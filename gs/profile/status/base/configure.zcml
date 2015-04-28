@@ -13,4 +13,33 @@
 <configure xmlns="http://namespaces.zope.org/zope"
            xmlns:browser="http://namespaces.zope.org/browser"
            i18n_domain="gs.profile.status.base">
+
+  <!-- The web-hooks -->
+  <browser:page
+    name="gs-profile-status-members.html"
+    for="Products.GSContent.interfaces.IGSSiteFolder"
+    class=".hook.MembersHook"
+    permission="zope2.Public" />
+  <browser:page
+    name="gs-profile-status-send.html"
+    for="Products.GSContent.interfaces.IGSSiteFolder"
+    class=".hook.SendNotification"
+    permission="zope2.Public" />
+
+  <!-- The notification -->
+  <browser:page
+    name="gs-profile-status.html"
+    for="Products.CustomUserFolder.interfaces.ICustomUser"
+    class=".notification.ProfileStatus"
+    template="browser/templates/notification-html.pt"
+    permission="zope2.ManageProperties" />
+  <browser:page
+    name="gs-profile-status.txt"
+    for="Products.CustomUserFolder.interfaces.ICustomUser"
+    class=".notification.ProfileStatusText"
+    template="browser/templates/notification-txt.pt"
+    permission="zope2.ManageProperties" />
+
+  <!-- The viewlets -->
+
 </configure>
