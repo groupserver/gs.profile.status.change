@@ -1,0 +1,6 @@
+<table xmlns:tal="http://xml.zope.org/namespaces/tal"
+     id="gs-profile-status-support">
+  <tr>
+    <td><h2>Support</h2></td>
+  </tr>
+</table>

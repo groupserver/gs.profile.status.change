@@ -1,0 +1,6 @@
+<table xmlns:tal="http://xml.zope.org/namespaces/tal"
+     id="gs-profile-status-groups">
+  <tr>
+    <td><h2>Your groups</h2></td>
+  </tr>
+</table>

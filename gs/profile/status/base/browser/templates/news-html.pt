@@ -1,0 +1,6 @@
+<table xmlns:tal="http://xml.zope.org/namespaces/tal"
+     id="gs-profile-status-news">
+  <tr>
+    <td><h2>News</h2></td>
+  </tr>
+</table>

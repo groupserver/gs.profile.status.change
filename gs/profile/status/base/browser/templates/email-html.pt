@@ -1,0 +1,6 @@
+<table xmlns:tal="http://xml.zope.org/namespaces/tal"
+     id="gs-profile-status-email">
+  <tr>
+    <td><h2>Your email settings</h2></td>
+  </tr>
+</table>

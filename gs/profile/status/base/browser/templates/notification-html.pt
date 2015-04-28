@@ -1,0 +1,15 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="context/@@groupserver_email_layout/page">
+  <head>
+    <title metal:fill-slot="title">Your profile:
+      <span tal:replace="view/siteInfo/name">Site</span></title>
+  </head>
+  <body>
+    <div id="gs-profile-status" metal:fill-slot="body"
+         tal:content="groupserver.ProfileStatus">
+      The HTML form of the notification
+    </div><!--a-page-->
+  </body>
+</html>
