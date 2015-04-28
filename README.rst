@@ -19,7 +19,7 @@ The profile status notification
 The *Profile status* notification_ is sent out once a month to
 remind people that they are a member of some GroupServer
 groups. It is a complex notification that is made up of many
-viewlets_.
+viewlets_. The notification is sent using the sender_.
 
 Notification
 ============
@@ -67,14 +67,14 @@ notification, using the ``title`` attribute for the entry and the
 Introduction
 ------------
 
-The *Introduction* explains to the recipient why he or she is
-getting the notification.
+The *Introduction* (``gs-profile-status-intro``) explains to the
+recipient why he or she is getting the notification.
 
 News
 ----
 
-The *News* comprises a plain-text area at the start of the
-notification. It is retrieved from the
+The *News* (``gs-profile-status-news``) comprises a plain-text
+area at the start of the notification. It is retrieved from the
 ``gs-profile-status-news.xml`` object in the **ZMI**, and dumped
 in place as is. If there is no object then the news section is
 omitted.
@@ -82,10 +82,10 @@ omitted.
 Profile information
 -------------------
 
-The *Profile information* is the first complex viewlet. Its
-purpose is twofold: **show** what information the person has on
-his or her profile, and **encourage** the recipient to update the
-profile information.
+The *Profile information* (``gs-profile-status-profile``) is the
+first complex viewlet. Its purpose is twofold: **show** what
+information the person has on his or her profile, and
+**encourage** the recipient to update the profile information.
 
 * If there is no **profile image** then a *missing image* image
   is shown, and the recipient encouraged to add an image.
@@ -107,12 +107,12 @@ provided to help the person log in.
 Email settings
 --------------
 
-The *Email settings* viewlet shows the existing addresses, and
-tries to encourage the participant to add more email
-addresses. The idea is that the recipient will be better able to
-manage his or her groups when they have more email addresses (as
-the same profile can be used for work and play), and the site
-will be better able to contact the recipient.
+The *Email settings* viewlet (``gs-profile-status-email``) shows
+the existing addresses, and tries to encourage the participant to
+add more email addresses. The idea is that the recipient will be
+better able to manage his or her groups when they have more email
+addresses (as the same profile can be used for work and play),
+and the site will be better able to contact the recipient.
 
 * Links to start the **verification** process for unverified
   links are given.
@@ -122,11 +122,11 @@ will be better able to contact the recipient.
 Groups
 ------
 
-The *Groups* viewlet summarises the groups that the participant
-is a member of. It is designed to encourage **better
-participation** by getting the participant to use more of the
-excellent features of GroupServer_, particularly the email
-settings [#settings]_.
+The *Groups* viewlet (``gs-profile-status-groups``) summarises
+the groups that the participant is a member of. It is designed to
+encourage **better participation** by getting the participant to
+use more of the excellent features of GroupServer_, particularly
+the email settings [#settings]_.
 
 The list of groups is broken down by site_, and within each site
 is listed the `group information`_.
@@ -176,8 +176,34 @@ the following is shown.
 Support
 -------
 
-The *Support* viewlet bookends the notification. It includes a
-link to **email support** and a way to find the **FAQ**.
+The *Support* viewlet (``gs-profile-status-support``) bookends
+the notification, along with the other general-information
+viewlets (Introduction_ and News_). It includes a link to **email
+support** and a way to find the **FAQ**.
+
+Sender
+======
+
+The system for actually sending the notification are provided by
+two **web hooks**: one provides the `user list`_ and the other is
+used to `send the notification`_.
+
+User list
+---------
+
+The page ``gs-profile-status-members.html`` in the *site* context
+provides a form that returns a list of people that *can possibly*
+receive a notification_, as a JSON object [#json]_. It uses
+``gs.auth.token`` [#token]_ for authentication.
+
+Send the notification
+---------------------
+
+The page ``gs-profile-status-send.html`` in the *site* context
+provides a form that sends a notification_ to a participant. The
+form takes the user-identifier of the participant, and a token
+[#token]_ for authentication. It returns a status as a JSON
+object [#json]_.
 
 Resources
 =========
@@ -193,8 +219,12 @@ Resources
 .. _OnlineGroups.Net: https://onlinegroups.net
 .. _Michael JasonSmith: http://groupserver.org/p/mpj17
 
-.. [#settings] See the Group-member email settings product for
-               more information
+.. [#settings] See
                <https://github.com/groupserver/gs.group.member.email.settings>
+
+.. [#json] See
+            <https://github.com/groupserver/gs.content.form.api.json>
+
+.. [#token] See <https://github.com/groupserver/gs.auth.token>
 
 ..  LocalWords:  nz GSProfile TODO redirector LocalWords viewlets
