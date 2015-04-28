@@ -8,7 +8,7 @@
   </head>
   <body>
     <div id="gs-profile-status" metal:fill-slot="body"
-         tal:content="groupserver.ProfileStatus">
+         tal:content="structure provider:groupserver.ProfileStatus">
       The HTML form of the notification
     </div><!--a-page-->
   </body>
