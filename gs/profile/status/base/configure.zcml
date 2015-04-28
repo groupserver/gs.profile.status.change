@@ -14,6 +14,8 @@
            xmlns:browser="http://namespaces.zope.org/browser"
            i18n_domain="gs.profile.status.base">
 
+  <include package="zope.viewlet" file="meta.zcml" />
+
   <!-- The web-hooks -->
   <browser:page
     name="gs-profile-status-members.html"
@@ -40,6 +42,63 @@
     template="browser/templates/notification-txt.pt"
     permission="zope2.ManageProperties" />
 
+  <!-- The viewlet manager -->
+  <browser:viewletManager
+    name="groupserver.ProfileStatus"
+    for="Products.CustomUserFolder.interfaces.ICustomUser"
+    provides=".interfaces.IProfileStatusNotification"
+    class="gs.viewlet.manager.WeightOrderedViewletManager"
+    template="browser/templates/simplemanager.pt"
+    permission="zope2.View" />
+
   <!-- The viewlets -->
+  <browser:viewlet
+    name="gs-profile-status-intro"
+    manager=".interfaces.IProfileStatusNotification"
+    template="browser/templates/intro-html.pt"
+    class="gs.viewlet.SiteViewlet"
+    permission="zope2.Public"
+    weight="10"
+    title="Introduction" />
+  <browser:viewlet
+    name="gs-profile-status-news"
+    manager=".interfaces.IProfileStatusNotification"
+    template="browser/templates/news-html.pt"
+    class="gs.viewlet.SiteViewlet"
+    permission="zope2.Public"
+    weight="20"
+    title="News" />
+  <browser:viewlet
+    name="gs-profile-status-profile"
+    manager=".interfaces.IProfileStatusNotification"
+    template="browser/templates/profile-html.pt"
+    class="gs.viewlet.SiteViewlet"
+    permission="zope2.Public"
+    weight="30"
+    title="Profile" />
+  <browser:viewlet
+    name="gs-profile-status-email"
+    manager=".interfaces.IProfileStatusNotification"
+    template="browser/templates/email-html.pt"
+    class="gs.viewlet.SiteViewlet"
+    permission="zope2.Public"
+    weight="40"
+    title="Email" />
+  <browser:viewlet
+    name="gs-profile-status-groups"
+    manager=".interfaces.IProfileStatusNotification"
+    template="browser/templates/groups-html.pt"
+    class="gs.viewlet.SiteViewlet"
+    permission="zope2.Public"
+    weight="50"
+    title="Groups" />
+  <browser:viewlet
+    name="gs-profile-status-support"
+    manager=".interfaces.IProfileStatusNotification"
+    template="browser/templates/support-html.pt"
+    class="gs.viewlet.SiteViewlet"
+    permission="zope2.Public"
+    weight="100"
+    title="Support" />
 
 </configure>
