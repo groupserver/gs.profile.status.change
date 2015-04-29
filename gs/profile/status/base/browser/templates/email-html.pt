@@ -1,6 +1,60 @@
 <table xmlns:tal="http://xml.zope.org/namespaces/tal"
      id="gs-profile-status-email" width="100%">
   <tr>
-    <td><h2>Your email settings</h2></td>
+    <td><h2>Your email addresses</h2></td>
+  </tr>
+  <tr>
+    <td>
+      <p class="well">
+        You can have multiple addresses with your profile.
+        You can <b>post</b> to your groups from any address, but
+        you only need to <b>receive</b> email on some of them.
+        This is quite useful if you have a work-email (or
+        several) as well as a home email address.
+
+        <b>Manage</b> your email addresses using
+        <a tal:attributes="href view/changeEmailUrl"
+           href="#">your email settings page</a>.
+      </p>
+    </td>
+  </tr>
+  <tr tal:condition="view/preferred">
+    <td>
+      <h4>Preferred addresses</h4>
+      <ul>
+        <li tal:repeat="address view/preferred">
+          <code class="email"
+                tal:content="address">person@example.com</code>
+        </li>
+      </ul>
+    </td>
+  </tr>
+  <tr tal:condition="view/verified">
+    <td>
+      <h4>Other addresses</h4>
+      <ul>
+        <li tal:repeat="address view/verified">
+          <code class="email"
+                tal:content="address">person@example.com</code>
+        </li>
+      </ul>
+    </td>
+  </tr>
+  <tr tal:condition="view/unverified">
+    <td>
+      <h4>Unverified</h4>
+      <ul>
+        <li tal:repeat="address view/unverified">
+          <code class="email"
+                tal:content="address">person@example.com</code>
+        </li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a tal:attributes="href view/changeEmailUrl"
+         href="#" class="btn">&#10010; Add address</a>
+    </td>
   </tr>
 </table>
