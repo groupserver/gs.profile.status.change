@@ -101,6 +101,9 @@ Each site lists its *Title* and the *About* text.
 * If the participant is the administrator of the site then a link
   to the ``admindivision`` page is shown.
 
+* If the participant is the administrator of the site then a link
+  to start a group is shown.
+
 * If the *About* text is the default then it is omitted. However,
   the administrator is encouraged to fill out the about text in
   this case.
@@ -118,8 +121,15 @@ the following is shown.
   text and the recipient is the administrator then he or she is
   encouraged to set the *About* text.
 
+* If the **privacy** is too strict (secret and more than 12
+  people, same as the encouragement [#encouragement]_) and the
+  recipient is the *site* administrator then a suggestion is
+  given to switch the privacy to *private*.
+
 * **The posting statistics** for the group in the last month,
   including the number of posts, topics, and authors.
+
+* A link to **post** to the group, using email.
 
 * A selection of **images** posted to the group in the last month.
 
@@ -140,6 +150,9 @@ The *Profile information* (``gs-profile-status-profile``) is the
 first complex viewlet. Its purpose is twofold: **show** what
 information the person has on his or her profile, and
 **encourage** the recipient to update the profile information.
+
+* If the recipient has never logged in then encouragement to use
+  the **password reset** system will be shown.
 
 * If there is no **profile image** then a *missing image* image
   is shown, and the recipient encouraged to add an image.
@@ -218,6 +231,9 @@ Resources
 .. _GroupServer.org: http://groupserver.org/
 .. _OnlineGroups.Net: https://onlinegroups.net
 .. _Michael JasonSmith: http://groupserver.org/p/mpj17
+
+.. [#encouragement] See
+                    <https://github.com/groupserver/gs.group.encouragement>
 
 .. [#settings] See
                <https://github.com/groupserver/gs.group.member.email.settings>
