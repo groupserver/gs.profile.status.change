@@ -3,4 +3,12 @@
   <tr>
     <td><h2>Support</h2></td>
   </tr>
+  <tr>
+    <td>
+      <p>
+        <a tal:attributes="href view/emailAddress;"
+           href="#">Email support</a> you have any comments or queries.
+      </p>
+    </td>
+  </tr>
 </table>

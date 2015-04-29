@@ -96,7 +96,7 @@
     name="gs-profile-status-support"
     manager=".interfaces.IProfileStatusNotification"
     template="browser/templates/support-html.pt"
-    class="gs.viewlet.SiteViewlet"
+    class=".support.SupportViewlet"
     permission="zope2.Public"
     weight="100"
     title="Support" />
