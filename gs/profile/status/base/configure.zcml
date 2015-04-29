@@ -101,4 +101,15 @@
     weight="100"
     title="Support" />
 
+  <!--The CSS viewlet -->
+  <browser:viewlet
+    name="gs-profile-status-base-css"
+    for="Products.CustomUserFolder.interfaces.ICustomUser"
+    manager="gs.content.email.css.interfaces.IHTMLEmailStyle"
+    class="gs.viewlet.SiteViewlet"
+    template="browser/templates/css.pt"
+    title="Profile Status CSS"
+    weight="80"
+    permission="zope2.Public"/>
+
 </configure>

@@ -1,0 +1,21 @@
+<tal:block xmlns:tal="http://xml.zope.org/namespaces/tal">
+#gs-profile-status-profile-image-change, 
+#gs-profile-status-profile-image-add {
+    width: 56px; /* 70px [img width] - ((1px [border] + 6px [padding]) * 2) */
+}
+#gs-profile-status-profile-head {
+    margin: 0 0 0 0;
+    padding: 0 0 10px 10px;
+}
+#gs-profile-status-profile-h {
+   margin: 0 0 0 0;
+    padding: 0 0 10px 0;
+}
+#gs-profile-status-profile-info td {
+    padding: 0 0 10px 10px;
+}
+#gs-profile-status-profile-info-bio-content p {
+    margin: 0 0 0 0;
+    padding: 0 0 10px 0;
+}
+</tal:block>
