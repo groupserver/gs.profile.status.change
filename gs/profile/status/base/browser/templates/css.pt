@@ -1,4 +1,11 @@
 <tal:block xmlns:tal="http://xml.zope.org/namespaces/tal">
+#gs-profile-status-profile p {
+    width: 520px; /* 600 - (70 [img] + 10 [padding]) */
+}
+#gs-profile-status-profile .well {
+    width: 520px; /* 600 - (70 [img] + 10 [padding] */
+                  /*        + (1 [border] + 9 [padding])*2) */
+}
 #gs-profile-status-profile-image-change, 
 #gs-profile-status-profile-image-add {
     width: 56px; /* 70px [img width] - ((1px [border] + 6px [padding]) * 2) */
@@ -8,8 +15,13 @@
     padding: 0 0 10px 10px;
 }
 #gs-profile-status-profile-h {
-   margin: 0 0 0 0;
+    margin: 0 0 0 0;
     padding: 0 0 10px 0;
+    line-height: 20px;
+}
+p.well {
+    margin: 0 0 0 0;
+    margin-bottom: 0;
 }
 #gs-profile-status-profile-info td {
     padding: 0 0 10px 10px;
