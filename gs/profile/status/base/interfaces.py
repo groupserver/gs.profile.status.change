@@ -14,7 +14,7 @@
 ############################################################################
 from __future__ import unicode_literals
 from zope.interface import Interface
-from zope.schema import ASCIILine, Bool, Int, Text, TextLine
+from zope.schema import ASCIILine
 from zope.viewlet.interfaces import IViewletManager
 from gs.auth.token import AuthToken
 
