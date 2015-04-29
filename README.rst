@@ -44,13 +44,13 @@ each of the major parts of the notification. The parts can be
 grouped into three.
 
 #. The Introduction_, News_ and Support_ provide general
-   information.
-
-#. The `Profile information`_ and `Email settings`_ provide
-   information that is just specific to a person.
+   information, book-ending the notification.
 
 #. The Groups_ provides the core power-house component of the
    notification.
+
+#. The `Profile information`_ and `Email settings`_ provide
+   information that is just specific to a person.
 
 (As there is both a plain-text and HTML form of the email
 notification_ this actually equates to fourteen viewlets; they
@@ -78,46 +78,6 @@ area at the start of the notification. It is retrieved from the
 ``gs-profile-status-news.xml`` object in the **ZMI**, and dumped
 in place as is. If there is no object then the news section is
 omitted.
-
-Profile information
--------------------
-
-The *Profile information* (``gs-profile-status-profile``) is the
-first complex viewlet. Its purpose is twofold: **show** what
-information the person has on his or her profile, and
-**encourage** the recipient to update the profile information.
-
-* If there is no **profile image** then a *missing image* image
-  is shown, and the recipient encouraged to add an image.
-
-* If the participant has a **name** that is the same as the
-  left-hand side of their email address then he or she is
-  encourage to add a nicer name.
-
-* If the recipient has no **biography** then he or she is
-  encouraged to fill out a biography.
-
-Even if the participant has all of these things, there is a link
-to change them if so desired.
-
-If the participant has never logged in, then a link to the
-**reset password** page, rather than the change links, is
-provided to help the person log in.
-
-Email settings
---------------
-
-The *Email settings* viewlet (``gs-profile-status-email``) shows
-the existing addresses, and tries to encourage the participant to
-add more email addresses. The idea is that the recipient will be
-better able to manage his or her groups when they have more email
-addresses (as the same profile can be used for work and play),
-and the site will be better able to contact the recipient.
-
-* Links to start the **verification** process for unverified
-  links are given.
-
-* An **Add** button is shown, to add another address.
 
 Groups
 ------
@@ -172,6 +132,46 @@ the following is shown.
   suggestion to switch to a daily digest of topics is given.
 
 * A link to **leave** the group, by the ``unsubscribe`` command.
+
+Profile information
+-------------------
+
+The *Profile information* (``gs-profile-status-profile``) is the
+first complex viewlet. Its purpose is twofold: **show** what
+information the person has on his or her profile, and
+**encourage** the recipient to update the profile information.
+
+* If there is no **profile image** then a *missing image* image
+  is shown, and the recipient encouraged to add an image.
+
+* If the participant has a **name** that is the same as the
+  left-hand side of their email address then he or she is
+  encourage to add a nicer name.
+
+* If the recipient has no **biography** then he or she is
+  encouraged to fill out a biography.
+
+Even if the participant has all of these things, there is a link
+to change them if so desired.
+
+If the participant has never logged in, then a link to the
+**reset password** page, rather than the change links, is
+provided to help the person log in.
+
+Email settings
+--------------
+
+The *Email settings* viewlet (``gs-profile-status-email``) shows
+the existing addresses, and tries to encourage the participant to
+add more email addresses. The idea is that the recipient will be
+better able to manage his or her groups when they have more email
+addresses (as the same profile can be used for work and play),
+and the site will be better able to contact the recipient.
+
+* Links to start the **verification** process for unverified
+  links are given.
+
+* An **Add** button is shown, to add another address.
 
 Support
 -------
