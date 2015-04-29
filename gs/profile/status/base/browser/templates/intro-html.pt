@@ -1,6 +1,13 @@
 <table xmlns:tal="http://xml.zope.org/namespaces/tal"
-     id="gs-profile-status-introduction">
+     id="gs-profile-status-introduction" width="100%">
   <tr>
     <td><h2>Introduction</h2></td>
+  </tr>
+  <tr>
+    <td class="well">
+      <p>
+        To stop receiving this monthly summary&#8230;
+      </p>
+    </td>
   </tr>
 </table>
