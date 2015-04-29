@@ -1,43 +1,70 @@
 <table xmlns:tal="http://xml.zope.org/namespaces/tal"
      id="gs-profile-status-profile" width="100%">
   <tr>
-    <td><h2>Your profile</h2></td>
-  </tr>
-  <tr>
-    <td valign="top">
-      <table id="gs-profile-status-profile-image" width="70">
+    <td>
+      <table id="gs-profile-status-profile-image" width="100%">
         <tr>
           <td width="70" height="70">
             <a tal:attributes="href python:view.profileUrl if view.hasImage else view.changeImageUrl"
-              href="#"><img height="70" width="70" src="/" border="0"
-              alt="Profile photo"
-              tal:attributes="alt string:Photo of ${view/userInfo/name};
-              src view/profileImageUrl" /></a>
+               href="#"><img height="70" width="70" src="/" border="0"
+               alt="Profile photo"
+               tal:attributes="alt string:Photo of ${view/userInfo/name};
+               src view/profileImageUrl" /></a>
+          </td>
+          <td valign="top" rowspan="2"
+              id="gs-profile-status-profile-head">
+            <table width="100%">
+              <tr>
+                <td>
+                  <h2 id="gs-profile-status-profile-h">Your profile</h2>
+                </td>
+              </tr>
+              <tr>
+                <td id="gs-profile-status-profile-intro">
+                  <p>
+                    Your profile is what you look like to other
+                    group members.
+                    <a tal:attributes="href view/profileUrl"
+                       href="#">Your profile online</a> also lists the
+                    posts that you have made.
+                  </p>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
         <tr>
           <td width="70">
-            <a href="#" class="btn btn-mini"
+            <a id="gs-profile-status-profile-image-change"
+               tal:condition="view/hasImage" href="#" class="btn btn-mini"
+               title="Change your profile image"
                tal:attributes="href view/changeImageUrl">Change</a>
+            <a id="gs-profile-status-profile-image-add"
+               tal:condition="not:view/hasImage" href="#" class="btn"
+               title="Add an profile image"
+               tal:attributes="href view/changeImageUrl">&#10010; Add</a>
           </td>
         </tr>
       </table><!--gs-profile-status-profile-image-->
     </td>
+  </tr>
+  <tr>
     <td>
       <table id="gs-profile-status-profile-info"  width="100%">
         <tr id="gs-profile-status-profile-info-name">
-          <td><b>Name</b></td>
+          <th valign="top" width="70"><b>Name</b></th>
           <td id="gs-profile-status-profile-info-name-value">
-            <a href="#"
+            <a href="#" title="View your profile online"
                tal:attributes="href view/profileUrl">
               <b tal:content="view/userInfo/name">[Name here]</b></a>
-              <a href="#" class="btn btn-mini"
+              <a href="#" class="btn btn-mini" title="Change your name"
                  tal:attributes="href view/changeProfileUrl">Change</a>
           </td>
         </tr>
         <tr id="gs-profile-status-profile-info-bio">
-          <td valign="top"><b>Biography</b></td>
-          <td tal:condition="view/biography" class="muted"
+          <th valign="top" width="70"><b>Biography</b></th>
+          <td tal:condition="view/biography"
+              id="gs-profile-status-profile-info-bio-content" class="muted"
               tal:content="structure view/biography">
             [Biography here.]
           </td>
@@ -53,7 +80,7 @@
         <tr>
           <td>&#160;</td>
           <td>
-            <a href="#" class="btn"
+            <a href="#" class="btn" title="Change your biography"
                tal:attributes="href view/changeProfileUrl">Change</a>
           </td>
         </tr>
