@@ -72,7 +72,7 @@
     name="gs-profile-status-profile"
     manager=".interfaces.IProfileStatusNotification"
     template="browser/templates/profile-html.pt"
-    class="gs.viewlet.SiteViewlet"
+    class="gs.profile.base.ProfileViewlet"
     permission="zope2.Public"
     weight="30"
     title="Profile" />

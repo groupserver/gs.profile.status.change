@@ -3,4 +3,40 @@
   <tr>
     <td><h2>Your profile</h2></td>
   </tr>
-</table>
+  <tr>
+    <td valign="top">
+      <table id="gs-profile-status-profile-image" width="70">
+        <tr>
+          <td width="70" height="70">
+            <img height="70" width="70" src="/"
+                 alt="Profile photo"
+                 tal:attributes="alt string:Photo of ${view/userInfo/name};
+                                 src string:${view/userInfo/url}/gs-profile-image-square/70" />
+          </td>
+        </tr>
+        <tr>
+          <td width="70">
+            <a href="#" class="btn btn-mini">Change</a>
+          </td>
+        </tr>
+      </table><!--gs-profile-status-profile-image-->
+    </td>
+    <td>
+      <table id="gs-profile-status-profile-info">
+        <tr id="gs-profile-status-profile-info-name">
+          <td><b>Name</b></td>
+          <td id="gs-profile-status-profile-info-name-value"
+              tal:content="view/userInfo/name">
+            [Your name here]
+          </td>
+        </tr>
+        <tr id="gs-profile-status-profile-info-bio"
+            tal:define="bio python:view.userInfo.get_property('biography');"
+            tal:condition="bio">
+          <td valign="top"><b>Biography</b></td>
+          <td tal:content="structure bio">[Figure out bio here.]</td>
+        </tr>
+      </table>
+    </td><!--gs-profile-status-profile-->
+  </tr>
+</table><!--gs-profile-status-profile-->
