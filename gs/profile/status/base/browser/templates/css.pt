@@ -1,4 +1,21 @@
 <tal:block xmlns:tal="http://xml.zope.org/namespaces/tal">
+.gs-profile-status-groups-site-odd {
+    background-color: #f0f6e5;
+    border-top: 1px #669900 solid;
+    border-bottom: 1px #669900 solid;
+}
+.gs-profile-status-groups-site-even {
+    background-color: #f6f6d7;
+}
+.gs-profile-status-groups-site-odd:hover {
+    background-color: #ffffff;
+}
+.gs-profile-status-groups-site-even:hover {
+    background-color: #ffffff;
+}
+#gs-profile-status-groups:last-child {
+    border-bottom: 1px #669900 solid;
+}
 #gs-profile-status-profile p {
     width: 520px; /* 600 - (70 [img] + 10 [padding]) */
 }

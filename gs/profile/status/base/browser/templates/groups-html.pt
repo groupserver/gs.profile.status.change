@@ -1,6 +1,73 @@
 <table xmlns:tal="http://xml.zope.org/namespaces/tal"
      id="gs-profile-status-groups" width="100%">
   <tr>
-    <td><h2>Your groups</h2></td>
+    <td><h1 id="gs-profile-status-groups-h">Your groups</h1></td>
+  </tr>
+  <tr tal:define="lg python:len(view.groups); ls python:len(view.sites);">
+    <td>
+      <p tal:condition="python:lg==1 and ls==1">
+        You are a member of one group on one site.
+      </p>
+      <p tal:condition="python:lg&gt;1 and ls==1">
+        You are a member of <span tal:content="lg">n</span> groups
+        on one site.
+      </p>
+      <p  tal:condition="python:lg&gt;1 and ls&gt;1">
+        You are a member of <span tal:content="lg">n</span> groups
+        on  <span tal:content="ls">n</span>  sites.
+      </p>
+    </td>
+  </tr>
+  <tr tal:repeat="site view/sites">
+    <td tal:define="siteInfo site/siteInfo; groupInfos site/groupInfos;">
+      <table tal:define="n repeat/site/number;
+                         odd string:gs-profile-status-groups-site-odd;
+                         even string:gs-profile-status-groups-site-even;"
+             tal:attributes="id string:gs-profile-status-groups-site-${siteInfo/id};
+                             class python:odd if n % 2 else even;"
+             width="100%">
+        <tr>
+          <td>
+            <h2><a tal:content="siteInfo/name"
+                   tal:attributes="href siteInfo/url;"
+                   href="#">The site</a></h2>
+          </td>
+        </tr>
+        <tr tal:condition="python:len(view.sites)&gt;1"
+            tal:define="lg python:len(groupInfos);">
+          <td>
+            <p tal:condition="python:lg==1">
+              You are a member of one group on
+              <a tal:content="siteInfo/name"
+                 tal:attributes="href siteInfo/url;"
+                 href="#">this site</a>.
+            </p>
+            <p tal:condition="python:lg&gt;1">
+              You are a member of
+              <span tal:content="lg">m</span> groups
+              on
+              <a tal:content="siteInfo/name"
+                 tal:attributes="href siteInfo/url;"
+                 href="#">this site</a>.
+            </p>
+          </td>
+        </tr>
+        <tr tal:repeat="groupInfo groupInfos">
+          <td>
+            <table width="100%">
+              <tr>
+                <td>
+                  <h3>
+                    <a tal:attributes="href groupInfo/url"
+                       tal:content="groupInfo/name"
+                       href="#">This group</a>
+                  </h3>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
   </tr>
 </table>
