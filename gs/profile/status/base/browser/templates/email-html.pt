@@ -43,10 +43,19 @@
   <tr tal:condition="view/unverified">
     <td>
       <h4>Unverified</h4>
+      <p class="well">
+        You must <b>verify</b> that you control each address
+        before you can use it to post, or receive email.
+        You can <b>resend</b> the verification message to
+        activate the address.
+      </p>
       <ul>
         <li tal:repeat="address view/unverified">
           <code class="email"
                 tal:content="address">person@example.com</code>
+          <a href="#" class="btn"
+             tal:attributes="href python:view.get_verification(address);"
+             title="Resend the verification message">&#9993; Resend</a>
         </li>
       </ul>
     </td>
@@ -54,7 +63,7 @@
   <tr>
     <td>
       <a tal:attributes="href view/changeEmailUrl"
-         href="#" class="btn">&#10010; Add address</a>
+         href="#" class="btn">&#10010; Add an address</a>
     </td>
   </tr>
 </table>
