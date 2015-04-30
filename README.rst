@@ -49,8 +49,9 @@ grouped into three.
 #. The Groups_ provides the core power-house component of the
    notification.
 
-#. The `Profile information`_ and `Email settings`_ provide
-   information that is just specific to a person.
+#. The `Reset password`_, `Profile information`_ and `Email
+   settings`_ provide information that is just specific to a
+   person.
 
 (As there is both a plain-text and HTML form of the email
 notification_ this actually equates to fourteen viewlets; they
@@ -78,6 +79,15 @@ area at the start of the notification. It is retrieved from the
 ``gs-profile-status-news.xml`` object in the **ZMI**, and dumped
 in place as is. If there is no object then the news section is
 omitted.
+
+Reset password
+--------------
+
+The *Just add* feature [#add]_ causes conniptions for the summary
+notification: the email is full of links to the web that are
+*useless* unless the recipient can log in. Because of this the
+*Reset password* viewlet appears early on, if the recipient has
+never logged in (it checks the ``audit`` table).
 
 Groups
 ------
@@ -218,6 +228,9 @@ form takes the user-identifier of the participant, and a token
 [#token]_ for authentication. It returns a status as a JSON
 object [#json]_.
 
+The subject line of the notification is (in English) *Activity in
+your groups*.
+
 Resources
 =========
 
@@ -231,6 +244,9 @@ Resources
 .. _GroupServer.org: http://groupserver.org/
 .. _OnlineGroups.Net: https://onlinegroups.net
 .. _Michael JasonSmith: http://groupserver.org/p/mpj17
+
+.. [#add] See 
+          <https://github.com/groupserver/gs.group.member.add.base>
 
 .. [#encouragement] See
                     <https://github.com/groupserver/gs.group.encouragement>

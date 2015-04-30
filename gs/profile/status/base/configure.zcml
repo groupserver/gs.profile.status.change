@@ -69,12 +69,20 @@
     weight="20"
     title="News" />
   <browser:viewlet
+    name="gs-profile-status-password"
+    manager=".interfaces.IProfileStatusNotification"
+    template="browser/templates/password-html.pt"
+    class="gs.viewlet.SiteViewlet"
+    permission="zope2.Public"
+    weight="30"
+    title="Groups" />
+  <browser:viewlet
     name="gs-profile-status-groups"
     manager=".interfaces.IProfileStatusNotification"
     template="browser/templates/groups-html.pt"
     class="gs.viewlet.SiteViewlet"
     permission="zope2.Public"
-    weight="30"
+    weight="40"
     title="Groups" />
   <browser:viewlet
     name="gs-profile-status-profile"
@@ -82,7 +90,7 @@
     template="browser/templates/profile-html.pt"
     class=".profile.ProfileViewlet"
     permission="zope2.Public"
-    weight="40"
+    weight="50"
     title="Profile" />
   <browser:viewlet
     name="gs-profile-status-email"
@@ -90,7 +98,7 @@
     template="browser/templates/email-html.pt"
     class=".email.EmailViewlet"
     permission="zope2.Public"
-    weight="50"
+    weight="60"
     title="Email" />
   <browser:viewlet
     name="gs-profile-status-support"
