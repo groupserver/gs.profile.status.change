@@ -84,6 +84,22 @@
     permission="zope2.Public"
     weight="40"
     title="Groups" />
+  <!-- Groups: Site information content provider -->
+  <interface
+    interface=".interfaces.IGSSiteInfoContentProvider"
+    type="zope.contentprovider.interfaces.ITALNamespaceData"/>
+  <class class=".groups.SiteInfo">
+    <implements interface=".interfaces.IGSSiteInfoContentProvider"/>
+  </class>
+  <adapter
+    name="gs-profile-status-groups-site"
+    for="zope.interface.Interface
+         zope.publisher.interfaces.browser.IDefaultBrowserLayer
+         zope.interface.Interface"
+    factory=".groups.SiteInfo"
+    provides="zope.contentprovider.interfaces.IContentProvider" />
+  <!-- Groups: Group information -->
+
   <browser:viewlet
     name="gs-profile-status-profile"
     manager=".interfaces.IProfileStatusNotification"

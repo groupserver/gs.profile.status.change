@@ -228,8 +228,8 @@ form takes the user-identifier of the participant, and a token
 [#token]_ for authentication. It returns a status as a JSON
 object [#json]_.
 
-The subject line of the notification is (in English) *Activity in
-your groups*.
+The subject line of the notification is (in English) *What is
+happening in your groups*.
 
 Resources
 =========

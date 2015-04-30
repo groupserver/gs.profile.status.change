@@ -16,10 +16,12 @@ from __future__ import absolute_import, print_function, unicode_literals
 from collections import namedtuple
 from functools import reduce
 from operator import concat, attrgetter
+from zope.app.pagetemplate import ViewPageTemplateFile
 from zope.cachedescriptors.property import Lazy
 from zope.component import createObject
+from zope.contentprovider.interfaces import UpdateNotCalled
 from gs.group.member.base import user_member_of_group
-from gs.profile.base import ProfileViewlet
+from gs.profile.base import ProfileViewlet, ProfileContentProvider
 from gs.site.member.sitemembershipvocabulary import SiteMembership
 
 
@@ -74,3 +76,27 @@ class GroupsViewlet(ProfileViewlet):
     def groups(self):
         retval = reduce(concat, [s.groupInfos for s in self.sites])
         return retval
+
+
+class SiteInfo(ProfileContentProvider):
+    def __init__(self, profile, request, view):
+        super(SiteInfo, self).__init__(profile, request, view)
+        self.__updated = False
+
+    @Lazy
+    def isAdmin(self):
+        site = self.siteInfo.siteObj
+        user = self.userInfo.user
+        retval = ('DivisionAdmin' in user.getRolesInContext(site))
+        assert type(retval) == bool
+        return retval
+
+    def update(self):
+        self.__updated = True
+
+    def render(self):
+        if not self.__updated:
+            raise UpdateNotCalled
+        pageTemplate = ViewPageTemplateFile(self.pageTemplateFileName)
+        r = pageTemplate(self)
+        return r

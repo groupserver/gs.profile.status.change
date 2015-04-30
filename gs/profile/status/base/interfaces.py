@@ -14,7 +14,7 @@
 ############################################################################
 from __future__ import unicode_literals
 from zope.interface import Interface
-from zope.schema import ASCIILine
+from zope.schema import ASCIILine, Field
 from zope.viewlet.interfaces import IViewletManager
 from gs.auth.token import AuthToken
 
@@ -42,3 +42,25 @@ class ISendNotification(Interface):
 
 class IProfileStatusNotification(IViewletManager):
     '''A viewlet manager for the profile status notification'''
+
+
+class IGSSiteInfoContentProvider(Interface):
+    siteInfo = Field(
+        title="Site information",
+        description="The site-information instance to display",
+        required=True,
+        readonly=False)
+
+    groupInfos = Field(
+        title="Groups information",
+        description="The list of groupInfo instances for the groups "
+                    "in the site",
+        required=True,
+        readonly=False)
+
+    pageTemplateFileName = ASCIILine(
+        title="Page Template File Name",
+        description='The name of the ZPT file that is used to render '
+                    'the post.',
+        required=False,
+        default=b"browser/templates/siteinfo-html.pt")

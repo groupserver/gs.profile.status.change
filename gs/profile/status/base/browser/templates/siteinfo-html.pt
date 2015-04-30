@@ -1,0 +1,45 @@
+<table xmlns:tal="http://xml.zope.org/namespaces/tal"
+       class="gs-profile-status-groups-site-info" width="100%">
+  <tr>
+    <td>
+      <h2>
+        <a tal:content="view/siteInfo/name"
+           tal:attributes="href view/siteInfo/url;"
+           href="#">The site</a>
+        <a tal:condition="view/isAdmin"
+           tal:attributes="href string:${view/siteInfo/url}/admindivision;
+                           title string:Administer ${view/siteInfo/name}"
+           href="#" class="btn">Administer</a>
+      </h2>
+    </td>
+  </tr>
+  <tr tal:define="lg python:len(view.groupInfos);">
+    <td>
+      <p  class="muted">
+        <span tal:condition="python:lg==1">
+          You are a member of one group on
+          <a tal:content="view/siteInfo/name"
+             tal:attributes="href view/siteInfo/url;"
+             href="#">this site</a>.
+        </span>
+        <span  tal:condition="python:lg&gt;1">
+          You are a member of
+          <span tal:content="lg">m</span> groups
+          on
+          <a tal:content="view/siteInfo/name"
+             tal:attributes="href view/siteInfo/url;"
+             href="#">this site</a>.
+        </span>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        <a tal:attributes="href string:${view/siteInfo/url}/startgroup.html;
+                           title string:Start a new group on ${view/siteInfo/name}"
+           class="btn" href="#">&#10010; Start a new group</a>
+      </p>
+    </td>
+  </tr>
+</table><!--gs-profile-status-groups-site-info-->

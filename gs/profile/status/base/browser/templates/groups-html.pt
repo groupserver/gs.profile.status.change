@@ -3,11 +3,9 @@
   <tr>
     <td><h1 id="gs-profile-status-groups-h">Your groups</h1></td>
   </tr>
-  <tr tal:define="lg python:len(view.groups); ls python:len(view.sites);">
+  <tr tal:define="lg python:len(view.groups); ls python:len(view.sites);"
+      tal:condition="python:len(view.sites)&gt;1">
     <td>
-      <p tal:condition="python:lg==1 and ls==1">
-        You are a member of one group on one site.
-      </p>
       <p tal:condition="python:lg&gt;1 and ls==1">
         You are a member of <span tal:content="lg">n</span> groups
         on one site.
@@ -27,29 +25,8 @@
                              class python:odd if n % 2 else even;"
              width="100%">
         <tr>
-          <td>
-            <h2><a tal:content="siteInfo/name"
-                   tal:attributes="href siteInfo/url;"
-                   href="#">The site</a></h2>
-          </td>
-        </tr>
-        <tr tal:condition="python:len(view.sites)&gt;1"
-            tal:define="lg python:len(groupInfos);">
-          <td>
-            <p tal:condition="python:lg==1">
-              You are a member of one group on
-              <a tal:content="siteInfo/name"
-                 tal:attributes="href siteInfo/url;"
-                 href="#">this site</a>.
-            </p>
-            <p tal:condition="python:lg&gt;1">
-              You are a member of
-              <span tal:content="lg">m</span> groups
-              on
-              <a tal:content="siteInfo/name"
-                 tal:attributes="href siteInfo/url;"
-                 href="#">this site</a>.
-            </p>
+          <td tal:content="structure provider:gs-profile-status-groups-site">
+            Site information
           </td>
         </tr>
         <tr tal:repeat="groupInfo groupInfos">
