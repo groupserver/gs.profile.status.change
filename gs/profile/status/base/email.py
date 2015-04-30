@@ -60,8 +60,11 @@ class EmailViewlet(ProfileViewlet):
         return retval
 
     def get_verification(self, address):
-        a = quote(address)
-        r = '{0}/emailsettings.html?form.resendVerificationAddress={1}'\
-            '&form.action.change=Change'
-        retval = r.format(self.profileUrl, a)
+        # TODO: Add all the verified and unverified addresses to the GET
+        # query
+        #a = quote(address)
+        # ?form.resendVerificationAddress={1}'\
+        #    '&form.actions.change=Change
+        r = '{0}/emailsettings.html'
+        retval = r.format(self.profileUrl)  # , a)
         return retval
