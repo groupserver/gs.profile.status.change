@@ -20,6 +20,7 @@ else:  # Python 2
     from urllib import quote
 from zope.cachedescriptors.property import Lazy
 from gs.profile.base import ProfileViewlet
+from gs.profile.email.base import EmailUser
 from .queries import LoginQuery
 
 
@@ -37,4 +38,19 @@ class PasswordViewlet(ProfileViewlet):
 :rtype: bool'''
         retval = not self.query.user_has_login(self.userInfo.id)
         assert(type(retval) == bool)
+        return retval
+
+    @Lazy
+    def emailAddr(self):
+        eu = EmailUser(self.context, self.userInfo)
+        p = eu.get_delivery_addresses()
+        v = eu.get_verified_addresses()
+        u = eu.get_unverified_addresses()
+        retval = p[0] if p else v[0] if v else u[0] if u else ''
+        return retval
+
+    @Lazy
+    def passwordResetUrl(self):
+        r = '{0}/reset_password.html?form.email={1}'
+        retval = r.format(self.siteInfo.url, quote(self.emailAddr))
         return retval
