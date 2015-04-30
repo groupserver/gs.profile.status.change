@@ -20,7 +20,12 @@
   </tr>
   <tr tal:condition="view/preferred">
     <td>
-      <h4>Preferred addresses</h4>
+      <h4 tal:condition="python:len(view.preferred)==1">
+        Your preferred address
+      </h4>
+      <h4 tal:condition="python:len(view.preferred)&gt;1">
+        Your preferred addresses
+      </h4>
       <ul>
         <li tal:repeat="address view/preferred">
           <code class="email"
@@ -31,7 +36,12 @@
   </tr>
   <tr tal:condition="view/verified">
     <td>
-      <h4>Other addresses</h4>
+      <h4 tal:condition="python:len(view.verified)==1">
+        Your other address
+      </h4>
+      <h4 tal:condition="python:len(view.verified)&gt;1">
+        Your other addresses
+      </h4>
       <ul>
         <li tal:repeat="address view/verified">
           <code class="email"
@@ -40,14 +50,25 @@
       </ul>
     </td>
   </tr>
+  <tr>
+    <td>
+      <a tal:attributes="href view/changeEmailUrl"
+         href="#" class="btn">&#10010; Add an address</a>
+    </td>
+  </tr>
   <tr tal:condition="view/unverified">
     <td>
-      <h4>Unverified</h4>
+      <h4 tal:condition="python:len(view.unverified)==1">
+        Unverified address
+      </h4>
+      <h4 tal:condition="python:len(view.unverified)&gt;1">
+        Unverified addresses
+      </h4>
       <p class="well">
         You must <b>verify</b> that you control each address
         before you can use it to post, or receive email.
-        You can <b>resend</b> the verification message to
-        activate the address.
+        Visit your email settings to <b>resend</b> the
+        verification message to activate the address.
       </p>
       <ul>
         <li tal:repeat="address view/unverified">
@@ -58,12 +79,6 @@
              title="Resend the verification message">&#9993; Resend</a>
         </li>
       </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a tal:attributes="href view/changeEmailUrl"
-         href="#" class="btn">&#10010; Add an address</a>
     </td>
   </tr>
 </table>
