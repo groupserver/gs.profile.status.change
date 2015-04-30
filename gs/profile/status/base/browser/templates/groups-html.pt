@@ -30,18 +30,8 @@
           </td>
         </tr>
         <tr tal:repeat="groupInfo groupInfos">
-          <td>
-            <table width="100%">
-              <tr>
-                <td>
-                  <h3>
-                    <a tal:attributes="href groupInfo/url"
-                       tal:content="groupInfo/name"
-                       href="#">This group</a>
-                  </h3>
-                </td>
-              </tr>
-            </table>
+          <td tal:content="structure provider:gs-profile-status-groups-group">
+            Group information
           </td>
         </tr>
       </table>

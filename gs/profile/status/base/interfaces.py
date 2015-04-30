@@ -64,3 +64,18 @@ class IGSSiteInfoContentProvider(Interface):
                     'the post.',
         required=False,
         default=b"browser/templates/siteinfo-html.pt")
+
+
+class IGSGroupInfoContentProvider(Interface):
+    groupInfo = Field(
+        title="Group information",
+        description="The group-information instance to display",
+        required=True,
+        readonly=False)
+
+    pageTemplateFileName = ASCIILine(
+        title="Page Template File Name",
+        description='The name of the ZPT file that is used to render '
+                    'the post.',
+        required=False,
+        default=b"browser/templates/groupinfo-html.pt")

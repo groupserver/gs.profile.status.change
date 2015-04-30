@@ -1,0 +1,12 @@
+<table xmlns:tal="http://xml.zope.org/namespaces/tal"
+       class="gs-profile-status-groups-group-info" width="100%">
+  <tr>
+    <td>
+      <h3>
+        <a tal:attributes="href view/groupInfo/url"
+           tal:content="view/groupInfo/name"
+           href="#">This group</a>
+      </h3>
+    </td>
+  </tr>
+</table>

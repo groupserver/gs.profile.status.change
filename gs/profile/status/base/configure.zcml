@@ -99,6 +99,19 @@
     factory=".groups.SiteInfo"
     provides="zope.contentprovider.interfaces.IContentProvider" />
   <!-- Groups: Group information -->
+  <interface
+    interface=".interfaces.IGSGroupInfoContentProvider"
+    type="zope.contentprovider.interfaces.ITALNamespaceData"/>
+  <class class=".groups.GroupInfo">
+    <implements interface=".interfaces.IGSGroupInfoContentProvider"/>
+  </class>
+  <adapter
+    name="gs-profile-status-groups-group"
+    for="zope.interface.Interface
+         zope.publisher.interfaces.browser.IDefaultBrowserLayer
+         zope.interface.Interface"
+    factory=".groups.GroupInfo"
+    provides="zope.contentprovider.interfaces.IContentProvider" />
 
   <browser:viewlet
     name="gs-profile-status-profile"

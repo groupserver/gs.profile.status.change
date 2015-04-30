@@ -20,7 +20,7 @@ from zope.app.pagetemplate import ViewPageTemplateFile
 from zope.cachedescriptors.property import Lazy
 from zope.component import createObject
 from zope.contentprovider.interfaces import UpdateNotCalled
-from gs.group.member.base import user_member_of_group
+from gs.group.member.base import user_member_of_group, user_admin_of_group
 from gs.profile.base import ProfileViewlet, ProfileContentProvider
 from gs.site.member.sitemembershipvocabulary import SiteMembership
 
@@ -79,6 +79,7 @@ class GroupsViewlet(ProfileViewlet):
 
 
 class SiteInfo(ProfileContentProvider):
+    'Ths site-information content provider'
     def __init__(self, profile, request, view):
         super(SiteInfo, self).__init__(profile, request, view)
         self.__updated = False
@@ -89,6 +90,28 @@ class SiteInfo(ProfileContentProvider):
         user = self.userInfo.user
         retval = ('DivisionAdmin' in user.getRolesInContext(site))
         assert type(retval) == bool
+        return retval
+
+    def update(self):
+        self.__updated = True
+
+    def render(self):
+        if not self.__updated:
+            raise UpdateNotCalled
+        pageTemplate = ViewPageTemplateFile(self.pageTemplateFileName)
+        r = pageTemplate(self)
+        return r
+
+
+class GroupInfo(ProfileContentProvider):
+    'Ths group-information content provider'
+    def __init__(self, profile, request, view):
+        super(GroupInfo, self).__init__(profile, request, view)
+        self.__updated = False
+
+    @Lazy
+    def isAdmin(self):
+        retval = user_admin_of_group(self.groupObj, self.userInfo)
         return retval
 
     def update(self):
