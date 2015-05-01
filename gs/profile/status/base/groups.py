@@ -216,17 +216,17 @@ class GroupInfo(ProfileContentProvider):
 
     @Lazy
     def people(self):
-        '''Four random recent authors, not including this person
+        '''Five random recent authors, not including this person
 
-:returns: The names of four recent authors, seperated by commas
+:returns: The names of five recent authors, seperated by commas
 :rtype: str'''
         # Get five authors, because we are going to throw one away.
-        authorIds = self.authorIds[:5]
+        authorIds = self.authorIds[:6]
         # Throw an author away.
         try:
             authorIds.remove(self.userInfo.id)
         except ValueError:
-            authorIds = authorIds[:4]  # User not in the list. No worries.
+            authorIds = authorIds[:5]  # User not in the list. No worries.
         authorNames = [createObject('groupserver.UserFromId',
                                     self.groupInfo.groupObj, uId).name
                        for uId in authorIds]
