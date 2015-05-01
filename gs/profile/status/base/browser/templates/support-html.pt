@@ -5,8 +5,16 @@
   </tr>
   <tr>
     <td>
+      <p class="well">
+        Send a message with the Subject <code>Summary off</code>
+        to
+        <a tal:attributes="href view/stopEmailAddress"
+           tal:content="view/supportEmail"
+           class="email" href="#">support</a>
+        to stop receiving this monthly summary.
+      </p>
       <p>
-        <a tal:attributes="href view/emailAddress;"
+        <a tal:attributes="href view/helpEmailAddress;"
            href="#">Email support</a> you have any comments or queries.
       </p>
     </td>

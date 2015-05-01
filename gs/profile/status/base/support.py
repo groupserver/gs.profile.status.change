@@ -25,18 +25,40 @@ from gs.profile.base import ProfileViewlet
 class SupportViewlet(ProfileViewlet):
     'The viewlet for the Support section'
 
+    mailto = 'mailto:{to}?Subject={subject}&body={body}'
+
     @Lazy
-    def emailAddress(self):
-        mailto = 'mailto:{to}?Subject={subject}&body={body}'
+    def supportEmail(self):
+        retval = self.siteInfo.get_support_email()
+        return retval
+
+    @Lazy
+    def helpEmailAddress(self):
         subject = quote('Monthly status notification')
         b = '''Hello,
 
-I received the monthly status notification and...
+I received the monthly summary of what is going on in my groups and...
 
 --
 Me: <{0}{1}>
 '''
         body = quote(b.format(self.siteInfo.url, self.userInfo.url))
-        retval = mailto.format(to=self.siteInfo.get_support_email(),
-                               subject=subject, body=body)
+        retval = self.mailto.format(to=self.supportEmail, subject=subject,
+                                    body=body)
+        return retval
+
+    @Lazy
+    def stopEmailAddress(self):
+
+        subject = quote('Summary off')
+        b = '''Hello,
+
+Please stop sending me the monthly summary of what is going on in my groups.
+
+--
+Me: <{0}{1}>
+'''
+        body = quote(b.format(self.siteInfo.url, self.userInfo.url))
+        retval = self.mailto.format(to=self.supportEmail, subject=subject,
+                                    body=body)
         return retval
