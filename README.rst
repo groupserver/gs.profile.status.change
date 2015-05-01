@@ -151,7 +151,8 @@ the following is shown.
   group. If the number of posts is high (over 30) then a
   suggestion to switch to a daily digest of topics is given.
 
-* A link to **leave** the group, by the ``unsubscribe`` command.
+* A link to **leave** the group, by the ``unsubscribe`` command
+  [#unsubscribe]_.
 
 Profile information
 -------------------
@@ -267,6 +268,9 @@ Resources
 
 .. [#settings] See
                <https://github.com/groupserver/gs.group.member.email.settings>
+
+.. [#unsubscribe] See
+                  <https://github.com/groupserver/gs.group.member.leave>
 
 .. [#json] See
             <https://github.com/groupserver/gs.content.form.api.json>

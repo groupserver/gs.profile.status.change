@@ -14,16 +14,28 @@
 ############################################################################
 from __future__ import absolute_import, print_function, unicode_literals
 from collections import namedtuple
+from datetime import date
 from functools import reduce
 from operator import concat, attrgetter
+import sys
+if sys.version_info >= (3, ):  # pragma: no cover
+    from urllib.parse import quote
+else:  # Python 2
+    from urllib import quote
 from zope.app.pagetemplate import ViewPageTemplateFile
 from zope.cachedescriptors.property import Lazy
 from zope.component import createObject
 from zope.contentprovider.interfaces import UpdateNotCalled
+from gs.core import curr_time
 from gs.group.member.base import user_member_of_group, user_admin_of_group
+from gs.group.privacy.interfaces import IGSGroupVisibility
+from gs.group.stats import GroupPostingStats
 from gs.profile.base import ProfileViewlet, ProfileContentProvider
 from gs.site.member.sitemembershipvocabulary import SiteMembership
-
+from gs.group.member.canpost.interfaces import IGSPostingUser
+from Products.GSGroup.interfaces import IGSMailingListInfo
+from Products.GSGroupMember.groupMembersInfo import GSGroupMembersInfo
+from .queries import PostingStatsQuery
 
 SiteGroups = namedtuple('SiteGroups', ['siteInfo', 'groupInfos'])
 
@@ -109,11 +121,6 @@ class GroupInfo(ProfileContentProvider):
         super(GroupInfo, self).__init__(profile, request, view)
         self.__updated = False
 
-    @Lazy
-    def isAdmin(self):
-        retval = user_admin_of_group(self.userInfo, self.groupInfo)
-        return retval
-
     def update(self):
         self.__updated = True
 
@@ -123,3 +130,120 @@ class GroupInfo(ProfileContentProvider):
         pageTemplate = ViewPageTemplateFile(self.pageTemplateFileName)
         r = pageTemplate(self)
         return r
+
+    # Methods and properties that are not part of the standard content
+    # provider API are below this point
+
+    @Lazy
+    def isAdmin(self):
+        '''Is the user an administrator of the group?
+
+:returns: ``True`` if the user is a group administrator.
+:rtype: bool'''
+        retval = user_admin_of_group(self.userInfo, self.groupInfo)
+        return retval
+
+    @Lazy
+    def groupVisibility(self):
+        retval = IGSGroupVisibility(self.groupInfo)
+        return retval
+
+    @Lazy
+    def groupStats(self):
+        retval = GroupPostingStats(self.groupInfo)
+        return retval
+
+    @Lazy
+    def membersInfo(self):
+        retval = GSGroupMembersInfo(self.groupInfo.groupObj)
+        return retval
+
+    @Lazy
+    def privacyTooStrict(self):
+        '''Is the privacy of the group too tight?
+
+:returns: ``True`` if the user is a group administrator, the privacy
+          of the group is ``secret``, and there are more than a dozen
+          members.
+:rtype: bool'''
+        retval = (self.isAdmin and self.groupVisibility.isSecret
+                  and (self.membersInfo.fullMemberCount > 12))
+        return retval
+
+    @Lazy
+    def statsQuery(self):
+        retval = PostingStatsQuery()
+        return retval
+
+    @Lazy
+    def previousMonth(self):
+        '''Get the previous month from now
+
+:returns: The previous month.
+:rtype: datetime.date'''
+        dt = curr_time()
+        if dt.month == 1:
+            newMonth = 12
+            newYear = dt.year - 1
+        else:
+            newMonth = dt.month - 1
+            newYear = dt.year
+        retval = date(newYear, newMonth, 1)
+        return retval
+
+    @Lazy
+    def nPosts(self):
+        'The number of posts the previous month'
+        pm = self.previousMonth
+        retval = self.statsQuery.posts_in_month(
+            pm.month, pm.year, self.groupInfo.id, self.siteInfo.id)
+        return retval
+
+    @Lazy
+    def authorIds(self):
+        pm = self.previousMonth
+        retval = self.statsQuery.authors_in_month(
+            pm.month, pm.year, self.groupInfo.id, self.siteInfo.id)
+        return retval
+
+    @Lazy
+    def nAuthors(self):
+        'The number of authors in the previous month'
+        retval = len(self.authorIds)
+        return retval
+
+    @Lazy
+    def nTopics(self):
+        pm = self.previousMonth
+        retval = self.statsQuery.topics_in_month(
+            pm.month, pm.year, self.groupInfo.id, self.siteInfo.id)
+        return retval
+
+    @Lazy
+    def canPost(self):
+        retval = IGSPostingUser(self.userInfo, self.groupInfo).canPost
+        return retval
+
+    @Lazy
+    def groupEmail(self):
+        l = IGSMailingListInfo(self.groupInfo.groupObj)
+        retval = l.get_property('mailto')
+        return retval
+
+    @Lazy
+    def unsubscribeLink(self):
+        to = quote(self.groupEmail)
+        subject = quote('Unsubscribe')
+        b = '''Hello,
+
+Please remove me from {0}
+<{1}>.
+
+--
+{2} <{3}{4}>'''
+        body = quote(b.format(self.groupInfo.name, self.groupInfo.url,
+                              self.userInfo.name,
+                              self.siteInfo.url, self.userInfo.url))
+        mailto = 'mailto:{to}?Subject={subject}&body={body}'
+        retval = mailto.format(to=to, subject=subject, body=body)
+        return retval
