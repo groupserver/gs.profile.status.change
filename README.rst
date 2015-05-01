@@ -201,8 +201,12 @@ Support
 
 The *Support* viewlet (``gs-profile-status-support``) bookends
 the notification, along with the other general-information
-viewlets (Introduction_ and News_). It includes a link to **email
-support** and a way to find the **FAQ**.
+viewlets (Introduction_ and News_). It includes
+
+* A link to **email support**,
+* A link to send the **stop** `email command`_ to the support
+  group, and
+* A way to find the **FAQ**.
 
 Sender
 ======
@@ -214,10 +218,13 @@ used to `send the notification`_.
 User list
 ---------
 
-The page ``gs-profile-status-members.html`` in the *site* context
-provides a form that returns a list of people that *can possibly*
-receive a notification_, as a JSON object [#json]_. It uses
-``gs.auth.token`` [#token]_ for authentication.
+The web-hook ``gs-profile-status-members.html`` in the *site*
+context provides a form that returns a list of user-identifiers
+people that *can possibly* receive a notification_, as a JSON
+object [#json]_.  The user-identifiers that are listed in the
+``summary_skip`` table are omitted from the list.
+
+The web-hook uses ``gs.auth.token`` [#token]_ for authentication.
 
 Send the notification
 ---------------------
@@ -230,6 +237,13 @@ object [#json]_.
 
 The subject line of the notification is (in English) *What is
 happening in your groups*.
+
+Email command
+=============
+
+The email command [#command]_ ``Support stop`` is registered for
+the support-groups. It adds the user-identifier for the sender to
+the ``summary_skip`` table.
 
 Resources
 =========
@@ -245,7 +259,7 @@ Resources
 .. _OnlineGroups.Net: https://onlinegroups.net
 .. _Michael JasonSmith: http://groupserver.org/p/mpj17
 
-.. [#add] See 
+.. [#add] See
           <https://github.com/groupserver/gs.group.member.add.base>
 
 .. [#encouragement] See
@@ -258,5 +272,7 @@ Resources
             <https://github.com/groupserver/gs.content.form.api.json>
 
 .. [#token] See <https://github.com/groupserver/gs.auth.token>
+
+.. [#command] See <https://github.com/groupserver/gs.group.list.command>
 
 ..  LocalWords:  nz GSProfile TODO redirector LocalWords viewlets
