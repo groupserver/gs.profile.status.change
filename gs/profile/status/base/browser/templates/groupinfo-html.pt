@@ -54,6 +54,11 @@
         <tal:block condition="python:view.nAuthors!=1">
           <span tal:content="view/nAuthors">n</span> people
         </tal:block>
+        <tal:block condition="view/people">
+          &#8213;
+          <span tal:content="view/people">some people</span>
+          &#8213;
+        </tal:block>
         made
         <tal:block condition="python:view.nPosts==1">
           one post

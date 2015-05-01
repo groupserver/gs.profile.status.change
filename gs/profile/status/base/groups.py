@@ -17,6 +17,7 @@ from collections import namedtuple
 from datetime import date
 from functools import reduce
 from operator import concat, attrgetter
+from random import shuffle
 import sys
 if sys.version_info >= (3, ):  # pragma: no cover
     from urllib.parse import quote
@@ -26,7 +27,7 @@ from zope.app.pagetemplate import ViewPageTemplateFile
 from zope.cachedescriptors.property import Lazy
 from zope.component import createObject
 from zope.contentprovider.interfaces import UpdateNotCalled
-from gs.core import curr_time
+from gs.core import curr_time, comma_comma_and
 from gs.group.member.base import user_member_of_group, user_admin_of_group
 from gs.group.privacy.interfaces import IGSGroupVisibility
 from gs.group.stats import GroupPostingStats
@@ -204,12 +205,34 @@ class GroupInfo(ProfileContentProvider):
         pm = self.previousMonth
         retval = self.statsQuery.authors_in_month(
             pm.month, pm.year, self.groupInfo.id, self.siteInfo.id)
+        shuffle(retval)  # Mostly for self.people
         return retval
 
     @Lazy
     def nAuthors(self):
         'The number of authors in the previous month'
         retval = len(self.authorIds)
+        return retval
+
+    @Lazy
+    def people(self):
+        '''Four random recent authors, not including this person
+
+:returns: The names of four recent authors, seperated by commas
+:rtype: str'''
+        # Get five authors, because we are going to throw one away.
+        authorIds = self.authorIds[:5]
+        # Throw an author away.
+        try:
+            authorIds.remove(self.userInfo.id)
+        except ValueError:
+            authorIds = authorIds[:4]  # User not in the list. No worries.
+        authorNames = [createObject('groupserver.UserFromId',
+                                    self.groupInfo.groupObj, uId).name
+                       for uId in authorIds]
+        retval = comma_comma_and(authorNames)
+        if self.nAuthors > 4:
+            retval = 'including {0}'.format(retval)
         return retval
 
     @Lazy
