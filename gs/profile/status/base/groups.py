@@ -111,7 +111,7 @@ class GroupInfo(ProfileContentProvider):
 
     @Lazy
     def isAdmin(self):
-        retval = user_admin_of_group(self.groupObj, self.userInfo)
+        retval = user_admin_of_group(self.userInfo, self.groupInfo)
         return retval
 
     def update(self):
