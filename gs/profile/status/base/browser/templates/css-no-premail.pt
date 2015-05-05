@@ -1,0 +1,14 @@
+<tal:block xmlns:tal="http://xml.zope.org/namespaces/tal">
+/* gs-profile-status-base-css-no-premail*/
+
+/* A hack for Apple Mail */
+@media screen and (min-width: 601px) {
+    .gs-profile-status-groups-group-info-details p {
+        width: 580px;
+    }
+    #gs-profile-status-profile p,
+    #gs-profile-status-profile .well {
+        width: 520px;
+    }
+}
+</tal:block>

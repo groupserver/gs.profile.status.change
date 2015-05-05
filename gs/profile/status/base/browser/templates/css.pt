@@ -1,11 +1,11 @@
 <tal:block xmlns:tal="http://xml.zope.org/namespaces/tal">
 .gs-profile-status-groups-site-odd {
-    background-color: #f0f6e5;
-    border-top: 1px #669900 solid;
-    border-bottom: 1px #669900 solid;
+    background-color: #fcfcfc;
+    border-top: 1px #cccccc solid;
+    border-bottom: 1px #cccccc solid;
 }
 .gs-profile-status-groups-site-even {
-    background-color: #f6f6d7;
+    background-color: #ebebeb;
 }
 .gs-profile-status-groups-site-odd:hover {
     background-color: #ffffff;
@@ -14,14 +14,20 @@
     background-color: #ffffff;
 }
 #gs-profile-status-groups:last-child {
-    border-bottom: 1px #669900 solid;
+    border-bottom: 1px #cccccc solid;
+}
+.gs-profile-status-groups-group-info-details td {
+    padding: 0 0 0 20px;
+}
+.gs-profile-status-groups-group-info-details p {
+    max-width: 580px; /* 600 - 20px [padding] */
 }
 #gs-profile-status-profile p {
-    width: 520px; /* 600 - (70 [img] + 10 [padding]) */
+    max-width: 520px; /* 600 - (70 [img] + 10 [padding]) */
 }
 #gs-profile-status-profile .well {
-    width: 520px; /* 600 - (70 [img] + 10 [padding] */
-                  /*        + (1 [border] + 9 [padding])*2) */
+    max-width: 520px; /* 600 - (70 [img] + 10 [padding] */
+                      /*        + (1 [border] + 9 [padding])*2) */
 }
 #gs-profile-status-profile-image-change, 
 #gs-profile-status-profile-image-add {

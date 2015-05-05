@@ -2,7 +2,7 @@
        class="gs-profile-status-groups-group-info" width="100%">
   <tr>
     <td>
-      <h3>
+      <h4>
         <a tal:attributes="href view/groupInfo/url"
            tal:content="view/groupInfo/name"
            href="#">This group</a>
@@ -11,89 +11,94 @@
               tal:condition="view/isAdmin">Administrator</span>
         <a tal:attributes="href view/unsubscribeLink"
            class="btn btn-small" href="#">Leave</a>
-      </h3>
+      </h4>
     </td>
   </tr>
-  <tr class="gs-profile-status-groups-group-info-privacy-too-tight"
-      tal:condition="view/privacyTooStrict">
+  <tr>
     <td>
-      <p class="alert">
-        <b>Privacy: </b>
-        <span tal:content="view/groupInfo/name">This group</span>
-        is hard to use because the privacy is too strict.
-        <br/>
-        <a tal:attributes="href string:${view/groupInfo/url}/admin_change_basic_privacy.html"
-           href="#"><b>Change</b> the privacy</a>
+      <table width="100%"
+             class="gs-profile-status-groups-group-info-details">
+        <tr class="gs-profile-status-groups-group-info-details-privacy-too-tight"
+            tal:condition="view/privacyTooStrict">
+          <td>
+            <p class="alert">
+              <b>Privacy: </b>
+              <span tal:content="view/groupInfo/name">This group</span>
+              is hard to use because the privacy is too strict.
+              <br/>
+              <a tal:attributes="href string:${view/groupInfo/url}/admin_change_basic_privacy.html"
+                 href="#"><b>Change</b> the privacy</a>
 
-        to <i>private:</i> only the group members can view the
-        posts and membership, but the group will be easier to
-        find and logging in will be easier.
-      </p>
-    </td>
-  </tr><!--gs-profile-status-groups-group-info-privacy-too-tight-->
-  <tr class="gs-profile-status-groups-group-info-general-stats-none"
-      tal:condition="not:view/nPosts">
-    <td>
-      <p>
-        No one made any posts to
-        <span tal:content="view/groupInfo/name">this group</span>
-        in
-        <span tal:attributes="title view/previousMonth/isoformat"
-              tal:content="python:view.previousMonth.strftime('%B')"
-              class="date">this month</span>.
-      </p>
-    </td>
-  </tr><!--gs-profile-status-groups-group-info-general-stats-none-->
-  <tr class="gs-profile-status-groups-group-info-general-stats"
-      tal:condition="view/nPosts">
-    <td>
-      <p>
-        <tal:block condition="python:view.nAuthors==1">
-          One person
-        </tal:block>
-        <tal:block condition="python:view.nAuthors!=1">
-          <span tal:content="view/nAuthors">n</span> people
-        </tal:block>
-        <tal:block condition="view/people">
-          &#8213;
-          <span tal:content="view/people">some people</span>
-          &#8213;
-        </tal:block>
-        made
-        <tal:block condition="python:view.nPosts==1">
-          one post
-        </tal:block>
-        <tal:block condition="python:view.nPosts!=1">
-          <span tal:content="view/nPosts">n</span> posts
-        </tal:block>
-        to
-        <tal:block condition="python:view.nTopics==1">
-          one topic
-        </tal:block>
-        <tal:block condition="python:view.nTopics!=1">
-          <span tal:content="view/nTopics">n</span> topics
-        </tal:block>
-        in <span tal:content="view/groupInfo/name">this group</span>
-        in
-        <span tal:attributes="title view/previousMonth/isoformat"
-              tal:content="python:view.previousMonth.strftime('%B')"
-              class="date">this month</span>.
-        <a tal:attributes="href view/groupInfo/url"
-           href="#"><b>Explore</b> the conversations online.</a>
-      </p>
-    </td>
-  </tr><!--gs-profile-status-groups-group-info-general-stats-->
-  <tr class="gs-profile-status-groups-group-canpost">
-    <td>
-      <p>
-        <a tal:attributes="href string:${view/groupInfo/url}/messages/newTopic.html"
-           class="btn" href="#">&#10010; Start a new topic</a>
-        or
-        <a tal:attributes="href string:mailto:${view/groupEmail}"
-           href="#">send an email to
-        <code tal:content="view/groupEmail"
-              class="email">the group</code>.</a>
-      </p>
+              to <i>private:</i> only the group members can view
+              the posts and membership, but the group will be
+              easier to find and logging in will be easier.
+            </p>
+          </td>
+        </tr><!--gs-profile-status-groups-group-info-details-privacy-too-tight-->
+        <tr class="gs-profile-status-groups-group-info-details-general-stats-none"
+            tal:condition="not:view/nPosts">
+          <td>
+            <p>
+              No one made any posts to
+              <span tal:content="view/groupInfo/name">this group</span>
+              in
+              <span tal:attributes="title view/previousMonth/isoformat"
+                    tal:content="python:view.previousMonth.strftime('%B')"
+                    class="date">this month</span>.
+            </p>
+          </td>
+        </tr><!--gs-profile-status-groups-group-info-details-general-stats-none-->
+        <tr class="gs-profile-status-groups-group-info-details-general-stats"
+            tal:condition="view/nPosts">
+          <td>
+            <p>
+              <tal:block condition="python:view.nAuthors==1">
+                One person
+              </tal:block>
+              <tal:block condition="python:view.nAuthors!=1">
+                <span tal:content="view/nAuthors">n</span> people
+              </tal:block>
+              <tal:block condition="view/people">
+                &#8213;
+                <span tal:content="view/people">some people</span>
+                &#8213;
+              </tal:block>
+              made
+              <tal:block condition="python:view.nPosts==1">
+                one post
+              </tal:block>
+              <tal:block condition="python:view.nPosts!=1">
+                <span tal:content="view/nPosts">n</span> posts
+              </tal:block>
+              to
+              <tal:block condition="python:view.nTopics==1">
+                one topic
+              </tal:block>
+              <tal:block condition="python:view.nTopics!=1">
+                <span tal:content="view/nTopics">n</span> topics
+              </tal:block>
+              in <span tal:content="view/groupInfo/name">this group</span>
+              in
+              <span tal:attributes="title view/previousMonth/isoformat"
+                    tal:content="python:view.previousMonth.strftime('%B')"
+                    class="date">this month</span>.
+              <a tal:attributes="href view/groupInfo/url"
+                 href="#"><b>Explore</b> the conversations online.</a>
+            </p>
+          </td>
+        </tr><!--gs-profile-status-groups-group-info-details-general-stats-->
+        <tr class="gs-profile-status-groups-group-info-details-canpost">
+          <td>
+            <p>
+              <a tal:attributes="href string:${view/groupInfo/url}/messages/newTopic.html"
+                 class="btn" href="#">&#10010; Start a new topic</a>
+              or
+              <a tal:attributes="href string:mailto:${view/groupEmail}"
+                 href="#"><b>send an email</b> to the group.</a>
+            </p>
+          </td>
+        </tr><!--gs-profile-status-groups-group-info-details-canpost-->
+      </table><!--gs-profile-status-groups-group-info-details-->
     </td>
   </tr>
 </table><!--gs-profile-status-groups-group-info-->

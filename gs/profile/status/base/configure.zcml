@@ -147,5 +147,13 @@
     title="Profile Status CSS"
     weight="80"
     permission="zope2.Public"/>
+  <browser:viewlet
+    name="gs-profile-status-base-no-premail"
+    manager="gs.content.email.css.interfaces.IHTMLOpenEmailStyle"
+    class="gs.viewlet.SiteViewlet"
+    template="browser/templates/css-no-premail.pt"
+    title="CSS skipping premailer"
+    weight="100"
+    permission="zope2.Public" />
 
 </configure>
