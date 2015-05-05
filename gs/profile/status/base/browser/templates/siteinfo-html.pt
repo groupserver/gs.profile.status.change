@@ -15,7 +15,7 @@
   </tr>
   <tr tal:define="lg python:len(view.groupInfos);">
     <td>
-      <p  class="muted">
+      <p>
         <span tal:condition="python:lg==1">
           You are a member of one group on
           <a tal:content="view/siteInfo/name"
@@ -33,7 +33,7 @@
       </p>
     </td>
   </tr>
-  <tr>
+  <tr tal:condition="view/isAdmin">
     <td>
       <p>
         <a tal:attributes="href string:${view/siteInfo/url}/startgroup.html;
