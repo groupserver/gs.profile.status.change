@@ -3,4 +3,7 @@
   <tr>
     <td><h2>News</h2></td>
   </tr>
+  <tr>
+    <td tal:content="structure view/news"
+  </tr>
 </table>

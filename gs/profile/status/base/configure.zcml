@@ -72,7 +72,7 @@
     name="gs-profile-status-news"
     manager=".interfaces.IProfileStatusNotification"
     template="browser/templates/news-html.pt"
-    class="gs.viewlet.SiteViewlet"
+    class=".news.NewsViewlet"
     permission="zope2.Public"
     weight="30"
     title="News" />
@@ -112,7 +112,6 @@
          zope.interface.Interface"
     factory=".groups.GroupInfo"
     provides="zope.contentprovider.interfaces.IContentProvider" />
-
   <browser:viewlet
     name="gs-profile-status-profile"
     manager=".interfaces.IProfileStatusNotification"
