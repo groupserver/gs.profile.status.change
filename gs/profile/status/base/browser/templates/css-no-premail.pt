@@ -3,6 +3,8 @@
 
 /* A hack for Apple Mail */
 @media screen and (min-width: 601px) {
+    .gs-profile-status-groups-site-info-intro p,
+    .gs-profile-status-groups-site-info-start-group p,
     .gs-profile-status-groups-group-info-details p {
         width: 580px;
     }

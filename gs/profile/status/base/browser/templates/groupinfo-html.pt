@@ -2,7 +2,7 @@
        class="gs-profile-status-groups-group-info" width="100%">
   <tr>
     <td>
-      <h4>
+      <h4 class="gs-profile-status-groups-group-info-h">
         <a tal:attributes="href view/groupInfo/url"
            tal:content="view/groupInfo/name"
            href="#">This group</a>
@@ -15,9 +15,8 @@
     </td>
   </tr>
   <tr>
-    <td>
-      <table width="100%"
-             class="gs-profile-status-groups-group-info-details">
+    <td class="gs-profile-status-groups-group-info-details">
+      <table width="100%">
         <tr class="gs-profile-status-groups-group-info-details-privacy-too-tight"
             tal:condition="view/privacyTooStrict">
           <td>
@@ -98,7 +97,7 @@
             </p>
           </td>
         </tr><!--gs-profile-status-groups-group-info-details-canpost-->
-      </table><!--gs-profile-status-groups-group-info-details-->
-    </td>
+      </table>
+    </td><!--gs-profile-status-groups-group-info-details-->
   </tr>
 </table><!--gs-profile-status-groups-group-info-->

@@ -2,7 +2,7 @@
        class="gs-profile-status-groups-site-info" width="100%">
   <tr>
     <td>
-      <h2>
+      <h2 class="gs-profile-status-groups-site-info-h">
         <a tal:content="view/siteInfo/name"
            tal:attributes="href view/siteInfo/url;"
            href="#">The site</a>
@@ -14,7 +14,7 @@
     </td>
   </tr>
   <tr tal:define="lg python:len(view.groupInfos);">
-    <td>
+    <td class="gs-profile-status-groups-site-info-intro">
       <p>
         <span tal:condition="python:lg==1">
           You are a member of one group on
@@ -34,11 +34,12 @@
     </td>
   </tr>
   <tr tal:condition="view/isAdmin">
-    <td>
+    <td class="gs-profile-status-groups-site-info-start-group">
       <p>
         <a tal:attributes="href string:${view/siteInfo/url}/startgroup.html;
                            title string:Start a new group on ${view/siteInfo/name}"
-           class="btn" href="#">&#10010; Start a new group</a>
+           class="btn" href="#">&#10010; <b>Start</b> a group</a>
+        on this site.
       </p>
     </td>
   </tr>

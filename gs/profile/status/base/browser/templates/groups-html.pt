@@ -5,7 +5,7 @@
   </tr>
   <tr tal:define="lg python:len(view.groups); ls python:len(view.sites);"
       tal:condition="python:len(view.sites)&gt;1">
-    <td>
+    <td id="gs-profile-status-groups-intro">
       <p tal:condition="python:lg&gt;1 and ls==1">
         You are a member of <span tal:content="lg">n</span> groups
         on one site.
@@ -14,10 +14,11 @@
         You are a member of <span tal:content="lg">n</span> groups
         on  <span tal:content="ls">n</span>  sites.
       </p>
-    </td>
+    </td><!--gs-profile-status-groups-intro-->
   </tr>
   <tr tal:repeat="site view/sites">
-    <td tal:define="siteInfo site/siteInfo; groupInfos site/groupInfos;">
+    <td tal:define="siteInfo site/siteInfo; groupInfos site/groupInfos;"
+        class="gs-profile-status-groups-site">
       <table tal:define="n repeat/site/number;
                          odd string:gs-profile-status-groups-site-odd;
                          even string:gs-profile-status-groups-site-even;"
@@ -34,7 +35,17 @@
             Group information
           </td>
         </tr>
+        <tr>
+          <td class="gs-profile-status-groups-spacer">
+            <div>&#160;</div>
+          </td><!--gs-profile-status-groups-spacer-->
+        </tr>
       </table>
-    </td>
+    </td><!--gs-profile-status-groups-site-->
   </tr>
-</table>
+  <tr>
+    <td class="gs-profile-status-groups-end">
+      <div>&#160;</div>
+    </td><!--gs-profile-status-groups-end-->
+  </tr>
+</table><!--gs-profile-status-groups-->
