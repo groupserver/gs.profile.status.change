@@ -87,7 +87,7 @@ class GroupsViewlet(ProfileViewlet):
 
     @Lazy
     def groups(self):
-        retval = reduce(concat, [s.groupInfos for s in self.sites])
+        retval = reduce(concat, [s.groupInfos for s in self.sites], [])
         return retval
 
 
@@ -231,7 +231,7 @@ class GroupInfo(ProfileContentProvider):
                                     self.groupInfo.groupObj, uId).name
                        for uId in authorIds]
         retval = comma_comma_and(authorNames)
-        if self.nAuthors > 4:
+        if self.nAuthors != len(authorNames):
             retval = 'including {0}'.format(retval)
         return retval
 

@@ -23,7 +23,10 @@ class ProfileViewlet(ProfileViewletBase):
 
     @Lazy
     def hasImage(self):
-        retval = get_image_file(self.context, self.userInfo) is not None
+        try:
+            retval = get_image_file(self.context, self.userInfo) is not None
+        except IOError:
+            retval = False
         assert(type(retval) == bool)
         return retval
 
@@ -47,7 +50,7 @@ class ProfileViewlet(ProfileViewletBase):
 
     @Lazy
     def biography(self):
-        retval = self.userInfo.get_property('biography').strip()
+        retval = self.userInfo.get_property('biography', '').strip()
         return retval
 
     @Lazy
