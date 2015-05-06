@@ -196,15 +196,17 @@ class GroupInfo(ProfileContentProvider):
     def nPosts(self):
         'The number of posts the previous month'
         pm = self.previousMonth
+        si = self.groupInfo.siteInfo
         retval = self.statsQuery.posts_in_month(
-            pm.month, pm.year, self.groupInfo.id, self.siteInfo.id)
+            pm.month, pm.year, self.groupInfo.id, si.id)
         return retval
 
     @Lazy
     def authorIds(self):
         pm = self.previousMonth
+        si = self.groupInfo.siteInfo
         retval = self.statsQuery.authors_in_month(
-            pm.month, pm.year, self.groupInfo.id, self.siteInfo.id)
+            pm.month, pm.year, self.groupInfo.id, si.id)
         shuffle(retval)  # Mostly for self.people
         return retval
 
@@ -238,8 +240,9 @@ class GroupInfo(ProfileContentProvider):
     @Lazy
     def nTopics(self):
         pm = self.previousMonth
+        si = self.groupInfo.siteInfo
         retval = self.statsQuery.topics_in_month(
-            pm.month, pm.year, self.groupInfo.id, self.siteInfo.id)
+            pm.month, pm.year, self.groupInfo.id, si.id)
         return retval
 
     @Lazy
@@ -264,9 +267,9 @@ Please remove me from {0}
 
 --
 {2} <{3}{4}>'''
+        si = self.groupInfo.siteInfo
         uBody = b.format(self.groupInfo.name, self.groupInfo.url,
-                         self.userInfo.name,
-                         self.siteInfo.url, self.userInfo.url)
+                         self.userInfo.name, si.url, self.userInfo.url)
         try:
             body = quote(uBody)
         except KeyError:  # --=mpj17=-- Why is it a KeyError?
