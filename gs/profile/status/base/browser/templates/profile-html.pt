@@ -71,7 +71,8 @@
             [Biography here.]
           </td>
           <td tal:condition="not:view/biography">
-            <p class="well">
+            <p class="well"
+               id="gs-profile-status-profile-info-bio-missing">
               <b>Visit</b>
               <a tal:attributes="href view/changeProfileUrl"
                  href="#">your <i>Change profile</i> page</a>

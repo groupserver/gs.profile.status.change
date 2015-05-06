@@ -110,6 +110,9 @@
     padding: 0 0 10px 0;
     max-width: 510px;
 }
+#gs-profile-status-profile-info-bio-missing {
+    max-width: 480px;
+}
 /* Email */
 #gs-profile-status-email-h {
     margin: 0 0 0 0;

@@ -27,7 +27,7 @@ from zope.app.pagetemplate import ViewPageTemplateFile
 from zope.cachedescriptors.property import Lazy
 from zope.component import createObject
 from zope.contentprovider.interfaces import UpdateNotCalled
-from gs.core import curr_time, comma_comma_and
+from gs.core import to_ascii, curr_time, comma_comma_and
 from gs.group.member.base import user_member_of_group, user_admin_of_group
 from gs.group.privacy.interfaces import IGSGroupVisibility
 from gs.group.stats import GroupPostingStats
@@ -264,9 +264,14 @@ Please remove me from {0}
 
 --
 {2} <{3}{4}>'''
-        body = quote(b.format(self.groupInfo.name, self.groupInfo.url,
-                              self.userInfo.name,
-                              self.siteInfo.url, self.userInfo.url))
+        uBody = b.format(self.groupInfo.name, self.groupInfo.url,
+                         self.userInfo.name,
+                         self.siteInfo.url, self.userInfo.url)
+        try:
+            body = quote(uBody)
+        except KeyError:  # --=mpj17=-- Why is it a KeyError?
+            u = to_ascii(uBody)
+            body = quote(u)
         mailto = 'mailto:{to}?Subject={subject}&body={body}'
         retval = mailto.format(to=to, subject=subject, body=body)
         return retval

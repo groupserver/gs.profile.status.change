@@ -50,7 +50,8 @@ class ProfileViewlet(ProfileViewletBase):
 
     @Lazy
     def biography(self):
-        retval = self.userInfo.get_property('biography', '').strip()
+        retval = self.userInfo.get_property('biography', '')
+        retval = retval.strip() if retval else ''
         return retval
 
     @Lazy
