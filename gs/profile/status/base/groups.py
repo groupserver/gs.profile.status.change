@@ -233,7 +233,7 @@ class GroupInfo(ProfileContentProvider):
                                     self.groupInfo.groupObj, uId).name
                        for uId in authorIds]
         retval = comma_comma_and(authorNames)
-        if self.nAuthors != len(authorNames):
+        if (retval is not '') and (self.nAuthors != len(authorNames)):
             retval = 'including {0}'.format(retval)
         return retval
 
