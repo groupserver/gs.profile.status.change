@@ -1,7 +1,9 @@
 <table xmlns:tal="http://xml.zope.org/namespaces/tal"
        id="gs-profile-status-support" width="100%">
   <tr>
-    <td><h2>Support</h2></td>
+    <td>
+      <h2 id="gs-profile-status-support-h">Support</h2>
+    </td>
   </tr>
   <tr>
     <td>

@@ -3,9 +3,9 @@
   <tr>
     <td>
       <h2 class="gs-profile-status-groups-site-info-h">
-        <a tal:content="view/siteInfo/name"
-           tal:attributes="href view/siteInfo/url;"
-           href="#">The site</a>
+        <a class="site" href="#"
+           tal:content="view/siteInfo/name"
+           tal:attributes="href view/siteInfo/url;">The site</a>
         <a tal:condition="view/isAdmin"
            tal:attributes="href string:${view/siteInfo/url}/admindivision;
                            title string:Administer ${view/siteInfo/name}"

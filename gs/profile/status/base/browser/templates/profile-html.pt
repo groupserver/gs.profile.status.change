@@ -4,7 +4,8 @@
     <td>
       <table id="gs-profile-status-profile-image" width="100%">
         <tr>
-          <td width="70" height="70" valign="top">
+          <td width="70" height="70" valign="top"
+              id="gs-profile-status-profile-image-photo">
             <a tal:attributes="href python:view.profileUrl if view.hasImage else view.changeImageUrl"
                href="#"><img height="70" width="70" src="/" border="0"
                alt="Profile photo"
@@ -16,7 +17,7 @@
             <table width="100%">
               <tr>
                 <td valign="top">
-                  <h2 id="gs-profile-status-profile-h">Your profile</h2>
+                  <h1 id="gs-profile-status-profile-h">Your profile</h1>
                 </td>
               </tr>
               <tr>
@@ -34,9 +35,9 @@
           </td>
         </tr>
         <tr>
-          <td width="70" valign="top">
-            <a id="gs-profile-status-profile-image-change"
-               tal:condition="view/hasImage" href="#" class="btn btn-mini"
+          <td width="70" valign="top"
+              id="gs-profile-status-profile-image-change">
+            <a tal:condition="view/hasImage" href="#" class="btn btn-mini"
                title="Change your profile image"
                tal:attributes="href view/changeImageUrl">Change</a>
             <a id="gs-profile-status-profile-image-add"
@@ -56,7 +57,8 @@
           <td id="gs-profile-status-profile-info-name-value">
             <a href="#" title="View your profile online"
                tal:attributes="href view/profileUrl">
-              <b tal:content="view/userInfo/name">[Name here]</b></a>
+              <b tal:content="view/userInfo/name"
+                 class="fn">[Name here]</b></a>
               <a href="#" class="btn btn-mini" title="Change your name"
                  tal:attributes="href view/changeProfileUrl">Change</a>
           </td>

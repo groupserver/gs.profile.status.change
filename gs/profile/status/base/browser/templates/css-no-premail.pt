@@ -8,9 +8,5 @@
     .gs-profile-status-groups-group-info-details p {
         width: 580px;
     }
-    #gs-profile-status-profile p,
-    #gs-profile-status-profile .well {
-        width: 520px;
-    }
 }
 </tal:block>

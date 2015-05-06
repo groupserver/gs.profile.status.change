@@ -1,10 +1,12 @@
 <table xmlns:tal="http://xml.zope.org/namespaces/tal"
      id="gs-profile-status-email" width="100%">
   <tr>
-    <td><h2>Your email addresses</h2></td>
+    <td>
+      <h2 id="gs-profile-status-email-h">Your email addresses</h2>
+    </td>
   </tr>
   <tr>
-    <td>
+    <td id="gs-profile-status-email-intro">
       <p class="well">
         You can have multiple addresses with your profile.
         You can <b>post</b> to your groups from any address, but
@@ -16,61 +18,61 @@
         <a tal:attributes="href view/changeEmailUrl"
            href="#">your email settings page</a>.
       </p>
-    </td>
+    </td><!==gs-profile-status-email-intrp-->
   </tr>
   <tr tal:condition="view/preferred">
-    <td>
+    <td id="gs-profile-status-email-preferred">
       <h4 tal:condition="python:len(view.preferred)==1">
         Your preferred address
       </h4>
       <h4 tal:condition="python:len(view.preferred)&gt;1">
         Your preferred addresses
       </h4>
-      <ul>
+      <ul id="gs-profile-status-email-preferred-list">
         <li tal:repeat="address view/preferred">
           <code class="email"
                 tal:content="address">person@example.com</code>
         </li>
       </ul>
-    </td>
+    </td><!--gs-profile-status-email-preferred-->
   </tr>
   <tr tal:condition="view/verified">
-    <td>
+    <td id="gs-profile-status-email-verified">
       <h4 tal:condition="python:len(view.verified)==1">
         Your other address
       </h4>
       <h4 tal:condition="python:len(view.verified)&gt;1">
         Your other addresses
       </h4>
-      <ul>
+      <ul id="gs-profile-status-email-verified-l">
         <li tal:repeat="address view/verified">
           <code class="email"
                 tal:content="address">person@example.com</code>
         </li>
       </ul>
-    </td>
+    </td><!--gs-profile-status-email-verified-->
   </tr>
   <tr>
-    <td>
+    <td id="gs-profile-status-email-add">
       <a tal:attributes="href view/changeEmailUrl"
          href="#" class="btn">&#10010; Add an address</a>
-    </td>
+    </td><!--gs-profile-status-email-add-->
   </tr>
   <tr tal:condition="view/unverified">
-    <td>
+    <td id="gs-profile-status-email-unverified">
       <h4 tal:condition="python:len(view.unverified)==1">
         Unverified address
       </h4>
       <h4 tal:condition="python:len(view.unverified)&gt;1">
         Unverified addresses
       </h4>
-      <p class="well">
+      <p class="well" id="gs-profile-status-email-unverified-intro">
         You must <b>verify</b> that you control each address
         before you can use it to post, or receive email.
         Visit your email settings to <b>resend</b> the
         verification message to activate the address.
       </p>
-      <ul>
+      <ul id="gs-profile-status-email-unverified-l">
         <li tal:repeat="address view/unverified">
           <code class="email"
                 tal:content="address">person@example.com</code>
@@ -79,6 +81,11 @@
              title="Resend the verification message">&#9993; Resend</a>
         </li>
       </ul>
-    </td>
+    </td><!--gs-profile-status-email-unverified-->
   </tr>
-</table>
+  <tr>
+    <td id="gs-profile-status-email-spacer">
+      <div>&#160;</div>
+    </td><!--gs-profile-status-email-spacer-->
+  </tr>
+</table><!--gs-profile-status-email-->
