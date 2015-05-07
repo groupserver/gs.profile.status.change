@@ -56,8 +56,8 @@
 .gs-profile-status-groups-group-info-details-posting-photos-photo {
     margin: 0 0 0 0;
     padding: 0 10px 0 0;
-    max-width: 80px;
-    max-height: 80px;
+    width: 50px;
+    height: 50px;
 }
 
 /* Similar to the :last-child pseudo-element, but works in tables */
