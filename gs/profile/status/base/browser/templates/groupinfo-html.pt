@@ -47,43 +47,62 @@
             </p>
           </td>
         </tr><!--gs-profile-status-groups-group-info-details-general-stats-none-->
-        <tr class="gs-profile-status-groups-group-info-details-general-stats"
-            tal:condition="view/nPosts">
+        <tr tal:condition="view/nPosts"
+            class="gs-profile-status-groups-group-info-details-posting">
           <td>
-            <p>
-              <tal:block condition="python:view.nAuthors==1">
-                One person
-              </tal:block>
-              <tal:block condition="python:view.nAuthors!=1">
-                <span tal:content="view/nAuthors">n</span> people
-              </tal:block>
-              <tal:block condition="view/people">
-                &#8213;
-                <span tal:content="view/people">some people</span>
-                &#8213;
-              </tal:block>
-              made
-              <tal:block condition="python:view.nPosts==1">
-                one post
-              </tal:block>
-              <tal:block condition="python:view.nPosts!=1">
-                <span tal:content="view/nPosts">n</span> posts
-              </tal:block>
-              to
-              <tal:block condition="python:view.nTopics==1">
-                one topic
-              </tal:block>
-              <tal:block condition="python:view.nTopics!=1">
-                <span tal:content="view/nTopics">n</span> topics
-              </tal:block>
-              in <span tal:content="view/groupInfo/name">this group</span>
-              in
-              <span tal:attributes="title view/previousMonth/isoformat"
-                    tal:content="python:view.previousMonth.strftime('%B')"
-                    class="date">this month</span>.
-              <a tal:attributes="href view/groupInfo/url"
-                 href="#"><b>Explore</b> the conversations online.</a>
-            </p>
+            <table width="100%">
+              <tr class="gs-profile-status-groups-group-info-details-posting-photos">
+                <td>
+                  <p>
+                    <tal:block repeat="author view/specificAuthors">
+                      <img width="80" height="80" alt="A person" src="#"
+                           border="0"
+                           class="gs-profile-status-groups-group-info-details-posting-photos-photo"
+                           tal:attributes="src string:${view/notificationSiteInfo/url}${author/url}/gs-profile-image-square/80;
+                                           alt author/name" />
+                    </tal:block>
+                  </p>
+                </td>
+              </tr><!--gs-profile-status-groups-group-info-details-posting-photos-->
+              <tr>
+                <td class="gs-profile-status-groups-group-info-details-posting-stats">
+                  <p>
+                    <tal:block condition="python:view.nAuthors==1">
+                      One person
+                    </tal:block>
+                    <tal:block condition="python:view.nAuthors!=1">
+                      <span tal:content="view/nAuthors">n</span> people
+                    </tal:block>
+                    <tal:block condition="view/people">
+                      &#8213;
+                      <span tal:content="view/people">some people</span>
+                      &#8213;
+                    </tal:block>
+                    made
+                    <tal:block condition="python:view.nPosts==1">
+                      one post
+                    </tal:block>
+                    <tal:block condition="python:view.nPosts!=1">
+                      <span tal:content="view/nPosts">n</span> posts
+                    </tal:block>
+                    to
+                    <tal:block condition="python:view.nTopics==1">
+                      one topic
+                    </tal:block>
+                    <tal:block condition="python:view.nTopics!=1">
+                      <span tal:content="view/nTopics">n</span> topics
+                    </tal:block>
+                    in <span tal:content="view/groupInfo/name">this group</span>
+                    in
+                    <span tal:attributes="title view/previousMonth/isoformat"
+                          tal:content="python:view.previousMonth.strftime('%B')"
+                          class="date">this month</span>.
+                    <a tal:attributes="href view/groupInfo/url"
+                       href="#"><b>Explore</b> the conversations online.</a>
+                  </p>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr><!--gs-profile-status-groups-group-info-details-general-stats-->
         <tr class="gs-profile-status-groups-group-info-details-canpost">

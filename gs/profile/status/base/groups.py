@@ -118,12 +118,17 @@ class SiteInfo(ProfileContentProvider):
 
 class GroupInfo(ProfileContentProvider):
     'Ths group-information content provider'
+
+    maxAuthors = 6
+
     def __init__(self, profile, request, view):
         super(GroupInfo, self).__init__(profile, request, view)
         self.__updated = False
 
     def update(self):
         self.__updated = True
+        self.notificationSiteInfo = self.siteInfo
+        self.siteInfo = self.groupInfo.siteInfo
 
     def render(self):
         if not self.__updated:
@@ -196,18 +201,16 @@ class GroupInfo(ProfileContentProvider):
     def nPosts(self):
         'The number of posts the previous month'
         pm = self.previousMonth
-        si = self.groupInfo.siteInfo
         retval = self.statsQuery.posts_in_month(
-            pm.month, pm.year, self.groupInfo.id, si.id)
+            pm.month, pm.year, self.groupInfo.id, self.siteInfo.id)
         return retval
 
     @Lazy
     def authorIds(self):
         pm = self.previousMonth
-        si = self.groupInfo.siteInfo
         retval = self.statsQuery.authors_in_month(
-            pm.month, pm.year, self.groupInfo.id, si.id)
-        shuffle(retval)  # Mostly for self.people
+            pm.month, pm.year, self.groupInfo.id, self.siteInfo.id)
+        shuffle(retval)  # Mostly for self.specificAuthorIds
         return retval
 
     @Lazy
@@ -217,21 +220,32 @@ class GroupInfo(ProfileContentProvider):
         return retval
 
     @Lazy
-    def people(self):
+    def specificAuthors(self):
         '''Five random recent authors, not including this person
+
+:returns: A list of the user-info instances of five recent authors
+:rtype: list'''
+        # Get n+1 authors, because we are going to throw one away.
+        ids = self.authorIds[:(self.maxAuthors+1)]
+        # Throw an author away.
+        try:
+            ids.remove(self.userInfo.id)
+        except ValueError:
+            # User not in the list. No worries.
+            ids = ids[:self.maxAuthors]
+        retval = [createObject('groupserver.UserFromId',
+                               self.groupInfo.groupObj, uId) for uId in ids]
+        assert type(retval) == list
+        assert len(retval) <= self.maxAuthors
+        return retval
+
+    @Lazy
+    def people(self):
+        '''The names of random recent authors, not including this person
 
 :returns: The names of five recent authors, seperated by commas
 :rtype: str'''
-        # Get five authors, because we are going to throw one away.
-        authorIds = self.authorIds[:6]
-        # Throw an author away.
-        try:
-            authorIds.remove(self.userInfo.id)
-        except ValueError:
-            authorIds = authorIds[:5]  # User not in the list. No worries.
-        authorNames = [createObject('groupserver.UserFromId',
-                                    self.groupInfo.groupObj, uId).name
-                       for uId in authorIds]
+        authorNames = [u.name for u in self.specificAuthors]
         retval = comma_comma_and(authorNames)
         if (retval is not '') and (self.nAuthors != len(authorNames)):
             retval = 'including {0}'.format(retval)
@@ -240,9 +254,8 @@ class GroupInfo(ProfileContentProvider):
     @Lazy
     def nTopics(self):
         pm = self.previousMonth
-        si = self.groupInfo.siteInfo
         retval = self.statsQuery.topics_in_month(
-            pm.month, pm.year, self.groupInfo.id, si.id)
+            pm.month, pm.year, self.groupInfo.id, self.siteInfo.id)
         return retval
 
     @Lazy
@@ -267,9 +280,9 @@ Please remove me from {0}
 
 --
 {2} <{3}{4}>'''
-        si = self.groupInfo.siteInfo
         uBody = b.format(self.groupInfo.name, self.groupInfo.url,
-                         self.userInfo.name, si.url, self.userInfo.url)
+                         self.userInfo.name, self.siteInfo.url,
+                         self.userInfo.url)
         try:
             body = quote(uBody)
         except KeyError:  # --=mpj17=-- Why is it a KeyError?

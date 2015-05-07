@@ -53,6 +53,12 @@
     padding: 0 0 10px 0;
     max-width: 580px; /* 600 - 20px [padding] */
 }
+.gs-profile-status-groups-group-info-details-posting-photos-photo {
+    margin: 0 0 0 0;
+    padding: 0 10px 0 0;
+    max-width: 80px;
+    max-height: 80px;
+}
 
 /* Similar to the :last-child pseudo-element, but works in tables */
 .gs-profile-status-groups-spacer div {
