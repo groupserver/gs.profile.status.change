@@ -231,8 +231,9 @@ current user is never in the list'''
         except ValueError:
             # User not in the list. No worries.
             maxIds = maxIds[:self.maxAuthors]
-        retval = [createObject('groupserver.UserFromId',
-                               self.groupInfo.groupObj, u) for u in maxIds]
+        r = [createObject('groupserver.UserFromId',
+                          self.groupInfo.groupObj, u) for u in maxIds]
+        retval = [u for u in r if not(u.anonymous)]
         assert type(retval) == list
         assert len(retval) <= self.maxAuthors
         return retval
