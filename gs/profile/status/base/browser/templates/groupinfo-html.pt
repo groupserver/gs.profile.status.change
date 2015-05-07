@@ -38,6 +38,15 @@
             tal:condition="not:view/nPosts">
           <td>
             <p>
+              <tal:block repeat="author view/specificMembers">
+                <img width="80" height="80" alt="A person" src="#"
+                     border="0"
+                     class="gs-profile-status-groups-group-info-details-posting-photos-photo"
+                     tal:attributes="src string:${view/notificationSiteInfo/url}${author/url}/gs-profile-image-square/80;
+                                     alt author/name" />
+              </tal:block>
+            </p>
+            <p>
               No one made any posts to
               <span tal:content="view/groupInfo/name">this group</span>
               in

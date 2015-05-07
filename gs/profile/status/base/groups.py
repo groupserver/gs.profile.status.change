@@ -33,6 +33,7 @@ from gs.group.privacy.interfaces import IGSGroupVisibility
 from gs.group.stats import GroupPostingStats
 from gs.profile.base import ProfileViewlet, ProfileContentProvider
 from gs.site.member.sitemembershipvocabulary import SiteMembership
+from gs.group.member.base import get_group_userids
 from gs.group.member.canpost.interfaces import IGSPostingUser
 from Products.GSGroup.interfaces import IGSMailingListInfo
 from Products.GSGroupMember.groupMembersInfo import GSGroupMembersInfo
@@ -215,8 +216,25 @@ class GroupInfo(ProfileContentProvider):
 
     @Lazy
     def nAuthors(self):
-        'The number of authors in the previous month'
+        'The number of authors in the previous month, for the ZPT'
         retval = len(self.authorIds)
+        return retval
+
+    def get_max_people(self, ids):
+        '''Get :var:`maxAuthors` from the list of ids. The ID of the
+current user is never in the list'''
+        # Get n+1 authors, because we are going to throw one away.
+        maxIds = ids[:(self.maxAuthors+1)]
+        try:
+            # Throw the author away.
+            maxIds.remove(self.userInfo.id)
+        except ValueError:
+            # User not in the list. No worries.
+            maxIds = maxIds[:self.maxAuthors]
+        retval = [createObject('groupserver.UserFromId',
+                               self.groupInfo.groupObj, u) for u in maxIds]
+        assert type(retval) == list
+        assert len(retval) <= self.maxAuthors
         return retval
 
     @Lazy
@@ -225,18 +243,7 @@ class GroupInfo(ProfileContentProvider):
 
 :returns: A list of the user-info instances of five recent authors
 :rtype: list'''
-        # Get n+1 authors, because we are going to throw one away.
-        ids = self.authorIds[:(self.maxAuthors+1)]
-        # Throw an author away.
-        try:
-            ids.remove(self.userInfo.id)
-        except ValueError:
-            # User not in the list. No worries.
-            ids = ids[:self.maxAuthors]
-        retval = [createObject('groupserver.UserFromId',
-                               self.groupInfo.groupObj, uId) for uId in ids]
-        assert type(retval) == list
-        assert len(retval) <= self.maxAuthors
+        retval = self.get_max_people(self.authorIds)
         return retval
 
     @Lazy
@@ -249,6 +256,13 @@ class GroupInfo(ProfileContentProvider):
         retval = comma_comma_and(authorNames)
         if (retval is not '') and (self.nAuthors != len(authorNames)):
             retval = 'including {0}'.format(retval)
+        return retval
+
+    @Lazy
+    def specificMembers(self):
+        allIds = get_group_userids(self.groupInfo.groupObj, self.groupInfo)
+        shuffle(allIds)
+        retval = self.get_max_people(allIds)
         return retval
 
     @Lazy
