@@ -240,7 +240,7 @@ class GroupInfo(ProfileContentProvider):
         return retval
 
     @Lazy
-    def people(self):
+    def authors(self):
         '''The names of random recent authors, not including this person
 
 :returns: The names of five recent authors, seperated by commas
