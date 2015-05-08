@@ -28,9 +28,13 @@
 .gs-profile-status-groups-site-even:hover {
     background-color: #ffffff;
 }
+.gs-profile-status-groups-site-info td,
+.gs-profile-status-groups-site-info th {
+    vertical-align: top;
+}
 .gs-profile-status-groups-site-info-h {
     margin: 0 0 0 0;
-    padding: 40px 0 10px 0;
+    padding: 40px 0 0 0;
 }
 .gs-profile-status-groups-site-info-h .site {
     padding: 0 10px 0 0;
@@ -41,25 +45,48 @@
     margin: 0 0 0 0;
 }
 .gs-profile-status-groups-group-info-h {
-    padding: 40px 0 10px 20px;
+    padding: 40px 0 0 20px;
     margin: 0 0 0 0;
 }
-
-.gs-profile-status-groups-group-info-details td {
-    padding: 0 0 0 20px;
+.gs-profile-status-groups-group-info-privacy td,
+.gs-profile-status-groups-group-info-general-stats-none td,
+.gs-profile-status-groups-group-info-posting th,
+.gs-profile-status-groups-group-info-digest td,
+.gs-profile-status-groups-group-info-canpost td {
+    padding: 10px 0 0 20px;
 }
-.gs-profile-status-groups-group-info-details p {
+.gs-profile-status-groups-group-info-privacy p,
+.gs-profile-status-groups-group-info-digest p,
+.gs-profile-status-groups-group-info-canpost p {
     margin: 0 0 0 0;
-    padding: 0 0 10px 0;
-    max-width: 580px; /* 600 - 20px [padding] */
+    max-width: 580px;
 }
-.gs-profile-status-groups-group-info-details-posting-photos-photo {
+.gs-profile-status-groups-group-info-posting th {
+    vertical-align: top;
+    width: 60px;
+}
+.gs-profile-status-groups-group-info-posting th .val {
+    font-size: 40px;
+    line-height: 40px;
+}
+.gs-profile-status-groups-group-info-posting td {
+    margin: 0 0 0 0;
+    padding: 10px 0 0 10px;
+    width: 450px;
+    vertical-align: top;
+}
+.gs-profile-status-groups-group-info-posting-people-desc {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+.gs-profile-status-groups-group-info-posting-people-photo {
+    margin: 0 0 0 0;
+    padding: 10px 0 0 0;
+}
+.gs-profile-status-groups-group-info-posting-people-photo img {
     margin: 0 0 0 0;
     padding: 0 10px 0 0;
-    width: 50px;
-    height: 50px;
 }
-
 /* Similar to the :last-child pseudo-element, but works in tables */
 .gs-profile-status-groups-spacer div {
     padding: 40px 0 0 0;

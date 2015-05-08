@@ -222,6 +222,12 @@ class GroupInfo(ProfileContentProvider):
         return retval
 
     @Lazy
+    def userIsOnlyAuthor(self):
+        retval = ((len(self.authorIds) == 1)
+                  and (self.authorIds[0] == self.userInfo))
+        return retval
+
+    @Lazy
     def nAuthors(self):
         'The number of authors in the previous month, for the ZPT'
         retval = len(self.authorIds)
