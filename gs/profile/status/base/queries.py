@@ -13,8 +13,13 @@
 #
 ############################################################################
 from __future__ import absolute_import, unicode_literals
+from collections import namedtuple
 import sqlalchemy as sa
 from gs.database import getTable, getSession
+
+
+#: Basic topic information
+BasicTopic = namedtuple('BasicTopic', ['topicId', 'name'])
 
 
 class LoginQuery(object):
@@ -59,9 +64,9 @@ class PostingStatsQuery(object):
         return retval
 
     def topics_in_month(self, month, year, groupId, siteId):
-        'Get the number of topics in a particular month'
+        'Get the names of the topics in a particular month'
         tt = self.topicTable
-        s = sa.select([sa.func.count(tt.c.topic_id).label('n_topics')])
+        s = sa.select([tt.c.topic_id, tt.c.original_subject])
         s.append_whereclause(sa.extract('month', tt.c.last_post_date) == month)
         s.append_whereclause(sa.extract('year', tt.c.last_post_date) == year)
         s.append_whereclause(tt.c.group_id == groupId)
@@ -70,8 +75,8 @@ class PostingStatsQuery(object):
         session = getSession()
         r = session.execute(s)
 
-        retval = r.fetchone()['n_topics']
-        return retval
+        retval = [BasicTopic(topicId=x['topic_id'],
+                             name=x['original_subject']) for x in r]
         return retval
 
     def authors_in_month(self, month, year, groupId, siteId):

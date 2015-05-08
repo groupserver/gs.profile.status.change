@@ -280,10 +280,15 @@ current user is never in the list'''
         return retval
 
     @Lazy
-    def nTopics(self):
+    def topics(self):
         pm = self.previousMonth
         retval = self.statsQuery.topics_in_month(
             pm.month, pm.year, self.groupInfo.id, self.siteInfo.id)
+        return retval
+
+    @Lazy
+    def nTopics(self):
+        retval = len(self.topics)
         return retval
 
     @Lazy
