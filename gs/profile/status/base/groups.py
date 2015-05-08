@@ -120,6 +120,7 @@ class SiteInfo(ProfileContentProvider):
 class GroupInfo(ProfileContentProvider):
     'Ths group-information content provider'
 
+    manyPosts = 31
     maxAuthors = 6
 
     def __init__(self, profile, request, view):
@@ -204,6 +205,12 @@ class GroupInfo(ProfileContentProvider):
         pm = self.previousMonth
         retval = self.statsQuery.posts_in_month(
             pm.month, pm.year, self.groupInfo.id, self.siteInfo.id)
+        return retval
+
+    @Lazy
+    def switchToDigest(self):
+        '``True`` if the member should switch to digest-mode'
+        retval = (self.nPosts >= self.manyPosts)
         return retval
 
     @Lazy
