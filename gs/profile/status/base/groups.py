@@ -122,6 +122,7 @@ class GroupInfo(ProfileContentProvider):
 
     manyPosts = 31
     maxAuthors = 6
+    maxTopicNames = 255
 
     def __init__(self, profile, request, view):
         super(GroupInfo, self).__init__(profile, request, view)
@@ -284,11 +285,49 @@ current user is never in the list'''
         pm = self.previousMonth
         retval = self.statsQuery.topics_in_month(
             pm.month, pm.year, self.groupInfo.id, self.siteInfo.id)
+        shuffle(retval)
         return retval
 
     @Lazy
     def nTopics(self):
         retval = len(self.topics)
+        return retval
+
+    @Lazy
+    def specificTopics(self):
+        specificTopics = []
+        n = 0
+        for topic in self.topics:
+            n += len(topic.name)
+            if n >= self.maxTopicNames:
+                break
+            specificTopics.append(topic)
+        t = '<a href="{siteInfo.url}r/topic/{topic.topicId}">{topic.name}</a>'
+        topicLinks = [t.format(siteInfo=self.siteInfo, topic=topic)
+                      for topic in specificTopics]
+        retval = comma_comma_and(topicLinks)
+        return retval
+
+    @Lazy
+    def keywords(self):
+        pm = self.previousMonth
+        retval = self.statsQuery.keywords_in_month(
+            pm.month, pm.year, self.groupInfo.id, self.siteInfo.id)
+        shuffle(retval)
+        return retval
+
+    @Lazy
+    def specificKeywords(self):
+        specificKeywords = []
+        n = 0
+        for keyword in self.keywords:
+            if len(keyword) > 31:
+                continue
+            n += len(keyword)
+            if n >= self.maxTopicNames:
+                break
+            specificKeywords.append(keyword)
+        retval = comma_comma_and(specificKeywords)
         return retval
 
     @Lazy

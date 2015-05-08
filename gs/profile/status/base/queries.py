@@ -14,6 +14,8 @@
 ############################################################################
 from __future__ import absolute_import, unicode_literals
 from collections import namedtuple
+from functools import reduce
+from operator import concat
 import sqlalchemy as sa
 from gs.database import getTable, getSession
 
@@ -47,6 +49,7 @@ class PostingStatsQuery(object):
     def __init__(self):
         self.postTable = getTable('post')
         self.topicTable = getTable('topic')
+        self.topicKeywordsTable = getTable('topic_keywords')
 
     def posts_in_month(self, month, year, groupId, siteId):
         'Get the number of posts in a particular month'
@@ -92,4 +95,20 @@ class PostingStatsQuery(object):
         r = session.execute(s)
 
         retval = [x['user_id'] for x in r]
+        return retval
+
+    def keywords_in_month(self, month, year, groupId, siteId):
+        tt = self.topicTable
+        tkt = self.topicKeywordsTable
+        s = sa.select([tkt.c.keywords])
+        s.append_whereclause(sa.extract('month', tt.c.last_post_date) == month)
+        s.append_whereclause(sa.extract('year', tt.c.last_post_date) == year)
+        s.append_whereclause(tt.c.group_id == groupId)
+        s.append_whereclause(tt.c.site_id == siteId)
+        s.append_whereclause(tt.c.topic_id == tkt.c.topic_id)
+
+        session = getSession()
+        r = session.execute(s)
+
+        retval = list(set(reduce(concat, [x['keywords'] for x in r], [])))
         return retval

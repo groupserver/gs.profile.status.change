@@ -100,7 +100,16 @@
               <span class="val" tal:content="view/nTopics">n</span> topics
             </h4>
           </th>
-          <td>Topics</td>
+          <td>
+            <p>
+            <span tal:condition="python:view.nTopics==1">Only one topic
+            was disccussed:</span>
+            <span tal:condition="python:view.nTopics!=1">There were
+            <span tal:content="view/nTopics">n</span> topics
+            disccussed:</span>
+            <span tal:content="structure view/specificTopics">the topics</span>
+            </p>
+          </td>
         </tr><!--gs-profile-status-groups-group-info-posting-topics-->
         <tr class="gs-profile-status-groups-group-info-posting-posts">
           <th>
@@ -111,7 +120,18 @@
               <span class="val" tal:content="view/nPosts">n</span> posts
             </h4>
           </th>
-          <td>Posts</td>
+          <td>
+            <p>
+              <span tal:condition="python:view.nPosts==1">
+                The posts included the following keywords:
+              </span>
+              <span tal:condition="python:view.nPosts!=1">
+                The <span class="val" tal:content="view/nPosts">n</span>
+                posts included the following keywords:
+              </span>
+              <span tal:content="view/specificKeywords">keywords</span>
+            </p>
+          </td>
         </tr><!--gs-profile-status-groups-group-info-posting-posts-->
       </table>
     </td>
