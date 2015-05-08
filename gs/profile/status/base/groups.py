@@ -225,7 +225,7 @@ class GroupInfo(ProfileContentProvider):
     @Lazy
     def userIsOnlyAuthor(self):
         retval = ((len(self.authorIds) == 1)
-                  and (self.authorIds[0] == self.userInfo))
+                  and (self.authorIds[0] == self.userInfo.id))
         return retval
 
     @Lazy
