@@ -1,5 +1,6 @@
 <table xmlns:tal="http://xml.zope.org/namespaces/tal"
-       class="gs-profile-status-groups-site-info" width="100%">
+       class="gs-profile-status-groups-site-info"
+       border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
     <td>
       <h2 class="gs-profile-status-groups-site-info-h">

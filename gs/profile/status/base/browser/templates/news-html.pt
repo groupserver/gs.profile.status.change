@@ -1,9 +1,10 @@
 <table xmlns:tal="http://xml.zope.org/namespaces/tal"
-     id="gs-profile-status-news" width="100%">
+     id="gs-profile-status-news"
+     border="0" cellpadding="0" cellspacing="0"  width="100%">
   <tr>
     <td><h2>News</h2></td>
   </tr>
   <tr>
-    <td tal:content="structure view/news"
+    <td tal:content="structure view/news">News!</td>
   </tr>
 </table>

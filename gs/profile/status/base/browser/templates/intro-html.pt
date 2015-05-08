@@ -1,5 +1,6 @@
 <table xmlns:tal="http://xml.zope.org/namespaces/tal"
-     id="gs-profile-status-introduction" width="100%">
+     id="gs-profile-status-introduction"
+     border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
     <td>
       <h1>What is going on in your groups</h1>
