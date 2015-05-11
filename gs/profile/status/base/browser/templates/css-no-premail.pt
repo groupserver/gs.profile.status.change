@@ -3,10 +3,16 @@
 
 /* A hack for Apple Mail */
 @media screen and (min-width: 601px) {
-    .gs-profile-status-groups-site-info-intro p,
-    .gs-profile-status-groups-site-info-start-group p,
-    .gs-profile-status-groups-group-info-details p {
-        width: 580px;
+    #gs-content-email-layout-fluid-body .gs-profile-status-groups-group-info-posting-people p,
+    #gs-content-email-layout-fluid-body .gs-profile-status-groups-group-info-posting-topics p,
+    #gs-content-email-layout-fluid-body .gs-profile-status-groups-group-info-posting-posts p {
+        max-width: 490px !important;
+    }
+    #gs-profile-status-email-unverified p {
+        max-width: 540px !important;
+    }
+    #gs-profile-status-support p {
+        max-width: 580px !important;
     }
 }
 </tal:block>

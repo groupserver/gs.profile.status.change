@@ -2,8 +2,8 @@
        class="gs-profile-status-groups-group-info"
        border="0" cellpadding="0" cellspacing="0" width="600">
   <tr>
-    <td>
-      <h4 class="gs-profile-status-groups-group-info-h">
+    <td class="gs-profile-status-groups-group-info-h">
+      <h3>
         <a tal:attributes="href view/groupInfo/url"
            tal:content="view/groupInfo/name"
            href="#">This group</a>
@@ -12,7 +12,7 @@
               tal:condition="view/isAdmin">Administrator</span>
         <a tal:attributes="href view/unsubscribeLink"
            class="btn btn-small" href="#">Leave</a>
-      </h4><!--gs-profile-status-groups-group-info-h-->
+      </h3><!--gs-profile-status-groups-group-info-h-->
     </td>
   </tr>
   <tr class="gs-profile-status-groups-group-info-privacy"
@@ -36,10 +36,10 @@
     <td>
       <p>
         <tal:block repeat="author view/specificMembers">
-          <img width="70" height="70" alt="A person" src="#"
+          <img width="60" height="60" alt="A person" src="#"
                border="0"
                class="gs-profile-status-groups-group-info-posting-photos-photo"
-               tal:attributes="src string:${view/notificationSiteInfo/url}${author/url}/gs-profile-image-square/70;
+               tal:attributes="src string:${view/notificationSiteInfo/url}${author/url}/gs-profile-image-square/60;
                                alt author/name" />
         </tal:block>
       </p>
@@ -77,10 +77,10 @@
               </p>
               <p class="gs-profile-status-groups-group-info-posting-people-photo">
                 <tal:block repeat="author view/specificMembers">
-                  <img width="70" height="70" alt="A person" src="#"
+                  <img width="60" height="60" alt="A person" src="#"
                        border="0"
                        class="gs-profile-status-groups-group-info-posting-photos-photo"
-                       tal:attributes="src string:${view/notificationSiteInfo/url}${author/url}/gs-profile-image-square/70;
+                       tal:attributes="src string:${view/notificationSiteInfo/url}${author/url}/gs-profile-image-square/60;
                                        alt author/name" />
                 </tal:block>
               </p>
@@ -97,10 +97,10 @@
               </p>
               <p class="gs-profile-status-groups-group-info-posting-people-photo">
                 <tal:block repeat="author view/specificAuthors">
-                  <img width="70" height="70" alt="A person" src="#"
+                  <img width="60" height="60" alt="A person" src="#"
                        border="0"
                        class="gs-profile-status-groups-group-info-posting-photos-photo"
-                       tal:attributes="src string:${view/notificationSiteInfo/url}${author/url}/gs-profile-image-square/70;
+                       tal:attributes="src string:${view/notificationSiteInfo/url}${author/url}/gs-profile-image-square/60;
                                        alt author/name" />
                 </tal:block>
               </p>

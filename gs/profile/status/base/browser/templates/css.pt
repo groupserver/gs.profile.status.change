@@ -36,6 +36,10 @@
     margin: 0 0 0 0;
     padding: 40px 0 0 0;
 }
+.gs-profile-status-groups-group-info-h h3 {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
 .gs-profile-status-groups-site-info-h .site {
     padding: 0 10px 0 0;
 }
@@ -63,7 +67,7 @@
 }
 .gs-profile-status-groups-group-info-posting th {
     vertical-align: top;
-    width: 60px;
+    width: 70px;
 }
 .gs-profile-status-groups-group-info-posting th h4 {
     margin: 0 0 0 0;
