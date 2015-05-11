@@ -1,6 +1,6 @@
 <table xmlns:tal="http://xml.zope.org/namespaces/tal"
        class="gs-profile-status-groups-group-info"
-       border="0" cellpadding="0" cellspacing="0" width="600">
+       border="0" cellpadding="0" cellspacing="0">
   <tr>
     <td class="gs-profile-status-groups-group-info-h">
       <h3>
@@ -12,8 +12,8 @@
               tal:condition="view/isAdmin">Administrator</span>
         <a tal:attributes="href view/unsubscribeLink"
            class="btn btn-small" href="#">Leave</a>
-      </h3><!--gs-profile-status-groups-group-info-h-->
-    </td>
+      </h3>
+    </td><!--gs-profile-status-groups-group-info-h-->
   </tr>
   <tr class="gs-profile-status-groups-group-info-privacy"
       tal:condition="view/privacyTooStrict">
