@@ -6,13 +6,14 @@
     #gs-content-email-layout-fluid-body .gs-profile-status-groups-group-info-posting-people p,
     #gs-content-email-layout-fluid-body .gs-profile-status-groups-group-info-posting-topics p,
     #gs-content-email-layout-fluid-body .gs-profile-status-groups-group-info-posting-posts p {
-        max-width: 490px !important;
+        width: 490px !important;
     }
     #gs-profile-status-email-unverified p {
-        max-width: 540px !important;
+        width: 540px !important;
     }
+    #gs-content-email-layout-fluid-body .gs-profile-status-groups-group-info-general-stats-none p,
     #gs-profile-status-support p {
-        max-width: 580px !important;
+        width: 580px !important;
     }
 }
 </tal:block>

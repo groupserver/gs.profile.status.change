@@ -32,9 +32,18 @@
 .gs-profile-status-groups-site-info th {
     vertical-align: top;
 }
+.gs-profile-status-groups-group-info {
+    max-width: 600px;
+}
 .gs-profile-status-groups-site-info-h {
     margin: 0 0 0 0;
     padding: 40px 0 0 0;
+    max-width: 560px;
+}
+.gs-profile-status-groups-site-info-intro,
+.gs-profile-status-groups-site-info-start-group {
+    margin: 0 0 0 0;
+    padding: 10px 0 0 0;
 }
 .gs-profile-status-groups-group-info-h h3 {
     margin: 0 0 0 0;
