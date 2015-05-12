@@ -8,7 +8,7 @@
     #gs-content-email-layout-fluid-body .gs-profile-status-groups-group-info-posting-posts p {
         width: 490px !important;
     }
-    #gs-profile-status-email-unverified p {
+    #gs-content-email-layout-fluid-body #gs-profile-status-email-unverified p {
         width: 540px !important;
     }
     #gs-content-email-layout-fluid-body .gs-profile-status-groups-group-info-general-stats-none p,

@@ -34,23 +34,20 @@
   <tr tal:condition="not:view/nPosts"
       class="gs-profile-status-groups-group-info-general-stats-none">
     <td>
-      <p>
-        <tal:block repeat="author view/specificMembers">
-          <img width="60" height="60" alt="A person" src="#"
-               border="0"
-               class="gs-profile-status-groups-group-info-posting-photos-photo"
-               tal:attributes="src string:${view/notificationSiteInfo/url}${author/url}/gs-profile-image-square/60;
-                               alt author/name" />
-        </tal:block>
-      </p>
-      <p>
-        No one made any posts to
-        <span tal:content="view/groupInfo/name">this group</span>
-        in
-        <span tal:attributes="title view/previousMonth/isoformat"
-              tal:content="python:view.previousMonth.strftime('%B')"
-              class="date">this month</span>.
-      </p>
+      <tal:block repeat="author view/specificMembers">
+        <img width="60" height="60" alt="A person" src="#"
+             border="0"
+             class="gs-profile-status-groups-group-info-posting-photos-photo"
+             tal:attributes="src string:${view/notificationSiteInfo/url}${author/url}/gs-profile-image-square/60;
+                             alt author/name" />
+      </tal:block>
+      <br/>
+      No one made any posts to
+      <span tal:content="view/groupInfo/name">this group</span>
+      in
+      <span tal:attributes="title view/previousMonth/isoformat"
+            tal:content="python:view.previousMonth.strftime('%B')"
+            class="date">this month</span>.
     </td>
   </tr><!--gs-profile-status-groups-group-info-general-stats-none-->
   <tr tal:condition="view/nPosts"
@@ -68,34 +65,29 @@
           </th>
           <td>
             <tal:block tal:condition="view/userIsOnlyAuthor">
-              <p class="gs-profile-status-groups-group-info-posting-people-desc">
-                You where the only person to post to the group
-                in
-                <span tal:attributes="title view/previousMonth/isoformat"
-                      tal:content="python:view.previousMonth.strftime('%B')"
-                      class="date">this month</span>.
-              </p>
-              <p class="gs-profile-status-groups-group-info-posting-people-photo">
-                <tal:block repeat="author view/specificMembers">
-                  <img width="60" height="60" alt="A person" src="#"
-                       border="0"
-                       class="gs-profile-status-groups-group-info-posting-photos-photo"
-                       tal:attributes="src string:${view/notificationSiteInfo/url}${author/url}/gs-profile-image-square/60;
-                                       alt author/name" />
-                </tal:block>
-              </p>
+              You where the only person to post to the group
+              in
+              <span tal:attributes="title view/previousMonth/isoformat"
+                    tal:content="python:view.previousMonth.strftime('%B')"
+                    class="date">this month</span>.
+              <br/>
+              <tal:block repeat="author view/specificMembers">
+                <img width="60" height="60" alt="A person" src="#"
+                     border="0"
+                     class="gs-profile-status-groups-group-info-posting-photos-photo"
+                     tal:attributes="src string:${view/notificationSiteInfo/url}${author/url}/gs-profile-image-square/60;
+                                     alt author/name" />
+              </tal:block>
             </tal:block>
             <tal:block tal:condition="not:view/userIsOnlyAuthor">
-              <p tal:condition="view/authors"
-                 class="gs-profile-status-groups-group-info-posting-people-desc">
+              <tal:block condition="view/authors">
                 <b><span tal:content="view/nAuthors">n</span> people posted</b>
                 to the group in
                 <span tal:attributes="title view/previousMonth/isoformat"
                       tal:content="python:view.previousMonth.strftime('%B')"
-                    class="date">this month</span>:
+                      class="date">this month</span>:
                 <span tal:content="view/authors">some people</span>.
-              </p>
-              <p class="gs-profile-status-groups-group-info-posting-people-photo">
+                <br/>
                 <tal:block repeat="author view/specificAuthors">
                   <img width="60" height="60" alt="A person" src="#"
                        border="0"
@@ -103,7 +95,7 @@
                        tal:attributes="src string:${view/notificationSiteInfo/url}${author/url}/gs-profile-image-square/60;
                                        alt author/name" />
                 </tal:block>
-              </p>
+              </tal:block>
             </tal:block>
           </td>
         </tr><!--gs-profile-status-groups-group-info-posting-people-->
@@ -117,14 +109,12 @@
             </h4>
           </th>
           <td>
-            <p>
             <span tal:condition="python:view.nTopics==1">Only
             <b>one topic was disccussed:</b></span>
             <span tal:condition="python:view.nTopics!=1">There were
             <b><span tal:content="view/nTopics">n</span> topics
             disccussed:</b></span>
             <span tal:content="structure view/specificTopics">the topics</span>
-            </p>
           </td>
         </tr><!--gs-profile-status-groups-group-info-posting-topics-->
         <tr class="gs-profile-status-groups-group-info-posting-posts">
@@ -137,17 +127,15 @@
             </h4>
           </th>
           <td>
-            <p>
-              <span tal:condition="python:view.nPosts==1">
-                <b>The keywords</b> in the post include:
-              </span>
-              <span tal:condition="python:view.nPosts!=1">
-                <b>The keywords</b> in the
-                The <span class="val" tal:content="view/nPosts">n</span>
-                posts included:
-              </span>
-              <span tal:content="view/specificKeywords">keywords</span>
-            </p>
+            <span tal:condition="python:view.nPosts==1">
+              <b>The keywords</b> in the post include:
+            </span>
+            <span tal:condition="python:view.nPosts!=1">
+              <b>The keywords</b> in the
+              The <span class="val" tal:content="view/nPosts">n</span>
+              posts included:
+            </span>
+            <span tal:content="view/specificKeywords">keywords</span>
           </td>
         </tr><!--gs-profile-status-groups-group-info-posting-posts-->
       </table>
@@ -163,13 +151,11 @@
   </tr><!--gs-profile-status-groups-group-info-digest-->
   <tr class="gs-profile-status-groups-group-info-canpost">
     <td>
-      <p>
-        <a tal:attributes="href string:${view/groupInfo/url}/messages/newTopic.html"
-           class="btn" href="#">&#10010; Start a new topic</a>
-        or
-        <a tal:attributes="href string:mailto:${view/groupEmail}"
-           href="#"><b>send an email</b> to the group.</a>
-      </p>
+      <a tal:attributes="href string:${view/groupInfo/url}/messages/newTopic.html"
+         class="btn" href="#">&#10010; Start a new topic</a>
+      or
+      <a tal:attributes="href string:mailto:${view/groupEmail}"
+         href="#"><b>send an email</b> to the group.</a>
     </td>
   </tr><!--gs-profile-status-groups-group-info-canpost-->
 </table><!--gs-profile-status-groups-group-info-->
