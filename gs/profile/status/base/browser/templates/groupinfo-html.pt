@@ -1,6 +1,6 @@
 <table xmlns:tal="http://xml.zope.org/namespaces/tal"
        class="gs-profile-status-groups-group-info"
-       border="0" cellpadding="0" cellspacing="0">
+       border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
     <td class="gs-profile-status-groups-group-info-h">
       <h3>
@@ -42,6 +42,7 @@
                              alt author/name" />
       </tal:block>
       <br/>
+      <br/>
       No one made any posts to
       <span tal:content="view/groupInfo/name">this group</span>
       in
@@ -71,6 +72,7 @@
                     tal:content="python:view.previousMonth.strftime('%B')"
                     class="date">this month</span>.
               <br/>
+              <br/>
               <tal:block repeat="author view/specificMembers">
                 <img width="60" height="60" alt="A person" src="#"
                      border="0"
@@ -87,6 +89,7 @@
                       tal:content="python:view.previousMonth.strftime('%B')"
                       class="date">this month</span>:
                 <span tal:content="view/authors">some people</span>.
+                <br/>
                 <br/>
                 <tal:block repeat="author view/specificAuthors">
                   <img width="60" height="60" alt="A person" src="#"
@@ -132,7 +135,7 @@
             </span>
             <span tal:condition="python:view.nPosts!=1">
               <b>The keywords</b> in the
-              The <span class="val" tal:content="view/nPosts">n</span>
+              <span class="val" tal:content="view/nPosts">n</span>
               posts included:
             </span>
             <span tal:content="view/specificKeywords">keywords</span>
