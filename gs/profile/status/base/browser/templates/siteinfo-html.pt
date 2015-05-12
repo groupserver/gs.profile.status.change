@@ -18,7 +18,7 @@
     <td class="gs-profile-status-groups-site-info-intro">
       <p>
         <span tal:condition="python:lg==1">
-          You are a member of one group on
+          You are a member of one group on this site:
           <a tal:content="view/siteInfo/name"
              tal:attributes="href view/siteInfo/url;"
              href="#">this site</a>.
@@ -26,7 +26,7 @@
         <span  tal:condition="python:lg&gt;1">
           You are a member of
           <span tal:content="lg">m</span> groups
-          on
+          on this site:
           <a tal:content="view/siteInfo/name"
              tal:attributes="href view/siteInfo/url;"
              href="#">this site</a>.
