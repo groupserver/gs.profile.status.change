@@ -39,7 +39,8 @@
              border="0"
              class="gs-profile-status-groups-group-info-posting-photos-photo"
              tal:attributes="src string:${view/notificationSiteInfo/url}${author/url}/gs-profile-image-square/60;
-                             alt author/name" />
+                             alt author/name;
+                             title author/name;" />
       </tal:block>
       <br/>
       <br/>
@@ -78,7 +79,8 @@
                      border="0"
                      class="gs-profile-status-groups-group-info-posting-photos-photo"
                      tal:attributes="src string:${view/notificationSiteInfo/url}${author/url}/gs-profile-image-square/60;
-                                     alt author/name" />
+                                     alt author/name;
+                                     title author/name;" />
               </tal:block>
             </tal:block>
             <tal:block tal:condition="not:view/userIsOnlyAuthor">
@@ -96,7 +98,8 @@
                        border="0"
                        class="gs-profile-status-groups-group-info-posting-photos-photo"
                        tal:attributes="src string:${view/notificationSiteInfo/url}${author/url}/gs-profile-image-square/60;
-                                       alt author/name" />
+                                       alt author/name;
+                                       title author/name;" />
                 </tal:block>
               </tal:block>
             </tal:block>
@@ -113,7 +116,7 @@
           </th>
           <td>
             <span tal:condition="python:view.nTopics==1">Only
-            <b>one topic was disccussed:</b></span>
+            <b>one topic was discussed:</b></span>
             <span tal:condition="python:view.nTopics!=1">There were
             <b><span tal:content="view/nTopics">n</span> topics
             disccussed:</b></span>
@@ -130,15 +133,11 @@
             </h4>
           </th>
           <td>
-            <span tal:condition="python:view.nPosts==1">
-              <b>The keywords</b> in the post include:
-            </span>
-            <span tal:condition="python:view.nPosts!=1">
-              <b>The keywords</b> in the
-              <span class="val" tal:content="view/nPosts">n</span>
-              posts included:
-            </span>
-            <span tal:content="view/specificKeywords">keywords</span>
+            <a href="#"
+               tal:attributes="href view/groupInfo/url">
+              <b>Keywords:</b>
+              <span tal:content="view/specificKeywords">keywords</span>
+            </a>
           </td>
         </tr><!--gs-profile-status-groups-group-info-posting-posts-->
       </table>
