@@ -54,7 +54,7 @@
 }
 .gs-profile-status-groups-site-info-intro p,
 .gs-profile-status-groups-site-info-start-group p {
-    padding: 0 0 10px 20px;
+    padding: 0 0 10px 0;
     margin: 0 0 0 0;
 }
 .gs-profile-status-groups-group-info-h {
