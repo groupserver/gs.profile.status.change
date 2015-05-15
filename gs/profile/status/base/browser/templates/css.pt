@@ -68,16 +68,6 @@
 .gs-profile-status-groups-group-info-canpost td {
     padding: 10px 0 0 20px;
 }
-.gs-profile-status-groups-group-info-general-stats-none p,
-.gs-profile-status-groups-group-info-privacy p,
-.gs-profile-status-groups-group-info-digest p,
-.gs-profile-status-groups-group-info-canpost p {
-    margin: 0 0 0 0;
-    max-width: 580px;
-}
-p.gs-profile-status-groups-group-info-general-stats-none-members {
-    padding: 0 0 10px 0;
-}
 .gs-profile-status-groups-group-info-posting th {
     vertical-align: top;
     width: 70px;
@@ -103,9 +93,12 @@ p.gs-profile-status-groups-group-info-general-stats-none-members {
     margin: 0 0 0 0;
     padding: 10px 0 0 0;
 }
-.gs-profile-status-groups-group-info-posting-people-photo img {
+.gs-profile-status-groups-group-info-general-stats-none img,
+.gs-profile-status-groups-group-info-posting-people img {
     margin: 0 0 0 0;
     padding: 0 10px 0 0;
+    width: 60px;
+    heightL: 60px;
 }
 /* Similar to the :last-child pseudo-element, but works in tables */
 .gs-profile-status-groups-spacer div {
