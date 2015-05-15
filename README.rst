@@ -106,17 +106,13 @@ is listed the `group information`_.
 Site information
 ~~~~~~~~~~~~~~~~
 
-Each site lists its *Title* and the *About* text.
+Each site lists its *Title*.
 
 * If the participant is the administrator of the site then a link
   to the ``admindivision`` page is shown.
 
 * If the participant is the administrator of the site then a link
   to start a group is shown.
-
-* If the *About* text is the default then it is omitted. However,
-  the administrator is encouraged to fill out the about text in
-  this case.
 
 Group information
 ~~~~~~~~~~~~~~~~~
@@ -127,10 +123,6 @@ the following is shown.
 * The title. Next to the title is a **Admin** link, if the
   recipient is a group administrator.
 
-* The start of the **About** text, if set. If there is no about
-  text and the recipient is the administrator then he or she is
-  encouraged to set the *About* text.
-
 * If the **privacy** is too strict (secret and more than 12
   people, same as the encouragement [#encouragement]_) and the
   recipient is the *site* administrator then a suggestion is
@@ -140,8 +132,6 @@ the following is shown.
   including the number of posts, topics, and authors.
 
 * A link to **post** to the group, using email.
-
-* A selection of **images** posted to the group in the last month.
 
 * The **names** of some of the authors.
 
