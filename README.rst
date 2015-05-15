@@ -18,8 +18,8 @@ The profile status notification
 
 The *Profile status* notification_ is sent out once a month to
 remind people that they are a member of some GroupServer
-groups. It is a complex notification that is made up of many
-viewlets_. The notification is sent using the sender_.
+groups. The notification is sent using the sender_, while the
+`email command`_ stops the summary notification from going out.
 
 Notification
 ============
@@ -36,7 +36,7 @@ where the site-names is a comma-separated list of the sites the
 recipient is a member of.
 
 Viewlets
-========
+--------
 
 There are seven viewlets that help manage the complexity of the
 notification: one for the `Table of contents`_ and then six for
@@ -58,7 +58,7 @@ notification_ this actually equates to fourteen viewlets; they
 share *view* code, but differ in the *page templates*.)
 
 Table of contents
------------------
+~~~~~~~~~~~~~~~~~
 
 Because the notification is so long there is a *Table of
 contents* viewlet. It lists the other sections in the
@@ -66,13 +66,13 @@ notification, using the ``title`` attribute for the entry and the
 ``name`` to form the ``href`` for the document-link.
 
 Introduction
-------------
+~~~~~~~~~~~~
 
 The *Introduction* (``gs-profile-status-intro``) explains to the
 recipient why he or she is getting the notification.
 
 News
-----
+~~~~
 
 The *News* (``gs-profile-status-news``) comprises a plain-text
 area at the start of the notification. It is retrieved from the
@@ -81,7 +81,7 @@ in place as is. If there is no object then the news section is
 omitted.
 
 Reset password
---------------
+~~~~~~~~~~~~~~
 
 The *Just add* feature [#add]_ causes conniptions for the summary
 notification: the email is full of links to the web that are
@@ -90,7 +90,7 @@ notification: the email is full of links to the web that are
 never logged in (it checks the ``audit`` table).
 
 Groups
-------
+~~~~~~
 
 The *Groups* viewlet (``gs-profile-status-groups``) summarises
 the groups that the participant is a member of. It is designed to
@@ -115,7 +115,7 @@ Each site lists its *Title*.
   to start a group is shown.
 
 Group information
-~~~~~~~~~~~~~~~~~
+`````````````````
 
 Within each site all the groups are listed. For each **group**
 the following is shown.
@@ -145,7 +145,7 @@ the following is shown.
   [#unsubscribe]_.
 
 Profile information
--------------------
+~~~~~~~~~~~~~~~~~~~
 
 The *Profile information* (``gs-profile-status-profile``) is the
 first complex viewlet. Its purpose is twofold: **show** what
@@ -173,7 +173,7 @@ If the participant has never logged in, then a link to the
 provided to help the person log in.
 
 Email settings
---------------
+~~~~~~~~~~~~~~
 
 The *Email settings* viewlet (``gs-profile-status-email``) shows
 the existing addresses, and tries to encourage the participant to
@@ -188,7 +188,7 @@ and the site will be better able to contact the recipient.
 * An **Add** button is shown, to add another address.
 
 Support
--------
+~~~~~~~
 
 The *Support* viewlet (``gs-profile-status-support``) bookends
 the notification, along with the other general-information
@@ -232,7 +232,7 @@ happening in your groups*.
 Email command
 =============
 
-The email command [#command]_ ``Support stop`` is registered for
+The email command [#command]_ ``Summary off`` is registered for
 the support-groups. It adds the user-identifier for the sender to
 the ``summary_skip`` table.
 
