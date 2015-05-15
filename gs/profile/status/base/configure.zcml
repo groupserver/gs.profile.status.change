@@ -22,6 +22,12 @@
     provides=".interfaces.ISiteGroups"
     factory=".sitegroups.SiteGroups" />
 
+  <adapter
+    for="Products.CustomUserFolder.interfaces.IGSUserInfo
+         gs.group.base.interfaces.IGSGroupMarker"
+    provides=".interfaces.IStatusGroupInfo"
+    factory=".sitegroups.StatusGroupInfo" />
+
   <!-- The web-hooks -->
   <browser:page
     name="gs-profile-status-members.html"

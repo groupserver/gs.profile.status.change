@@ -14,8 +14,13 @@
 ############################################################################
 from __future__ import absolute_import, print_function, unicode_literals
 from operator import attrgetter
-from zope.component import createObject
+from zope.component import createObject, getMultiAdapter
 from gs.group.member.base import user_member_of_group
+from Products.GSGroup.groupInfo import GSGroupInfo
+from .interfaces import IStatusGroupInfo
+
+#: The "types" of folder objects in the ZMI
+FOLDER_TYPES = ['Folder', 'Folder (ordered)']
 
 
 class NoGroups(ValueError):
@@ -23,17 +28,19 @@ class NoGroups(ValueError):
 
 
 class SiteGroups(object):
+    '''The groups on a site'''
+
     def __init__(self, user, site):
         groups = getattr(site, 'groups')
-        self.groupInfos = []
-        for folder in groups.objectValues(['Folder', 'Folder (ordered)']):
-            if user_member_of_group(user, folder):
-                groupInfo = self.get_groupInfo(folder)
-                self.groupInfos.append(groupInfo)
+        # Normally the StatusGroupInfo below, but not always.
+        gis = [getMultiAdapter((user, folder), IStatusGroupInfo)
+               for folder in groups.objectValues(FOLDER_TYPES)
+               if folder.getProperty('is_group', False)]
+        self.groupInfos = [gi for gi in gis if gi.show]
+        self.groupInfos.sort(key=attrgetter('name'))
         if self.groupInfos is []:
             m = 'Not a member of any groups in {0}'.format(site.getId())
             raise NoGroups(m)
-        self.groupInfos.sort(key=attrgetter('name'))
 
         self.siteInfo = self.get_siteInfo(site)
 
@@ -45,4 +52,15 @@ class SiteGroups(object):
     @staticmethod
     def get_siteInfo(folder):
         retval = createObject('groupserver.SiteInfo', folder)
+        return retval
+
+
+class StatusGroupInfo(GSGroupInfo):
+    def __init__(self, user, group):
+        self.user = user
+        super(StatusGroupInfo, self).__init__(group)
+
+    @property
+    def show(self):
+        retval = user_member_of_group(self.user, self.groupObj)
         return retval

@@ -14,9 +14,10 @@
 ############################################################################
 from __future__ import unicode_literals
 from zope.interface import Interface
-from zope.schema import ASCIILine, Field
+from zope.schema import ASCIILine, Bool, Field
 from zope.viewlet.interfaces import IViewletManager
 from gs.auth.token import AuthToken
+from Products.GSGroup.interfaces import IGSGroupInfo
 
 
 class IGetPeople(Interface):
@@ -89,3 +90,10 @@ class ISiteGroups(Interface):
     groupInfos = Field(
         title='Groups information',
         description='A list of groupInfo objects')
+
+
+class IStatusGroupInfo(IGSGroupInfo):
+    show = Bool(
+        title='Show',
+        description='True if the group should be shown in the profile '
+                    'status')
