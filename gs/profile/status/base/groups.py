@@ -13,7 +13,6 @@
 #
 ############################################################################
 from __future__ import absolute_import, print_function, unicode_literals
-from collections import namedtuple
 from datetime import date
 from functools import reduce
 from operator import concat, attrgetter
@@ -25,10 +24,10 @@ else:  # Python 2
     from urllib import quote
 from zope.app.pagetemplate import ViewPageTemplateFile
 from zope.cachedescriptors.property import Lazy
-from zope.component import createObject
+from zope.component import createObject, getMultiAdapter
 from zope.contentprovider.interfaces import UpdateNotCalled
 from gs.core import to_ascii, curr_time, comma_comma_and
-from gs.group.member.base import user_member_of_group, user_admin_of_group
+from gs.group.member.base import user_admin_of_group
 from gs.group.privacy.interfaces import IGSGroupVisibility
 from gs.group.stats import GroupPostingStats
 from gs.profile.base import ProfileViewlet, ProfileContentProvider
@@ -37,53 +36,40 @@ from gs.group.member.base import get_group_userids
 from gs.group.member.canpost.interfaces import IGSPostingUser
 from Products.GSGroup.interfaces import IGSMailingListInfo
 from Products.GSGroupMember.groupMembersInfo import GSGroupMembersInfo
+from .interfaces import ISiteGroups
 from .queries import PostingStatsQuery
-
-SiteGroups = namedtuple('SiteGroups', ['siteInfo', 'groupInfos'])
+from .sitegroups import NoGroups
 
 
 class GroupsViewlet(ProfileViewlet):
     'The groups viewlet'
 
     @Lazy
+    def show(self):
+        retval = self.sites is not []
+        return retval
+
+    @Lazy
     def userGroups(self):
         self.userInfo.user.get
-
-    @staticmethod
-    def get_groupInfo(folder):
-        retval = createObject('groupserver.GroupInfo', folder)
-        return retval
-
-    @staticmethod
-    def get_siteInfo(folder):
-        retval = createObject('groupserver.SiteInfo', folder)
-        return retval
 
     def get_sitegroups(self, siteId):
         content = self.context.Content
         site = getattr(content, siteId)
-        groups = getattr(site, 'groups')
-
-        groupInfos = []
-        for folder in groups.objectValues(['Folder', 'Folder (ordered)']):
-            if user_member_of_group(self.userInfo, folder):
-                groupInfo = self.get_groupInfo(folder)
-                groupInfos.append(groupInfo)
-
-        if groupInfos is []:
-            m = 'Not a member of any groups in {0}'.format(siteId)
-            raise ValueError(m)
-        groupInfos.sort(key=attrgetter('name'))
-        siteInfo = self.get_siteInfo(site)
-        retval = SiteGroups(siteInfo=siteInfo, groupInfos=groupInfos)
+        retval = getMultiAdapter((self.userInfo, site), ISiteGroups)
         return retval
 
     @Lazy
     def sites(self):
         sites = list(SiteMembership(self.context))
         sites.sort(key=attrgetter('title'))
-        retval = [self.get_sitegroups(s.token) for s in sites]
-
+        retval = []
+        for s in sites:
+            try:
+                siteGroups = self.get_sitegroups(s.token)
+                retval.append(siteGroups)
+            except NoGroups:
+                continue
         return retval
 
     @Lazy

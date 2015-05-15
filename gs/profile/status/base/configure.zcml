@@ -16,6 +16,12 @@
 
   <include package="zope.viewlet" file="meta.zcml" />
 
+  <adapter
+    for="Products.CustomUserFolder.interfaces.IGSUserInfo
+         Products.GSContent.interfaces.IGSSiteFolder"
+    provides=".interfaces.ISiteGroups"
+    factory=".sitegroups.SiteGroups" />
+
   <!-- The web-hooks -->
   <browser:page
     name="gs-profile-status-members.html"

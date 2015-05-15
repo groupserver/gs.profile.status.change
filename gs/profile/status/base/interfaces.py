@@ -79,3 +79,13 @@ class IGSGroupInfoContentProvider(Interface):
                     'the post.',
         required=False,
         default=b"browser/templates/groupinfo-html.pt")
+
+
+class ISiteGroups(Interface):
+    siteInfo = Field(
+        title='Site information',
+        description='Information about the site.')
+
+    groupInfos = Field(
+        title='Groups information',
+        description='A list of groupInfo objects')
