@@ -321,7 +321,7 @@ current user is never in the list'''
         specificKeywords = []
         n = 0
         for keyword in self.keywords:
-            if len(keyword) > 31:
+            if (len(keyword) > 31) or ('@' in keyword):
                 continue
             n += len(keyword)
             if n >= self.maxTopicNames:
