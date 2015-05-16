@@ -7,6 +7,9 @@
       <span tal:replace="view/siteInfo/name">Site</span></title>
   </head>
   <body>
+    <tal:block metal:fill-slot="preheader">
+      Here is a summary of what is going on in your groups.
+    </tal:block>
     <div id="gs-profile-status" metal:fill-slot="body"
          tal:content="structure provider:groupserver.ProfileStatus">
       The HTML form of the notification
