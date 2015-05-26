@@ -288,7 +288,8 @@ current user is never in the list'''
             if n >= self.maxTopicNames:
                 break
             specificTopics.append(topic)
-        t = '<a href="{siteInfo.url}r/topic/{topic.topicId}">{topic.name}</a>'
+        t = '<a href="{siteInfo.url}r/topic/{topic.topicId}">'\
+            '{topic.name}</a>'
         topicLinks = [t.format(siteInfo=self.siteInfo, topic=topic)
                       for topic in specificTopics]
         retval = comma_comma_and(topicLinks)
