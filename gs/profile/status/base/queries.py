@@ -51,12 +51,22 @@ class PostingStatsQuery(object):
         self.topicTable = getTable('topic')
         self.topicKeywordsTable = getTable('topic_keywords')
 
+    @staticmethod
+    def year(dateCol):
+        retval = sa.extract('year', dateCol)
+        return retval
+
+    @staticmethod
+    def month(dateCol):
+        retval = sa.extract('month', dateCol)
+        return retval
+
     def posts_in_month(self, month, year, groupId, siteId):
         'Get the number of posts in a particular month'
         pt = self.postTable
         s = sa.select([sa.func.count(pt.c.post_id).label('n_posts')])
-        s.append_whereclause(sa.extract('month', pt.c.date) == month)
-        s.append_whereclause(sa.extract('year', pt.c.date) == year)
+        s.append_whereclause(self.month(pt.c.date) == month)
+        s.append_whereclause(self.year(pt.c.date) == year)
         s.append_whereclause(pt.c.group_id == groupId)
         s.append_whereclause(pt.c.site_id == siteId)
 
@@ -70,8 +80,8 @@ class PostingStatsQuery(object):
         'Get the names of the topics in a particular month'
         tt = self.topicTable
         s = sa.select([tt.c.topic_id, tt.c.original_subject])
-        s.append_whereclause(sa.extract('month', tt.c.last_post_date) == month)
-        s.append_whereclause(sa.extract('year', tt.c.last_post_date) == year)
+        s.append_whereclause(self.month(tt.c.last_post_date) == month)
+        s.append_whereclause(self.year(tt.c.last_post_date) == year)
         s.append_whereclause(tt.c.group_id == groupId)
         s.append_whereclause(tt.c.site_id == siteId)
 
@@ -86,8 +96,8 @@ class PostingStatsQuery(object):
         'Get the distinct user-ids of the authors in a particular month'
         pt = self.postTable
         s = sa.select([sa.func.distinct(pt.c.user_id).label('user_id')])
-        s.append_whereclause(sa.extract('month', pt.c.date) == month)
-        s.append_whereclause(sa.extract('year', pt.c.date) == year)
+        s.append_whereclause(self.month(pt.c.date) == month)
+        s.append_whereclause(self.year(pt.c.date) == year)
         s.append_whereclause(pt.c.group_id == groupId)
         s.append_whereclause(pt.c.site_id == siteId)
 
@@ -101,8 +111,8 @@ class PostingStatsQuery(object):
         tt = self.topicTable
         tkt = self.topicKeywordsTable
         s = sa.select([tkt.c.keywords])
-        s.append_whereclause(sa.extract('month', tt.c.last_post_date) == month)
-        s.append_whereclause(sa.extract('year', tt.c.last_post_date) == year)
+        s.append_whereclause(self.month(tt.c.last_post_date) == month)
+        s.append_whereclause(self.year(tt.c.last_post_date) == year)
         s.append_whereclause(tt.c.group_id == groupId)
         s.append_whereclause(tt.c.site_id == siteId)
         s.append_whereclause(tt.c.topic_id == tkt.c.topic_id)
