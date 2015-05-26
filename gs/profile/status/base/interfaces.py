@@ -33,6 +33,7 @@ class ISendNotification(Interface):
 
     profileId = ASCIILine(
         title='Profile identifier',
+        description='The identifier for the recipient of the notification',
         required=True)
 
     token = AuthToken(
