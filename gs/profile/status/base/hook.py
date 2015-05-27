@@ -18,7 +18,7 @@ from logging import getLogger
 log = getLogger('gs.profile.status.base.hook')
 import time
 from zope.cachedescriptors.property import Lazy
-from zope.component import createObject, getMultiAdapter
+from zope.component import createObject, queryMultiAdapter
 from zope.formlib import form
 from gs.cache import cache
 from gs.content.form.api.json import SiteEndpoint
@@ -80,6 +80,7 @@ class SendNotification(SiteEndpoint):
             log.warn(msg)
             r = {'status': self.STATUS['no_user'], 'message': msg}
         elif self.should_send(userInfo):
+            # TODO: Check for verified addresses
             m = 'Sent the monthly profile-status notification to {0} ({1})'
             msg = m.format(userInfo.name, userInfo.id)
             log.info(msg)
@@ -87,7 +88,7 @@ class SendNotification(SiteEndpoint):
             time.sleep(0.5)  # Simulate work
         else:
             m = 'Skipping the monthly profile-status notification for '\
-                '{0} ({1})'
+                '{0} ({1}): not in any groups'
             msg = m.format(userInfo.name, userInfo.id)
             log.info(msg)
             r = {'status': self.STATUS['no_groups'], 'message': msg}
@@ -108,10 +109,10 @@ class SendNotification(SiteEndpoint):
         retval = False
         content = self.context.site_root().Content
         if siteIds:
-            siteGroups = [getMultiAdapter((userInfo, getattr(content, s)),
-                                          ISiteGroups) for s in siteIds]
+            siteGroups = [queryMultiAdapter((userInfo, getattr(content, s)),
+                                            ISiteGroups) for s in siteIds]
             siteGroups = [sg for sg in siteGroups
-                          if sg.groupInfos is not []]
+                          if sg and (sg.groupInfos is not [])]
             retval = siteGroups is not []
         return retval
 
