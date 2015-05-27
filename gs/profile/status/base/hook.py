@@ -16,6 +16,7 @@ from __future__ import absolute_import, print_function, unicode_literals
 from json import dumps as to_json
 from logging import getLogger
 log = getLogger('gs.profile.status.base.hook')
+import time
 from zope.cachedescriptors.property import Lazy
 from zope.component import createObject, getMultiAdapter
 from zope.formlib import form
@@ -49,7 +50,7 @@ class MembersHook(SiteEndpoint):
     @Lazy
     def profile_ids(self):
         acl_users = self.context.acl_users
-        retval = list(acl_users.objectIds('Custom User'))
+        retval = acl_users.getUserNames()
         return retval
 
 
@@ -79,11 +80,11 @@ class SendNotification(SiteEndpoint):
             log.warn(msg)
             r = {'status': self.STATUS['no_user'], 'message': msg}
         elif self.should_send(userInfo):
-            m = 'Sending the monthly profile-status notification to '\
-                '{0} ({1})'
+            m = 'Sent the monthly profile-status notification to {0} ({1})'
             msg = m.format(userInfo.name, userInfo.id)
             log.info(msg)
-            r = {'status': self.STATUS['ok'], 'message': userInfo.name}
+            r = {'status': self.STATUS['ok'], 'message': msg}
+            time.sleep(0.5)  # Simulate work
         else:
             m = 'Skipping the monthly profile-status notification for '\
                 '{0} ({1})'
