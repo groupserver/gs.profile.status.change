@@ -23,6 +23,7 @@ from zope.formlib import form
 from gs.cache import cache
 from gs.content.form.api.json import SiteEndpoint
 from gs.auth.token import log_auth_error
+from gs.profile.email.base import EmailUserFromUser
 from .interfaces import (IGetPeople, ISendNotification, ISiteGroups)
 
 
@@ -63,7 +64,7 @@ class SendNotification(SiteEndpoint):
     label = 'Send a status reminder'
     form_fields = form.Fields(ISendNotification, render_context=False)
     FOLDER_TYPES = ['Folder', 'Folder (ordered)']
-    STATUS = {'no_groups': -4, 'no_user': -2, 'ok': 0, }
+    STATUS = {'no_email': -8, 'no_groups': -4, 'no_user': -2, 'ok': 0, }
 
     @form.action(label='Send', name='send', prefix='',
                  failure='handle_send_failure')
@@ -79,13 +80,22 @@ class SendNotification(SiteEndpoint):
             msg = m.format(data['profileId'])
             log.warn(msg)
             r = {'status': self.STATUS['no_user'], 'message': msg}
-        elif self.should_send(userInfo):
-            # TODO: Check for verified addresses
-            m = 'Sent the monthly profile-status notification to {0} ({1})'
-            msg = m.format(userInfo.name, userInfo.id)
-            log.info(msg)
-            r = {'status': self.STATUS['ok'], 'message': msg}
-            time.sleep(0.5)  # Simulate work
+        elif self.in_groups(userInfo):
+            emailUser = EmailUserFromUser(userInfo)
+            if emailUser.get_delivery_addresses():
+                # TODO: Send
+                m = 'Sent the monthly profile-status notification to {0} '\
+                    '({1})'
+                msg = m.format(userInfo.name, userInfo.id)
+                log.info(msg)
+                r = {'status': self.STATUS['ok'], 'message': msg}
+                time.sleep(0.5)  # FIXME: Simulate work
+            else:  # No email addresses
+                m = 'Skipping the monthly profile-status notification for '\
+                    '{0} ({1}): no verified email addresses'
+                msg = m.format(userInfo.name, userInfo.id)
+                log.info(msg)
+                r = {'status': self.STATUS['no_email'], 'message': msg}
         else:
             m = 'Skipping the monthly profile-status notification for '\
                 '{0} ({1}): not in any groups'
@@ -95,8 +105,8 @@ class SendNotification(SiteEndpoint):
         retval = to_json(r)
         return retval
 
-    def should_send(self, userInfo):
-        '''Should a notification be sent to a person?
+    def in_groups(self, userInfo):
+        '''Is the person in *any* groups (actual groups, not just sites)
 
 :param userInfo: The user
 :type userInfo: Products.CustomUserFolder.interfaces.IGSUserInfo
