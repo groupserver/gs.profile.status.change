@@ -40,7 +40,6 @@ class MembersHook(SiteEndpoint):
 
 :param action: The button that was clicked.
 :param dict data: The form data.'''
-        log.info('Getting the list of profile identifiers')
         retval = to_json(self.profile_ids)
         return retval
 
@@ -51,10 +50,10 @@ class MembersHook(SiteEndpoint):
 
     @Lazy
     def profile_ids(self):
+        '''All the members of the GroupServer instance.'''
         acl_users = self.context.acl_users
         retval = acl_users.getUserNames()
         return retval
-
 
 #: The time the list of site-identifiers is cached (in seconds)
 SITE_CACHE_TIME = 24*60*60
@@ -130,8 +129,9 @@ class SendNotification(SiteEndpoint):
             retval = siteGroups is not []
         return retval
 
-    def get_gs_instance(self):
-        '''Get the identifier for the GroupServer instance:
+    @Lazy
+    def gsInstance(self):
+        '''The identifier for the GroupServer instance:
 
 :returns: The identifier for the folder that holds the ``Content`` folder.
 :rtype: string'''
@@ -140,7 +140,7 @@ class SendNotification(SiteEndpoint):
         return retval
 
     @cache('gs.profile.status.base.hook.SendNotification.possibleSites',
-           lambda s: s.get_gs_instance(), SITE_CACHE_TIME)
+           lambda s: s.gsInstance, SITE_CACHE_TIME)
     def sites(self):
         '''Get the list of all sites
 
