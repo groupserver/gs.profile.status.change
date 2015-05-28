@@ -19,7 +19,7 @@
         <a tal:attributes="href view/changeEmailUrl"
            href="#">your email settings page</a>.
       </p>
-    </td><!==gs-profile-status-email-intrp-->
+    </td><!--gs-profile-status-email-intro-->
   </tr>
   <tr tal:condition="view/preferred">
     <td id="gs-profile-status-email-preferred">
