@@ -1,6 +1,6 @@
 <tal:block
   xmlns:tal="http://xml.zope.org/namespaces/tal">Your email address
-------------------
+==================
 
 You can have multiple addresses with your profile. You can post
 to your groups from any address, but you only need to receive
@@ -9,25 +9,25 @@ work-email (or several) as well as a home email address.
 
 *Manage* your email addresses using your email settings page:
 <tal:block content="view/changeEmailUrl">URL</tal:block>
+<tal:block condition="python:len(view.preferred)==1">
+* Your preferred address</tal:block><tal:block condition="python:len(view.preferred)&gt;1">* Your preferred addresses</tal:block>
+<tal:block repeat="address view/preferred">  + <tal:block content="address">person@example.com</tal:block></tal:block>
+<tal:block condition="python:len(view.verified)==1">
+* Your other address</tal:block><tal:block condition="python:len(view.verified)&gt;1">* Your other addresses</tal:block>
+<tal:block repeat="address view/verified">  + <tal:block content="address">person@example.com</tal:block></tal:block>
 
-<tal:block condition="python:len(view.preferred)==1">* Your preferred address *</tal:block><tal:block condition="python:len(view.preferred)&gt;1">* Your preferred addresses* </tal:block>
-<tal:block repeat="address view/preferred">  * <tal:block content="address">person@example.com</tal:block>
-</tal:block>
-<tal:block condition="python:len(view.verified)==1">* Your other address *</tal:block><tal:block condition="python:len(view.verified)&gt;1">* Your other addresses *</tal:block>
-<tal:block repeat="address view/verified">  * <tal:block content="address">person@example.com</tal:block>
-</tal:block>
-
-*Add an address*
+Add an address
+--------------
   <tal:block content="view/changeEmailUrl">URL</tal:block>
 
-<tal:block condition="view/unverified"><tal:block condition="python:len(view.unverified)==1">* Unverified address *</tal:block><tal:block condition="python:len(view.unverified)&gt;1">Unverified addresses</tal:block>
-
+<tal:block condition="view/unverified"><tal:block condition="python:len(view.unverified)==1">Unverified address
+------------------
+</tal:block><tal:block condition="python:len(view.unverified)&gt;1">Unverified addresses
+--------------------</tal:block>
   You must *verify* that you control each address before you can
   use it to post, or receive email. Visit your email settings to
   *resend* the verification message to activate the address.
-
   <tal:block content="view/changeEmailUrl">URL</tal:block>
 
-  <tal:block repeat="address view/unverified">  * <tal:block tal:content="address">person@example.com</tal:block>
-</tal:block></tal:block>
+<tal:block repeat="address view/unverified">  * <tal:block tal:content="address">person@example.com</tal:block></tal:block></tal:block>
 </tal:block>

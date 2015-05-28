@@ -1,5 +1,6 @@
 <tal:block
-  xmlns:tal="http://xml.zope.org/namespaces/tal">Support
+  xmlns:tal="http://xml.zope.org/namespaces/tal">=======
+Support
 =======
 
 To stop receiving this monthly summary send an email with the

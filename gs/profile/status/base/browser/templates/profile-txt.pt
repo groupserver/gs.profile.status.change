@@ -1,5 +1,6 @@
 <tal:block
-  xmlns:tal="http://xml.zope.org/namespaces/tal">Your profile
+  xmlns:tal="http://xml.zope.org/namespaces/tal">============
+Your profile
 ============
 
 Your profile is what you look like to other group members. Your
@@ -13,4 +14,5 @@ your profile to
  <tal:block content="view/profileUrl">URL</tal:block>
 
 This will help your fellow group members to get to know you a bit
-better.</tal:block>
+better.
+</tal:block>

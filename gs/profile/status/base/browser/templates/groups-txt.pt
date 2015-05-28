@@ -1,15 +1,14 @@
 <tal:block
   xmlns:tal="http://xml.zope.org/namespaces/tal"
   define="lg python:len(view.groups);
-          ls python:len(view.sites);">Your groups
+          ls python:len(view.sites);">===========
+Your groups
 ===========
-<tal:block condition="python:lg&gt;1 and ls==1">
-  You are a member of <span tal:content="lg">n</span> groups.</tal:block><tal:block condition="python:lg&gt;1 and ls&gt;1">  You are a member of <tal:block content="lg">n</tal:block> groups on <span tal:content="ls">n</span> sites.</tal:block>
 
-  <tal:block
-    repeat="site view/sites"><tal:block
-                               define="siteInfo site/siteInfo;
-                                       groupInfos site/groupInfos;"><tal:block
-                                                                      define="pageTemplateFileName browser/templates/siteinfo-txt.pt"
-                                                                      content="structure provider:gs-profile-status-groups-site">Site information</tal:block>
-<tal:block repeat="groupInfo groupInfos"><tal:block define="browser/templates/groupinfo-html.pt" content="structure provider:gs-profile-status-groups-group">Group information</tal:block></tal:block></tal:block></tal:block></tal:block>
+<tal:block condition="python:lg&gt;1 and ls==1">
+You are a member of <tal:block content="lg">n</tal:block> groups.</tal:block><tal:block condition="python:lg&gt;1 and ls&gt;1">You are a member of <tal:block content="lg">n</tal:block> groups on <tal:block content="ls">n</tal:block> sites.</tal:block>
+
+<tal:block repeat="site view/sites"><tal:block define="siteInfo site/siteInfo;
+              groupInfos site/groupInfos;"><tal:block define="pageTemplateFileName string:browser/templates/siteinfo-txt.pt" content="structure provider:gs-profile-status-groups-site">Site information</tal:block>
+<tal:block repeat="groupInfo groupInfos"><tal:block define="pageTemplateFileName string:browser/templates/groupinfo-txt.pt" content="structure provider:gs-profile-status-groups-group">Group information</tal:block></tal:block></tal:block></tal:block>
+</tal:block>

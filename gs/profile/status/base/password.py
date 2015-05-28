@@ -50,7 +50,13 @@ class PasswordViewlet(ProfileViewlet):
         return retval
 
     @Lazy
+    def passwordResetBaseURL(self):
+        r = '{0}/reset_password.html'
+        retval = r.format(self.siteInfo.url)
+        return retval
+
+    @Lazy
     def passwordResetUrl(self):
-        r = '{0}/reset_password.html?form.email={1}'
-        retval = r.format(self.siteInfo.url, quote(self.emailAddr))
+        r = '{0}?form.email={1}'
+        retval = r.format(self.passwordResetBaseURL, quote(self.emailAddr))
         return retval
