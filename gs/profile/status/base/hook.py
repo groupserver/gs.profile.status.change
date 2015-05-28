@@ -25,6 +25,7 @@ from gs.content.form.api.json import SiteEndpoint
 from gs.auth.token import log_auth_error
 from gs.profile.email.base import EmailUserFromUser
 from .interfaces import (IGetPeople, ISendNotification, ISiteGroups)
+from .notifier import StatusNotifier
 
 
 class MembersHook(SiteEndpoint):
@@ -83,7 +84,10 @@ class SendNotification(SiteEndpoint):
         elif self.in_groups(userInfo):
             emailUser = EmailUserFromUser(userInfo)
             if emailUser.get_delivery_addresses():
-                # TODO: Send
+                m = 'Sending profile status for {0} (1)'
+                log.info(m.format(userInfo.name, userInfo.id))
+                notifier = StatusNotifier(userInfo.user, self.request)
+                notifier.notify()
                 m = 'Sent the monthly profile-status notification to {0} '\
                     '({1})'
                 msg = m.format(userInfo.name, userInfo.id)
