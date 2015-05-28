@@ -34,6 +34,7 @@ from gs.profile.base import ProfileViewlet, ProfileContentProvider
 from gs.site.member.sitemembershipvocabulary import SiteMembership
 from gs.group.member.base import get_group_userids
 from gs.group.member.canpost.interfaces import IGSPostingUser
+from gs.group.member.email.base import (GroupEmailUser, GroupEmailSetting)
 from Products.GSGroup.interfaces import IGSMailingListInfo
 from Products.GSGroupMember.groupMembersInfo import GSGroupMembersInfo
 from .interfaces import ISiteGroups
@@ -197,7 +198,10 @@ class GroupInfo(ProfileContentProvider):
     @Lazy
     def switchToDigest(self):
         '``True`` if the member should switch to digest-mode'
-        retval = (self.nPosts >= self.manyPosts)
+        manyPosts = (self.nPosts >= self.manyPosts)
+        geu = GroupEmailUser(self.userInfo, self.groupInfo)
+        emailPerPost = geu.get_delivery_setting() == GroupEmailSetting.default
+        retval = manyPosts and emailPerPost
         return retval
 
     @Lazy
@@ -338,7 +342,7 @@ current user is never in the list'''
             u = to_ascii(body)
             qBody = quote(u)
         mailto = 'mailto:{to}?Subject={subject}&body={body}'
-        retval = mailto.format(to=to, subject=subject, body=body)
+        retval = mailto.format(to=qTo, subject=qSubject, body=qBody)
         return retval
 
     @Lazy
@@ -358,8 +362,6 @@ Please remove me from {0}
 
     @Lazy
     def digestLink(self):
-        to = quote(self.groupEmail)
-        subject = quote('Digest on')
         b = '''Hello,
 
 Please set me to digest-mode for {0}
