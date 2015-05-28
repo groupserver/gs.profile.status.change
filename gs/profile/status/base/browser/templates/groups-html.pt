@@ -8,8 +8,7 @@
       tal:condition="python:len(view.sites)&gt;1">
     <td id="gs-profile-status-groups-intro">
       <p tal:condition="python:lg&gt;1 and ls==1">
-        You are a member of <span tal:content="lg">n</span> groups
-        on one site.
+        You are a member of <span tal:content="lg">n</span> groups.
       </p>
       <p  tal:condition="python:lg&gt;1 and ls&gt;1">
         You are a member of <span tal:content="lg">n</span> groups
