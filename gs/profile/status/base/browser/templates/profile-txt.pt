@@ -13,6 +13,6 @@ your profile to
 
  <tal:block content="view/profileUrl">URL</tal:block>
 
-This will help your fellow group members to get to know you a bit
+This will help your fellow group members to get to know you
 better.
 </tal:block>
