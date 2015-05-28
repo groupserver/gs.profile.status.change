@@ -1,4 +1,4 @@
-<tal:block xmlns:tal="http://xml.zope.org/namespaces/tal"
-           repeat="viewlet options/viewlets">
-  <tal:block content="structure viewlet/render">viewlets</tal:block>
-</tal:block>
+<tal:block
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  repeat="viewlet options/viewlets"><tal:block
+                                      content="structure viewlet/render">viewlets</tal:block></tal:block>

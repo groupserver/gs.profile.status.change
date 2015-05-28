@@ -62,6 +62,13 @@
     class="gs.viewlet.manager.WeightOrderedViewletManager"
     template="browser/templates/simplemanager.pt"
     permission="zope2.View" />
+  <browser:viewletManager
+    name="groupserver.ProfileStatusText"
+    for="Products.CustomUserFolder.interfaces.ICustomUser"
+    provides=".interfaces.IProfileStatusNotificationText"
+    class="gs.viewlet.manager.WeightOrderedViewletManager"
+    template="browser/templates/simplemanager.pt"
+    permission="zope2.View" />
 
   <!-- The viewlets -->
   <browser:viewlet
@@ -73,6 +80,14 @@
     weight="10"
     title="Introduction" />
   <browser:viewlet
+    name="gs-profile-status-intro"
+    manager=".interfaces.IProfileStatusNotificationText"
+    template="browser/templates/intro-txt.pt"
+    class="gs.viewlet.SiteViewlet"
+    permission="zope2.Public"
+    weight="10"
+    title="Introduction (text)" />
+  <browser:viewlet
     name="gs-profile-status-password"
     manager=".interfaces.IProfileStatusNotification"
     template="browser/templates/password-html.pt"
@@ -80,6 +95,14 @@
     permission="zope2.Public"
     weight="20"
     title="Reset your password" />
+  <browser:viewlet
+    name="gs-profile-status-password"
+    manager=".interfaces.IProfileStatusNotificationText"
+    template="browser/templates/password-txt.pt"
+    class=".password.PasswordViewlet"
+    permission="zope2.Public"
+    weight="20"
+    title="Reset your password (text)" />
   <browser:viewlet
     name="gs-profile-status-news"
     manager=".interfaces.IProfileStatusNotification"
@@ -96,6 +119,14 @@
     permission="zope2.Public"
     weight="40"
     title="Groups" />
+  <browser:viewlet
+    name="gs-profile-status-groups-text"
+    manager=".interfaces.IProfileStatusNotificationText"
+    template="browser/templates/groups-txt.pt"
+    class=".groups.GroupsViewlet"
+    permission="zope2.Public"
+    weight="40"
+    title="Groups (text)" />
   <!-- Groups: Site information content provider -->
   <interface
     interface=".interfaces.IGSSiteInfoContentProvider"

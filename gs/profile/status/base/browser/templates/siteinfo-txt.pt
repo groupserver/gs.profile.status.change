@@ -1,0 +1,10 @@
+<tal:block
+  xmlns:tal="http://xml.zope.org/namespaces/tal"><tal:block content="view/siteInfo/name">The site</tal:block>
+<tal:block content="python:'='*len(view.siteInfo.name)">===========</tal:block>
+
+<tal:block define="lg python:len(view.groupInfos);"><tal:block condition="python:lg==1">  You are a member of one group on this site:
+  <tal:block content="view/siteInfo/name">Site Name</tal:block>
+  <tal:block content="view/siteInfo/url;">URL</tal:block></tal:block><tal:block condition="python:lg&gt;1">  You are a member of <tal:block content="lg">m</tal:block> groups on this site:
+  <tal:block content="view/siteInfo/name">Site Name</tal:block>
+  <tal:block content="view/siteInfo/url;">URL</tal:block></tal:block></tal:block>
+</tal:block>

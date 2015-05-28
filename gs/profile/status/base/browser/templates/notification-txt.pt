@@ -1,1 +1,5 @@
-This is the plain-text form of the notification.
+<tal:block
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  tal:content="structure provider:groupserver.ProfileStatusText">
+  This is the plain-text form of the notification.
+</tal:block>
