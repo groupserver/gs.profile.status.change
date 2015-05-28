@@ -119,7 +119,7 @@
             <b>one topic was discussed:</b></span>
             <span tal:condition="python:view.nTopics!=1">There were
             <b><span tal:content="view/nTopics">n</span> topics
-            disccussed:</b></span>
+            discussed:</b></span>
             <span tal:content="structure view/specificTopics">the topics</span>
           </td>
         </tr><!--gs-profile-status-groups-group-info-posting-topics-->
@@ -147,7 +147,13 @@
       class="gs-profile-status-groups-group-info-digest">
     <td>
       <p>
-        Switch to digest mode?
+        You get quite a lot of email!
+        <a tal:attributes="href view/digestLink"
+           href="#">Switch to <b>digest mode</b></a>
+        and you will get a single daily summary of what is going
+        on in
+        <span tal:content="view/groupInfo/name">this group</span>,
+        instead of an email each time someone posts.
       </p>
     </td>
   </tr><!--gs-profile-status-groups-group-info-digest-->

@@ -328,10 +328,21 @@ current user is never in the list'''
         retval = l.get_property('mailto')
         return retval
 
+    @staticmethod
+    def mailto(to, subject, body):
+        qTo = quote(to)
+        qSubject = quote(subject)
+        try:
+            qBody = quote(body)
+        except KeyError:  # --=mpj17=-- Why is it a KeyError?
+            u = to_ascii(body)
+            qBody = quote(u)
+        mailto = 'mailto:{to}?Subject={subject}&body={body}'
+        retval = mailto.format(to=to, subject=subject, body=body)
+        return retval
+
     @Lazy
     def unsubscribeLink(self):
-        to = quote(self.groupEmail)
-        subject = quote('Unsubscribe')
         b = '''Hello,
 
 Please remove me from {0}
@@ -342,11 +353,22 @@ Please remove me from {0}
         uBody = b.format(self.groupInfo.name, self.groupInfo.url,
                          self.userInfo.name, self.siteInfo.url,
                          self.userInfo.url)
-        try:
-            body = quote(uBody)
-        except KeyError:  # --=mpj17=-- Why is it a KeyError?
-            u = to_ascii(uBody)
-            body = quote(u)
-        mailto = 'mailto:{to}?Subject={subject}&body={body}'
-        retval = mailto.format(to=to, subject=subject, body=body)
+        retval = self.mailto(self.groupEmail, 'Unsubscribe', uBody)
+        return retval
+
+    @Lazy
+    def digestLink(self):
+        to = quote(self.groupEmail)
+        subject = quote('Digest on')
+        b = '''Hello,
+
+Please set me to digest-mode for {0}
+<{1}>.
+
+--
+{2} <{3}{4}>'''
+        uBody = b.format(self.groupInfo.name, self.groupInfo.url,
+                         self.userInfo.name, self.siteInfo.url,
+                         self.userInfo.url)
+        retval = self.mailto(self.groupEmail, 'Digest on', uBody)
         return retval
