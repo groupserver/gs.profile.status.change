@@ -1,0 +1,16 @@
+<tal:block
+  xmlns:tal="http://xml.zope.org/namespaces/tal">Your profile
+============
+
+Your profile is what you look like to other group members. Your
+profile online also lists the posts that you have made. Visit
+your profile to
+
+  * Set a photo
+  * Change your name
+  * Update your biography
+
+ <tal:block content="view/profileUrl">URL</tal:block>
+
+This will help your fellow group members to get to know you a bit
+better.</tal:block>

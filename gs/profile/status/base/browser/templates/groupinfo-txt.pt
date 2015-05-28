@@ -51,9 +51,14 @@
     <tal:block repeat="topic view/topics">
       * <tal:block content="topic/name">Topic name</tal:block>
     </tal:block>
-
     <tal:block condition="view/switchToDigest">
-      Switch to digest mode?
+      You get quite a lot of email! Switch to digest mode and you
+      will get a single daily summary of what is going on,
+      instead of an email each time someone posts.
+
+      Send an email with the subject "Digest on" (without the
+      quotes) to:
+      <tal:block content="view/groupEmail">email</tal:block>
     </tal:block>
   </tal:block>
 </tal:block>

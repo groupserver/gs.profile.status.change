@@ -120,7 +120,7 @@
     weight="40"
     title="Groups" />
   <browser:viewlet
-    name="gs-profile-status-groups-text"
+    name="gs-profile-status-groups"
     manager=".interfaces.IProfileStatusNotificationText"
     template="browser/templates/groups-txt.pt"
     class=".groups.GroupsViewlet"
@@ -164,6 +164,14 @@
     weight="50"
     title="Profile" />
   <browser:viewlet
+    name="gs-profile-status-profile"
+    manager=".interfaces.IProfileStatusNotificationText"
+    template="browser/templates/profile-txt.pt"
+    class=".profile.ProfileViewlet"
+    permission="zope2.Public"
+    weight="50"
+    title="Profile (text)" />
+  <browser:viewlet
     name="gs-profile-status-email"
     manager=".interfaces.IProfileStatusNotification"
     template="browser/templates/email-html.pt"
@@ -172,6 +180,14 @@
     weight="60"
     title="Email" />
   <browser:viewlet
+    name="gs-profile-status-email"
+    manager=".interfaces.IProfileStatusNotificationText"
+    template="browser/templates/email-txt.pt"
+    class=".email.EmailViewlet"
+    permission="zope2.Public"
+    weight="60"
+    title="Email (text)" />
+  <browser:viewlet
     name="gs-profile-status-support"
     manager=".interfaces.IProfileStatusNotification"
     template="browser/templates/support-html.pt"
@@ -179,6 +195,14 @@
     permission="zope2.Public"
     weight="100"
     title="Support" />
+  <browser:viewlet
+    name="gs-profile-status-support"
+    manager=".interfaces.IProfileStatusNotificationText"
+    template="browser/templates/support-txt.pt"
+    class=".support.SupportViewlet"
+    permission="zope2.Public"
+    weight="100"
+    title="Support (text)" />
 
   <!--The CSS viewlet -->
   <browser:viewlet

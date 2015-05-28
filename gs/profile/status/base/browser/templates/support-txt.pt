@@ -1,0 +1,11 @@
+<tal:block
+  xmlns:tal="http://xml.zope.org/namespaces/tal">Support
+=======
+
+To stop receiving this monthly summary send an email with the
+Subject "Summary off" (without the quotes) to
+  <tal:block content="view/supportEmail">support@example.com</tal:block>
+
+Email support you have any comments or queries:
+    <tal:block content="view/supportEmail">support@example.com</tal:block>
+</tal:block>
