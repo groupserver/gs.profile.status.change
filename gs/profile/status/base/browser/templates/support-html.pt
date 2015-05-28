@@ -9,7 +9,7 @@
   <tr>
     <td>
       <p class="well">
-        Send a message with the Subject <code>Summary off</code>
+        Send an email with the Subject <code>Summary off</code>
         to
         <a tal:attributes="href view/stopEmailAddress"
            tal:content="view/supportEmail"
