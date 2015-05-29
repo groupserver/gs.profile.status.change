@@ -70,8 +70,10 @@ requires = [
 if (sys.version_info < (3, 4)):
     requires += ['setuptools', ]
 
+name = 'gs.profile.status.base'
+
 setup(
-    name='gs.profile.status.base',
+    name=name,
     version=version,
     description="The profile status notification on GroupServer",
     long_description=long_description,
@@ -89,13 +91,16 @@ setup(
     keywords='profile, groupserver, email, notification',
     author='Michael JasonSmith',
     author_email='mpj17@onlinegroups.net',
-    url='https://github.com/groupserver/gs.profile.status.base/',
+    url='https://github.com/groupserver/{0}'.format(name),
     license='ZPL 2.1',
     packages=find_packages(exclude=['ez_setup']),
-    namespace_packages=['gs', 'gs.profile', 'gs.profile.status'],
+    namespace_packages=['.'.join(name.split('.')[:i])
+                        for i in range(1, len(name.split('.')))],
     include_package_data=True,
     zip_safe=False,
     install_requires=requires,
+    test_suite="{0}.tests.test_all".format(name),
+    tests_require=['mock', ],
     entry_points="""
     # -*- Entry points: -*-
     """,)
