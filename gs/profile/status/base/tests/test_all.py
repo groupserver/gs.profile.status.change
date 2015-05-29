@@ -16,7 +16,8 @@ from __future__ import absolute_import, unicode_literals
 from unittest import TestSuite, main as unittest_main
 from gs.profile.status.base.tests.command import (
     StatusOnTest, StatusOffTest)
-testCases = (StatusOnTest, StatusOffTest)
+from gs.profile.status.base.tests.hook import HookTest
+testCases = (StatusOnTest, StatusOffTest, HookTest)
 
 
 def load_tests(loader, tests, pattern):
