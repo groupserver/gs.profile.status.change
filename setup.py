@@ -64,8 +64,10 @@ requires = [
     'gs.site.member',
     'gs.viewlet',
     'Products.CustomUserFolder',
+    'Products.GSAuditTrail',
     'Products.GSGroup',
     'Products.GSGroupMember',
+    'Products.XWFUtils',
 ]
 if (sys.version_info < (3, 4)):
     requires += ['setuptools', ]

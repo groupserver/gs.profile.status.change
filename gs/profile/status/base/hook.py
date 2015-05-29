@@ -16,7 +16,6 @@ from __future__ import absolute_import, print_function, unicode_literals
 from json import dumps as to_json
 from logging import getLogger
 log = getLogger('gs.profile.status.base.hook')
-import time
 from zope.cachedescriptors.property import Lazy
 from zope.component import createObject, queryMultiAdapter
 from zope.formlib import form
@@ -24,6 +23,8 @@ from gs.cache import cache
 from gs.content.form.api.json import SiteEndpoint
 from gs.auth.token import log_auth_error
 from gs.profile.email.base import EmailUserFromUser
+from .audit import (Auditor, SENT_STATUS, SKIPPED_STATUS_EMAIL, SKIPPED_STATUS_GROUPS,
+                    SKIPPED_STATUS_ANON)
 from .interfaces import (IGetPeople, ISendNotification, ISiteGroups)
 from .notifier import StatusNotifier
 from .queries import SkipQuery
@@ -72,6 +73,11 @@ class SendNotification(SiteEndpoint):
     FOLDER_TYPES = ['Folder', 'Folder (ordered)']
     STATUS = {'no_email': -8, 'no_groups': -4, 'no_user': -2, 'ok': 0, }
 
+    @Lazy
+    def auditor(self):
+        retval = Auditor(self.context)
+        return retval
+
     @form.action(label='Send', name='send', prefix='',
                  failure='handle_send_failure')
     def handle_send(self, action, data):
@@ -82,34 +88,33 @@ class SendNotification(SiteEndpoint):
         userInfo = createObject('groupserver.UserFromId',
                                 self.context, data['profileId'])
         if userInfo.anonymous:
+            self.auditor.info(SKIPPED_STATUS_ANON,
+                              instanceDatum=data['profileId'])
             m = 'Cannot find the user object for the user ID ({0})'
             msg = m.format(data['profileId'])
-            log.warn(msg)
             r = {'status': self.STATUS['no_user'], 'message': msg}
         elif self.in_groups(userInfo):
             emailUser = EmailUserFromUser(userInfo)
             if emailUser.get_delivery_addresses():
-                m = 'Sending profile status for {0} (1)'
-                log.info(m.format(userInfo.name, userInfo.id))
                 notifier = StatusNotifier(userInfo.user, self.request)
                 notifier.notify()
+                self.auditor.info(SENT_STATUS, userInfo,
+                                  repr(emailUser.get_delivery_addresses()))
                 m = 'Sent the monthly profile-status notification to {0} '\
                     '({1})'
                 msg = m.format(userInfo.name, userInfo.id)
-                log.info(msg)
                 r = {'status': self.STATUS['ok'], 'message': msg}
-                time.sleep(0.5)  # FIXME: Simulate work
             else:  # No email addresses
+                self.auditor.info(SKIPPED_STATUS_EMAIL, userInfo)
                 m = 'Skipping the monthly profile-status notification for '\
                     '{0} ({1}): no verified email addresses'
                 msg = m.format(userInfo.name, userInfo.id)
-                log.info(msg)
                 r = {'status': self.STATUS['no_email'], 'message': msg}
-        else:
+        else:  # No groups
+            self.auditor.info(SKIPPED_STATUS_GROUPS, userInfo)
             m = 'Skipping the monthly profile-status notification for '\
                 '{0} ({1}): not in any groups'
             msg = m.format(userInfo.name, userInfo.id)
-            log.info(msg)
             r = {'status': self.STATUS['no_groups'], 'message': msg}
         retval = to_json(r)
         return retval
