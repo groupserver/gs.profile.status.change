@@ -44,6 +44,8 @@ class StatusCommand(CommandABC):
             elif userInfo and (components[1] == 'off'):
                 self.skipQuery.add_skip(userInfo.id)
                 retval = CommandResult.commandStop
+            elif not(userInfo):
+                retval = CommandResult.commandContinue
         assert retval
         return retval
 

@@ -17,12 +17,11 @@ from mock import patch
 from unittest import TestCase
 from gs.profile.status.base.command import StatusCommand
 from gs.group.list.command.result import CommandResult
-from .faux import (FauxGroupInfo, FauxUserInfo, faux_on_email)
+from .faux import (FauxGroupInfo, FauxUserInfo, faux_on_email,
+                   faux_off_email)
 
 
 class StatusOnTest(TestCase):
-    confirmSubject = 'Confirm some text ID-1a2b3c'
-    confirmNoIdSubject = 'Confirm subject without an identifier'
 
     def setUp(self):
         self.fauxGroup = FauxGroupInfo()
@@ -38,6 +37,41 @@ class StatusOnTest(TestCase):
         self.assertEqual(CommandResult.commandStop, r)
         FauxSkipQuery().remove_skip.assert_called_once_with(b'exampleuser')
 
+    @patch.object(StatusCommand, 'get_user')
+    @patch('gs.profile.status.base.command.SkipQuery', autospec=True)
+    def test_on_nouser(self, FauxSkipQuery, faux_get_user):
+        faux_get_user.return_value = None
+        c = StatusCommand(self.fauxGroup)
+        e = faux_on_email()
+
+        r = c.process(e, None)
+        self.assertEqual(CommandResult.commandContinue, r)
+        self.assertEqual(0, FauxSkipQuery().remove_skip.call_count)
+
 
 class StatusOffTest(TestCase):
-    pass
+
+    def setUp(self):
+        self.fauxGroup = FauxGroupInfo()
+
+    @patch.object(StatusCommand, 'get_user')
+    @patch('gs.profile.status.base.command.SkipQuery', autospec=True)
+    def test_off(self, FauxSkipQuery, faux_get_user):
+        faux_get_user.return_value = FauxUserInfo()
+        c = StatusCommand(self.fauxGroup)
+        e = faux_off_email()
+
+        r = c.process(e, None)
+        self.assertEqual(CommandResult.commandStop, r)
+        FauxSkipQuery().add_skip.assert_called_once_with(b'exampleuser')
+
+    @patch.object(StatusCommand, 'get_user')
+    @patch('gs.profile.status.base.command.SkipQuery', autospec=True)
+    def test_off_nouser(self, FauxSkipQuery, faux_get_user):
+        faux_get_user.return_value = None
+        c = StatusCommand(self.fauxGroup)
+        e = faux_off_email()
+
+        r = c.process(e, None)
+        self.assertEqual(CommandResult.commandContinue, r)
+        self.assertEqual(0, FauxSkipQuery().remove_skip.call_count)
