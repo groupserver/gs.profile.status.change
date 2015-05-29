@@ -17,16 +17,11 @@ from datetime import date
 from functools import reduce
 from operator import concat, attrgetter
 from random import shuffle
-import sys
-if sys.version_info >= (3, ):  # pragma: no cover
-    from urllib.parse import quote
-else:  # Python 2
-    from urllib import quote
 from zope.app.pagetemplate import ViewPageTemplateFile
 from zope.cachedescriptors.property import Lazy
 from zope.component import createObject, getMultiAdapter
 from zope.contentprovider.interfaces import UpdateNotCalled
-from gs.core import to_ascii, curr_time, comma_comma_and
+from gs.core import curr_time, comma_comma_and
 from gs.group.member.base import user_admin_of_group
 from gs.group.privacy.interfaces import IGSGroupVisibility
 from gs.group.stats import GroupPostingStats
@@ -40,6 +35,7 @@ from Products.GSGroupMember.groupMembersInfo import GSGroupMembersInfo
 from .interfaces import ISiteGroups
 from .queries import PostingStatsQuery
 from .sitegroups import NoGroups
+from .utils import mailto
 
 
 class GroupsViewlet(ProfileViewlet):
@@ -332,19 +328,6 @@ current user is never in the list'''
         retval = l.get_property('mailto')
         return retval
 
-    @staticmethod
-    def mailto(to, subject, body):
-        qTo = quote(to)
-        qSubject = quote(subject)
-        try:
-            qBody = quote(body)
-        except KeyError:  # --=mpj17=-- Why is it a KeyError?
-            u = to_ascii(body)
-            qBody = quote(u)
-        mailto = 'mailto:{to}?Subject={subject}&body={body}'
-        retval = mailto.format(to=qTo, subject=qSubject, body=qBody)
-        return retval
-
     @Lazy
     def unsubscribeLink(self):
         b = '''Hello,
@@ -357,7 +340,7 @@ Please remove me from {0}
         uBody = b.format(self.groupInfo.name, self.groupInfo.url,
                          self.userInfo.name, self.siteInfo.url,
                          self.userInfo.url)
-        retval = self.mailto(self.groupEmail, 'Unsubscribe', uBody)
+        retval = mailto(self.groupEmail, 'Unsubscribe', uBody)
         return retval
 
     @Lazy
@@ -372,5 +355,5 @@ Please set me to digest-mode for {0}
         uBody = b.format(self.groupInfo.name, self.groupInfo.url,
                          self.userInfo.name, self.siteInfo.url,
                          self.userInfo.url)
-        retval = self.mailto(self.groupEmail, 'Digest on', uBody)
+        retval = mailto(self.groupEmail, 'Digest on', uBody)
         return retval

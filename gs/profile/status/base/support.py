@@ -13,19 +13,13 @@
 #
 ############################################################################
 from __future__ import absolute_import, print_function, unicode_literals
-import sys
-if sys.version_info >= (3, ):  # pragma: no cover
-    from urllib.parse import quote
-else:  # Python 2
-    from urllib import quote
 from zope.cachedescriptors.property import Lazy
 from gs.profile.base import ProfileViewlet
+from .utills import mailto
 
 
 class SupportViewlet(ProfileViewlet):
     'The viewlet for the Support section'
-
-    mailto = 'mailto:{to}?Subject={subject}&body={body}'
 
     @Lazy
     def supportEmail(self):
@@ -34,7 +28,6 @@ class SupportViewlet(ProfileViewlet):
 
     @Lazy
     def helpEmailAddress(self):
-        subject = quote('Monthly status notification')
         b = '''Hello,
 
 I received the monthly summary of what is going on in my groups and...
@@ -42,15 +35,13 @@ I received the monthly summary of what is going on in my groups and...
 --
 Me: <{0}{1}>
 '''
-        body = quote(b.format(self.siteInfo.url, self.userInfo.url))
-        retval = self.mailto.format(to=self.supportEmail, subject=subject,
-                                    body=body)
+        body = b.format(self.siteInfo.url, self.userInfo.url)
+        retval = mailto(self.supportEmail, 'Monthly status notification',
+                        body)
         return retval
 
     @Lazy
     def stopEmailAddress(self):
-
-        subject = quote('Summary off')
         b = '''Hello,
 
 Please stop sending me the monthly summary of what is going on in my groups.
@@ -58,7 +49,6 @@ Please stop sending me the monthly summary of what is going on in my groups.
 --
 Me: <{0}{1}>
 '''
-        body = quote(b.format(self.siteInfo.url, self.userInfo.url))
-        retval = self.mailto.format(to=self.supportEmail, subject=subject,
-                                    body=body)
+        body = b.format(self.siteInfo.url, self.userInfo.url)
+        retval = mailto(self.supportEmail, 'Summary off', body)
         return retval
