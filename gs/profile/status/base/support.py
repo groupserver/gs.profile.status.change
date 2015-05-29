@@ -15,7 +15,7 @@
 from __future__ import absolute_import, print_function, unicode_literals
 from zope.cachedescriptors.property import Lazy
 from gs.profile.base import ProfileViewlet
-from .utills import mailto
+from .utils import mailto
 
 
 class SupportViewlet(ProfileViewlet):
