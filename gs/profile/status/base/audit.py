@@ -118,7 +118,7 @@ class SkippedStatusGroupsEvent(BasicAuditEvent):
     def __unicode__(self):
         r = 'Skipped the profile-status notification for {userInfo.name} '\
             '({userInfo.id}) because they are not in any groups'
-        retval = r.format(userInfo=self.userInfo)
+        retval = r.format(userInfo=self.instanceUserInfo)
         return retval
 
     @property
