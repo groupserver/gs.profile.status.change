@@ -26,6 +26,7 @@ from gs.auth.token import log_auth_error
 from gs.profile.email.base import EmailUserFromUser
 from .interfaces import (IGetPeople, ISendNotification, ISiteGroups)
 from .notifier import StatusNotifier
+from .queries import SkipQuery
 
 
 class MembersHook(SiteEndpoint):
@@ -40,7 +41,7 @@ class MembersHook(SiteEndpoint):
 
 :param action: The button that was clicked.
 :param dict data: The form data.'''
-        retval = to_json(self.profile_ids)
+        retval = to_json(self.profileIds)
         return retval
 
     def handle_get_people_failure(self, action, data, errors):
@@ -49,10 +50,15 @@ class MembersHook(SiteEndpoint):
         return retval
 
     @Lazy
-    def profile_ids(self):
+    def query(self):
+        retval = SkipQuery()
+        return retval
+
+    @Lazy
+    def profileIds(self):
         '''All the members of the GroupServer instance.'''
         acl_users = self.context.acl_users
-        retval = acl_users.getUserNames()
+        retval = list(set(acl_users.getUserNames()) - set(self.query.skip_people()))
         return retval
 
 #: The time the list of site-identifiers is cached (in seconds)

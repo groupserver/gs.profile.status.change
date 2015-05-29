@@ -45,6 +45,20 @@ class LoginQuery(object):
         return retval
 
 
+class SkipQuery(object):
+    def __init__(self):
+        self.skipTable = getTable('profile_notification_skip')
+
+    def skip_people(self):
+        s = self.skipTable.select()
+
+        session = getSession()
+        r = session.execute(s)
+
+        retval = [x['user_id'] for x in r]
+        return retval
+
+
 class PostingStatsQuery(object):
     def __init__(self):
         self.postTable = getTable('post')
