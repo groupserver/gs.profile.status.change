@@ -58,6 +58,28 @@ class SkipQuery(object):
         retval = [x['user_id'] for x in r]
         return retval
 
+    def has_skip(self, userId):
+        s = self.skipTable.select()
+        s.append_whereclause(self.skipTable.c.user_id == userId)
+
+        session = getSession()
+        r = session.execute(s)
+
+        retval = bool(r.rowcount)
+        return retval
+
+    def add_skip(self, userId):
+        i = self.skipTable.insert()
+        d = {'user_id': userId}
+
+        session = getSession()
+        session.execute(i, params=d)
+
+    def remove_skip(self, userId):
+        d = self.skipTable.delete(self.skipTable.c.user_id == userId)
+        session = getSession()
+        session.execute(d)
+
 
 class PostingStatsQuery(object):
     def __init__(self):
