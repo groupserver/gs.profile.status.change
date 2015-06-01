@@ -67,7 +67,7 @@ requires = [
     'Products.GSAuditTrail',
     'Products.GSGroup',
     'Products.GSGroupMember',
-    'Products.XWFUtils',
+    'Products.XWFCore',
 ]
 if (sys.version_info < (3, 4)):
     requires += ['setuptools', ]
