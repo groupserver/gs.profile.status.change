@@ -21,7 +21,7 @@ from gs.database import getTable, getSession
 
 
 #: Basic topic information
-BasicTopic = namedtuple('BasicTopic', ['topicId', 'name'])
+BasicTopic = namedtuple('BasicTopic', ['topicId', 'lastPostId', 'name'])
 
 
 class LoginQuery(object):
@@ -115,7 +115,7 @@ class PostingStatsQuery(object):
     def topics_in_month(self, month, year, groupId, siteId):
         'Get the names of the topics in a particular month'
         tt = self.topicTable
-        s = sa.select([tt.c.topic_id, tt.c.original_subject])
+        s = sa.select([tt.c.topic_id, tt.c.last_post_id, tt.c.original_subject])
         s.append_whereclause(self.month(tt.c.last_post_date) == month)
         s.append_whereclause(self.year(tt.c.last_post_date) == year)
         s.append_whereclause(tt.c.group_id == groupId)
@@ -125,6 +125,7 @@ class PostingStatsQuery(object):
         r = session.execute(s)
 
         retval = [BasicTopic(topicId=x['topic_id'],
+                             lastPostId=x['last_post_id'],
                              name=x['original_subject']) for x in r]
         return retval
 
