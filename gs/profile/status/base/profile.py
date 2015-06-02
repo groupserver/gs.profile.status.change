@@ -56,6 +56,6 @@ class ProfileViewlet(ProfileViewletBase):
 
     @Lazy
     def changeProfileUrl(self):
-        r = '{0}/change.html'
+        r = '{0}/edit.html'
         retval = r.format(self.profileUrl)
         return retval
