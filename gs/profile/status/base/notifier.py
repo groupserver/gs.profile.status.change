@@ -44,4 +44,4 @@ class StatusNotifier(object):
         sender = MessageSender(self.context, userInfo)
         text = self.textTemplate()
         html = self.htmlTemplate()
-        sender.send_message('What is happening in your groups', text, html)
+        sender.send_message('What is going on in your groups', text, html)
