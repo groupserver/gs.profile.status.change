@@ -1,9 +1,0 @@
-<tal:block
-  xmlns:tal="http://xml.zope.org/namespaces/tal">Here is a summary of what is going on in your groups. All the
-posts in your groups are on the web, where you will love
-exploring the conversations. Follow the links below to find out
-more.
-
-To stop receiving this monthly summary follow the instructions in
-the *Support* section at the bottom of this message.
-</tal:block>
