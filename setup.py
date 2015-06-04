@@ -27,9 +27,11 @@ with codecs.open(os.path.join("docs", "HISTORY.rst"),
     long_description += '\n' + f.read()
 
 requires = [
-    'setuptools',
-    'pytz',
     'sqlalchemy',
+    'zope.cachedescriptors',
+    'gs.database',
+    'gs.group.list.command',
+    'Products.CustomUserFolder',
 ]
 if (sys.version_info < (3, 4)):
     requires += ['setuptools', ]
