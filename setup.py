@@ -30,54 +30,16 @@ requires = [
     'setuptools',
     'pytz',
     'sqlalchemy',
-    'zope.app.pagetemplate',
-    'zope.browserpage',
-    'zope.cachedescriptors',
-    'zope.component',
-    'zope.contentprovider',
-    'zope.formlib',
-    'zope.interface',
-    'zope.schema',
-    'zope.tal',
-    'zope.tales',
-    'zope.viewlet',
-    'gs.auth.token',
-    'gs.cache',
-    'gs.content.email.base',
-    'gs.content.email.css',
-    'gs.content.email.layout',
-    'gs.content.form.api.json',
-    'gs.core',
-    'gs.database',
-    'gs.group.base',  # For the marker
-    'gs.group.list.command',
-    'gs.group.member.base',
-    'gs.group.member.canpost',
-    'gs.group.member.email.base',
-    'gs.group.privacy',
-    'gs.group.stats',
-    'gs.group.type.support',  # For the marker
-    'gs.profile.base',
-    'gs.profile.email.base',
-    'gs.profile.image.base',
-    'gs.profile.notify',
-    'gs.site.member',
-    'gs.viewlet',
-    'Products.CustomUserFolder',
-    'Products.GSAuditTrail',
-    'Products.GSGroup',
-    'Products.GSGroupMember',
-    'Products.XWFCore',
 ]
 if (sys.version_info < (3, 4)):
     requires += ['setuptools', ]
 
-name = 'gs.profile.status.base'
+name = 'gs.profile.status.change'
 
 setup(
     name=name,
     version=version,
-    description="The profile status notification on GroupServer",
+    description="Toggle receiving the Profile Status notification on and off",
     long_description=long_description,
     classifiers=[
         'Development Status :: 4 - Beta',
