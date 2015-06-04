@@ -31,6 +31,8 @@ requires = [
     'zope.cachedescriptors',
     'gs.database',
     'gs.group.list.command',
+    'gs.group.type.support',  # For the marker interface
+    'gs.profile.status.base',  # For the SQL table
     'Products.CustomUserFolder',
 ]
 if (sys.version_info < (3, 4)):
