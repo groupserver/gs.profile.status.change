@@ -12,7 +12,7 @@
 <!-- FITNESS FOR A PARTICULAR PURPOSE. -->
 <configure xmlns="http://namespaces.zope.org/zope"
            xmlns:browser="http://namespaces.zope.org/browser"
-           i18n_domain="gs.profile.status.base">
+           i18n_domain="gs.profile.status.change">
 
   <include package="zope.viewlet" file="meta.zcml" />
 
