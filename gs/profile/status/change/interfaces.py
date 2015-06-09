@@ -15,6 +15,7 @@
 from __future__ import absolute_import, print_function, unicode_literals
 from zope.interfaces import Interface
 from zope.schmea import Bool
+from . import GSMessageFactory as _
 
 
 class ToggleStatusCommand(Interface):

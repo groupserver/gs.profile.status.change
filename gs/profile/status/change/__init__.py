@@ -1,3 +1,4 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-# This space deliberately left almost blank.
+from zope.i18nmessageid import MessageFactory
+GSMessageFactory = MessageFactory('gs.profile.status.change')

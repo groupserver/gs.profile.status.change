@@ -1,0 +1,62 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2015-06-09 23:30+0000\n"
+"PO-Revision-Date: 2015-06-09 16:33-0700\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#. Default: "Change"
+#: ./page.py:52
+msgid "change-button"
+msgstr "Change"
+
+#. Default: "Change notification"
+#: ./browser/templates/page.pt:9
+#: ./page.py:26
+msgid "change-notification"
+msgstr "Change notification"
+
+#. Default: "There are errors:"
+#: ./page.py:83
+msgid "error-multiple"
+msgstr "There are errors:"
+
+#. Default: "There is an error:"
+#: ./page.py:81
+msgid "error-single"
+msgstr "There is an error:"
+
+#. Default: "No change"
+#: ./page.py:77
+msgid "no-change"
+msgstr "No change."
+
+#. Default: "No change made: you are still receiving the notification."
+#: ./page.py:73
+msgid "no-change-in"
+msgstr "No change made: still receiving the “What is happening in your groups” notification, which is sent out once a month."
+
+#. Default: "No change made: you are still skipping the notification."
+#: ./page.py:68
+msgid "no-change-skip"
+msgstr "No change made: you are still opted out of the “What is happening in your groups notification”, which is sent out once a month."
+
+#. Default: "Opting out of the monthly profile-status notification."
+#: ./page.py:57
+msgid "opt-out"
+msgstr "Opted out of the “What is happening in your groups” notification, which is sent out once a month."
+
+#. Default: "Opting into the monthly profile-status notification."
+#: ./page.py:62
+msgid "out-in"
+msgstr "Opted into the “What is happening in your groups” notification, which is sent out once a month."
+

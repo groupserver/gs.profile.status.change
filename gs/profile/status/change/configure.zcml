@@ -12,7 +12,10 @@
 <!-- FITNESS FOR A PARTICULAR PURPOSE. -->
 <configure xmlns="http://namespaces.zope.org/zope"
            xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:i18n="http://namespaces.zope.org/i18n"
            i18n_domain="gs.profile.status.change">
+
+  <i18n:registerTranslations directory="locales" />
 
   <!--Email command-->
   <adapter
@@ -21,6 +24,7 @@
     provides="gs.group.list.command.interfaces.IEmailCommand"
     factory=".command.StatusCommand" />
 
+  <!--The toggle page-->
   <browser:page
     name="notification.html"
     for="Products.CustomUserFolder.interfaces.IGSCustomUser"
