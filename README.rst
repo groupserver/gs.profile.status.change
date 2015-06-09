@@ -32,10 +32,12 @@ Resources
 
 - Code repository:
   https://github.com/groupserver/gs.profile.status.change
+- Translations:
+  https://www.transifex.com/projects/p/gs-profile-status-change/
 - Questions and comments to
   http://groupserver.org/groups/development
 - Report bugs at https://redmine.iopen.net/projects/groupserver
-
+    
 .. _GroupServer: http://groupserver.org/
 .. _GroupServer.org: http://groupserver.org/
 .. _OnlineGroups.Net: https://onlinegroups.net
