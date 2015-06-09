@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="context/@@groupserver_full_layout/page">
+  <head>
+    <title metal:fill-slot="title">
+      Change notification:
+      <tal:block replace="view/userInfo/name"/>:
+      <tal:block replace="view/siteInfo/name"/>
+    </title>
+  </head>
+  <body>
+    <ul metal:fill-slot="breadcrumb">
+      <li>
+        <a href="/" class="icon-alone">
+          <span aria-hidden="true" data-icon="&#x2302;"></span>
+          <span class="screen-reader-text">Site home page</span>
+        </a>
+      </li>
+      <li>
+        <a tal:attributes="href view/userInfo/url"
+           href="#"><b tal:content="view/userInfo/name">A. Person</b></a>
+      </li>
+      <li>Change notification</li>
+    </ul>
+    <tal:block
+      metal:fill-slot="messages"
+      content="structure provider:groupserver.FormStatusMessage"
+      define="errors view/errors;
+              status view/status;
+              widgets view/widgets">&#160;</tal:block>
+    <div id="gs-profile-status-change"
+         metal:fill-slot="body">
+      <h1>Change notification</h1>
+      <tal:block define="widgets view/widgets">
+        <tal:block replace="structure provider:groupserver.FormWidgets"/>
+      </tal:block>
+    </div><!--gs-profile-status-change-->
+  </body>
+</html>

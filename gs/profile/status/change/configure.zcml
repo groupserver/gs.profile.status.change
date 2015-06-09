@@ -21,4 +21,11 @@
     provides="gs.group.list.command.interfaces.IEmailCommand"
     factory=".command.StatusCommand" />
 
+  <browser:page
+    name="notification.html"
+    for="Products.CustomUserFolder.interfaces.IGSCustomUser"
+    class=".page.ChangeNotification"
+    template="browser/templates/page.pt"
+    permission="zope2.ManageProperties" />
+
 </configure>
