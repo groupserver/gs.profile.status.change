@@ -28,10 +28,21 @@ with codecs.open(os.path.join("docs", "HISTORY.rst"),
 
 requires = [
     'sqlalchemy',
+    'zope.browserpage',
     'zope.cachedescriptors',
+    'zope.formlib',
+    'zope.i18n',
+    'zope.i18nmessageid',
+    'zope.interface',
+    'zope.tal',
+    'zope.tales',
+    'zope.schema',
+    'zope.sqlalchemy',
     'gs.database',
+    'gs.content.form.base',  # For the content provider
     'gs.group.list.command',
     'gs.group.type.support',  # For the marker interface
+    'gs.profile.base',
     'gs.profile.status.base',  # For the SQL table
     'Products.CustomUserFolder',
 ]
