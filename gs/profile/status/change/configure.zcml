@@ -19,7 +19,7 @@
 
   <!--Email command-->
   <adapter
-    name="status"
+    name="summary"
     for="gs.group.type.support.interfaces.IGSSupportGroup"
     provides="gs.group.list.command.interfaces.IEmailCommand"
     factory=".command.StatusCommand" />
