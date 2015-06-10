@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-06-09 23:30+0000\n"
+"POT-Creation-Date: 2015-06-10 17:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,37 +29,42 @@ msgid "change-notification"
 msgstr ""
 
 #. Default: "There are errors:"
-#: ./page.py:83
+#: ./page.py:85
 msgid "error-multiple"
 msgstr ""
 
 #. Default: "There is an error:"
-#: ./page.py:81
+#: ./page.py:83
 msgid "error-single"
 msgstr ""
 
-#. Default: "No change"
-#: ./page.py:77
-msgid "no-change"
-msgstr ""
-
 #. Default: "No change made: you are still receiving the notification."
-#: ./page.py:73
+#: ./page.py:74
 msgid "no-change-in"
 msgstr ""
 
 #. Default: "No change made: you are still skipping the notification."
-#: ./page.py:68
+#: ./page.py:69
 msgid "no-change-skip"
 msgstr ""
 
 #. Default: "Opting out of the monthly profile-status notification."
-#: ./page.py:57
+#: ./page.py:58
 msgid "opt-out"
 msgstr ""
 
 #. Default: "Opting into the monthly profile-status notification."
-#: ./page.py:62
+#: ./page.py:63
 msgid "out-in"
+msgstr ""
+
+#. Default: "Skip receiving the profile-status notification that is sent out once a month"
+#: ./interfaces.py:24
+msgid "skip-help"
+msgstr ""
+
+#. Default: "Skip the monthly profile-status"
+#: ./interfaces.py:23
+msgid "skip-label"
 msgstr ""
 

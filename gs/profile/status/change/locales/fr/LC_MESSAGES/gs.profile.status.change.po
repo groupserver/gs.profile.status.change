@@ -1,21 +1,21 @@
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: gs.profile.status.change\n"
-"POT-Creation-Date: 2015-06-09 23:30+0000\n"
+"POT-Creation-Date: 2015-06-10 17:33+0000\n"
 "PO-Revision-Date: 2015-06-09 23:49+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/gs-profile-status-change/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Domain: DOMAIN\n"
-"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Language-Code: en\n"
 "Language-Name: English\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+"Language: fr\n"
 
 #. Default: "Change"
 #: ./page.py:52
@@ -23,41 +23,48 @@ msgid "change-button"
 msgstr ""
 
 #. Default: "Change notification"
-#: ./browser/templates/page.pt:9 ./page.py:26
+#: ./browser/templates/page.pt:9
+#: ./page.py:26
 msgid "change-notification"
 msgstr ""
 
 #. Default: "There are errors:"
-#: ./page.py:83
+#: ./page.py:85
 msgid "error-multiple"
 msgstr ""
 
 #. Default: "There is an error:"
-#: ./page.py:81
+#: ./page.py:83
 msgid "error-single"
 msgstr ""
 
-#. Default: "No change"
-#: ./page.py:77
-msgid "no-change"
-msgstr ""
-
 #. Default: "No change made: you are still receiving the notification."
-#: ./page.py:73
+#: ./page.py:74
 msgid "no-change-in"
 msgstr ""
 
 #. Default: "No change made: you are still skipping the notification."
-#: ./page.py:68
+#: ./page.py:69
 msgid "no-change-skip"
 msgstr ""
 
 #. Default: "Opting out of the monthly profile-status notification."
-#: ./page.py:57
+#: ./page.py:58
 msgid "opt-out"
 msgstr ""
 
 #. Default: "Opting into the monthly profile-status notification."
-#: ./page.py:62
+#: ./page.py:63
 msgid "out-in"
 msgstr ""
+
+#. Default: "Skip receiving the profile-status notification that is sent out once a month"
+#: ./interfaces.py:24
+msgid "skip-help"
+msgstr ""
+
+#. Default: "Skip the monthly profile-status"
+#: ./interfaces.py:23
+msgid "skip-label"
+msgstr ""
+

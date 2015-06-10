@@ -52,6 +52,7 @@ class ChangeNotification(ProfileForm):
     @form.action(name=b'change', label=_('change-button', 'Change'),
                  failure='handle_set_action_failure')
     def handle_change(self, action, data):
+        self.status = None
         if data['skip'] and not self.skip:
             self.query.add_skip(self.userInfo.id)
             self.status = _(
@@ -74,7 +75,8 @@ class ChangeNotification(ProfileForm):
                     'no-change-in',
                     'No change made: you are still receiving the '
                     'notification.')
-            self.status = _('no-change', 'No change')
+        assert(self.skip == data['skip'])
+        assert(self.status is not None)
 
     def handle_set_action_failure(self, action, data, errors):
         if len(errors) == 1:
