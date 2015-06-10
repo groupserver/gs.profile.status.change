@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.1 (2015-06-xx)
+1.0.0 (2015-06-10)
 ------------------
 
 Initial version. Before the creation of this product the toggle
