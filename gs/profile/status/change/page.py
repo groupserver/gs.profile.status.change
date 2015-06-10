@@ -65,12 +65,12 @@ class ChangeNotification(ProfileForm):
         else:
             # data['skip'] == self.skip
             if self.skip:
-                self.status _(
+                self.status = _(
                     'no-change-skip',
                     'No change made: you are still skipping the '
                     'notification.')
             else:
-                self.status _(
+                self.status = _(
                     'no-change-in',
                     'No change made: you are still receiving the '
                     'notification.')

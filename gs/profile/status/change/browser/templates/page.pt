@@ -32,12 +32,22 @@
       define="errors view/errors;
               status view/status;
               widgets view/widgets">&#160;</tal:block>
-    <div id="gs-profile-status-change"
-         metal:fill-slot="body">
+    <form id="gs-profile-status-change"
+          enctype="multipart/form-data"  method="post" action="."
+          class="gs-content-js-required"
+          tal:attributes="action request/URL"
+          metal:fill-slot="body">
       <h1 i18n:translate="change-notification">Change notification</h1>
       <tal:block define="widgets view/widgets">
         <tal:block replace="structure provider:groupserver.FormWidgets"/>
       </tal:block>
-    </div><!--gs-profile-status-change-->
+      <div class="buttons" tal:condition="view/availableActions">
+        <tal:block repeat="action view/actions">
+          <div class="formelementbutton">
+            <span tal:replace="structure action/render">Button</span>
+          </div>
+        </tal:block>
+      </div><!--buttons-->
+    </form><!--gs-profile-status-change-->
   </body>
 </html>

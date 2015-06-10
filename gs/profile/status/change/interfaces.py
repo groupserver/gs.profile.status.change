@@ -13,15 +13,16 @@
 #
 ############################################################################
 from __future__ import absolute_import, print_function, unicode_literals
-from zope.interfaces import Interface
-from zope.schmea import Bool
+from zope.interface import Interface
+from zope.schema import Bool
 from . import GSMessageFactory as _
 
 
 class ToggleStatusCommand(Interface):
     skip = Bool(
-        title='Skip the monthly profile-status',
-        description='Skip receiving the profile-status notification that '
-                    'is sent out once a month',
+        title=_('skip-label', 'Skip the monthly profile-status'),
+        description=_('skip-help',
+                      'Skip receiving the profile-status notification that '
+                      'is sent out once a month'),
         default=False,
         required=True)

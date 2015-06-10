@@ -27,7 +27,7 @@
   <!--The toggle page-->
   <browser:page
     name="notification.html"
-    for="Products.CustomUserFolder.interfaces.IGSCustomUser"
+    for="Products.CustomUserFolder.interfaces.ICustomUser"
     class=".page.ChangeNotification"
     template="browser/templates/page.pt"
     permission="zope2.ManageProperties" />
