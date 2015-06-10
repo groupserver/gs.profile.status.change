@@ -12,8 +12,9 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ############################################################################
-from __future__ import absolute_import, unicode_literals
+from __future__ import absolute_import, unicode_literals, print_function
 import sqlalchemy as sa  # lint:ok
+from zope.sqlalchemy import mark_changed
 from gs.database import getTable, getSession
 
 
@@ -23,31 +24,28 @@ class SkipQuery(object):
 
     def skip_people(self):
         s = self.skipTable.select()
-
         session = getSession()
         r = session.execute(s)
-
         retval = [x['user_id'] for x in r]
         return retval
 
     def has_skip(self, userId):
         s = self.skipTable.select()
         s.append_whereclause(self.skipTable.c.user_id == userId)
-
         session = getSession()
         r = session.execute(s)
-
         retval = bool(r.rowcount)
         return retval
 
     def add_skip(self, userId):
         i = self.skipTable.insert()
         d = {'user_id': userId}
-
         session = getSession()
         session.execute(i, params=d)
+        mark_changed(session)
 
     def remove_skip(self, userId):
         d = self.skipTable.delete(self.skipTable.c.user_id == userId)
         session = getSession()
         session.execute(d)
+        mark_changed(session)
