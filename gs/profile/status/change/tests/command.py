@@ -15,10 +15,9 @@
 from __future__ import absolute_import, unicode_literals
 from mock import patch
 from unittest import TestCase
-from gs.profile.status.base.command import StatusCommand
+from gs.profile.status.change.command import StatusCommand
 from gs.group.list.command.result import CommandResult
-from .faux import (FauxGroupInfo, FauxUserInfo, faux_on_email,
-                   faux_off_email)
+from .faux import (FauxGroupInfo, FauxUserInfo, faux_on_email, faux_off_email)
 
 
 class StatusOnTest(TestCase):
@@ -27,7 +26,7 @@ class StatusOnTest(TestCase):
         self.fauxGroup = FauxGroupInfo()
 
     @patch.object(StatusCommand, 'get_user')
-    @patch('gs.profile.status.base.command.SkipQuery', autospec=True)
+    @patch('gs.profile.status.change.command.SkipQuery', autospec=True)
     def test_on(self, FauxSkipQuery, faux_get_user):
         faux_get_user.return_value = FauxUserInfo()
         c = StatusCommand(self.fauxGroup)
@@ -38,7 +37,7 @@ class StatusOnTest(TestCase):
         FauxSkipQuery().remove_skip.assert_called_once_with(b'exampleuser')
 
     @patch.object(StatusCommand, 'get_user')
-    @patch('gs.profile.status.base.command.SkipQuery', autospec=True)
+    @patch('gs.profile.status.change.command.SkipQuery', autospec=True)
     def test_on_nouser(self, FauxSkipQuery, faux_get_user):
         faux_get_user.return_value = None
         c = StatusCommand(self.fauxGroup)
@@ -55,7 +54,7 @@ class StatusOffTest(TestCase):
         self.fauxGroup = FauxGroupInfo()
 
     @patch.object(StatusCommand, 'get_user')
-    @patch('gs.profile.status.base.command.SkipQuery', autospec=True)
+    @patch('gs.profile.status.change.command.SkipQuery', autospec=True)
     def test_off(self, FauxSkipQuery, faux_get_user):
         faux_get_user.return_value = FauxUserInfo()
         c = StatusCommand(self.fauxGroup)
@@ -66,7 +65,7 @@ class StatusOffTest(TestCase):
         FauxSkipQuery().add_skip.assert_called_once_with(b'exampleuser')
 
     @patch.object(StatusCommand, 'get_user')
-    @patch('gs.profile.status.base.command.SkipQuery', autospec=True)
+    @patch('gs.profile.status.change.command.SkipQuery', autospec=True)
     def test_off_nouser(self, FauxSkipQuery, faux_get_user):
         faux_get_user.return_value = None
         c = StatusCommand(self.fauxGroup)
